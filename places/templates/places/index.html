@@ -1,0 +1,107 @@
+
+{% load staticfiles %}
+<!-- import css files -->
+<link rel="stylesheet" type="text/css" href="{% static 'places/style.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+<head>
+  <title>PlaceBook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="topnav">
+  <a href="">PlaceBook</a>
+  <a href="{% url 'memory-add' %}">New</a>
+  <a href="" class='info-button'>Info</a>
+  <a href="" style="float:right;display:none;" class="clear-all">Hide map</a>
+</div>
+
+<div class='infodiv'>
+  <div class="container">
+  <h1 class="h1">Info</h1>
+    <p>This site lets you save your dearest activity memories. You can add a card in the "Add" tab and fill in all the info of the memory!</p>
+    <button class="close-button btn btn-secondary">Close</button>
+  </div>
+</div>
+
+
+<div class="mapcontainer">
+  <img class="map">
+</div>
+
+<!-- it inserts all the stored memories in the cardholder -->
+<div class="cardholder scrollbar" id="style-1">
+{% if all_memorys %}
+  {% for memory in all_memorys%}
+  <div class='card, mapcard'>
+      <span><h2 class='h2' id='h2'>{{memory.city}}, {{memory.country}}</h2>
+      <strong>City: </strong>{{memory.city}}
+      <br><strong>Country: </strong>{{memory.country}}
+      <br><strong>Info: </strong>{{memory.info}} <br><br>
+
+<!-- button to edit a card -->
+      <form style="width:48%;float:right;" action="{% url 'memory-update' memory.id%}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="memory_id" value="{{ memory.id }}">
+        <button class='btn btn-secundary' type="submit">Edit Card</button>
+      </form>
+<!-- button to remove a card from the database -->
+      <form style="width:48%;" action="{% url 'memory-delete' memory.id%}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="memory_id" value="{{ memory.id }}">
+        <button class='btn btn-danger' type="submit">Delete Card</button>
+      </form>
+<button class='btn btn-primary mapbutton'>Show map</button>
+
+    </span>
+  </div>
+  {% endfor %}
+{% else %}
+  <!-- if there are no items -->
+  <h2>No memories are added</h2>
+{% endif %}
+</div>
+
+<!-- if somethins is wrong -->
+{% if error_message %}
+  <p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+<!-- functions for the buttons and the api access -->
+<script>
+$(document).ready(function(){
+  $('.info-button').on('click', function() {
+    $('.infodiv').toggle();
+    return false;
+  });
+  $('.close-button').on('click', function() {
+    $('.infodiv').hide();
+    return false;
+  });
+  $(document).on('click', '.mapbutton',function(){
+    var val1 = $(this).siblings('h2').text().split(' ').join('+');
+    //alert(val1);
+    var str = "https://maps.googleapis.com/maps/api/staticmap?center="+ val1 + "&zoom=12&scale=2&size=600x300&maptype=terrain&key=AIzaSyCdJieNVjZkVK1snuD_zRrruMd-ktMhZBU&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" + val1;
+    $(".map").show().attr("src",str);
+    $(".clear-all").show();
+    return false;
+  });
+  $('.clear-all').click(function () {
+    $(".map").hide();
+    $(".clear-all").hide();
+    return false;
+  });
+
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+
+</body>

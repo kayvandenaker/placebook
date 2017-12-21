@@ -1,0 +1,9 @@
+<!-- make a input field for every item -->
+
+{% for field in form %}
+  <div>
+    <div style="color:red;">{{ field.errors }}</div>
+    <label>{{ field.label_tag }}</label>
+    <div id="input">{{ field }}</div>
+  </div>
+{% endfor %}

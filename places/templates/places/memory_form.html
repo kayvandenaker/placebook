@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'places/style.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+<body>
+
+
+{% block body %}
+<div class="inputcard">
+  <h1 class="h1">Card</h1>
+  <!-- create the cards -->
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% include 'places/form-template.html'%}
+
+    <div>
+      <button class='btn btn-primary addbutton' type="submit">Submit</button>
+      <a href="{% url 'index' %}" class='btn btn-danger backbutton' >Back</a>
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}
+</body>
