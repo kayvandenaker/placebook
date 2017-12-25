@@ -43,13 +43,13 @@
       <br><strong>Info: </strong>{{memory.info}} <br><br>
 
 <!-- button to edit a card -->
-      <form style="width:48%;float:right;" action="{% url 'memory-update' memory.id%}" method="post">
+      <form style="width:48%;float:right;" action="{% url 'memory-update' memory.id %}" method="get">
         {% csrf_token %}
         <input type="hidden" name="memory_id" value="{{ memory.id }}">
         <button class='btn btn-secundary' type="submit">Edit Card</button>
       </form>
 <!-- button to remove a card from the database -->
-      <form style="width:48%;" action="{% url 'memory-delete' memory.id%}" method="post">
+      <form style="width:48%;" action="{% url 'memory-delete' memory.id %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="memory_id" value="{{ memory.id }}">
         <button class='btn btn-danger' type="submit">Delete Card</button>

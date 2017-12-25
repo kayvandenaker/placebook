@@ -22,6 +22,7 @@ class MemoryCreate(CreateView):
 class MemoryUpdate(UpdateView):
     model = Memory
     fields = ['city', 'country', 'info']
+    template_name_suffix = '_form'
 
 class MemoryDelete(DeleteView):
     model = Memory

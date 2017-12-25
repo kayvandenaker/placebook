@@ -24,7 +24,7 @@ urlpatterns = [
     # access the admin panel
     path('admin/', admin.site.urls),
     # access the rest api
-    path('memories/', views.MemoryList.as_view()),
+    path('memories/', views.index),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

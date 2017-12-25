@@ -5,7 +5,6 @@
 
 <body>
 
-
 {% block body %}
 <div class="inputcard">
   <h1 class="h1">Card</h1>
@@ -13,7 +12,7 @@
   <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-    {% include 'places/form-template.html'%}
+    {% include 'places/form_template.html'%}
 
     <div>
       <button class='btn btn-primary addbutton' type="submit">Submit</button>

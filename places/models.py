@@ -5,7 +5,7 @@ from django.urls import reverse
 class Memory(models.Model):
     city = models.CharField(max_length=250)
     country = models.CharField(max_length=250)
-    info = models.CharField(max_length=250)
+    info = models.TextField()
 
     def get_absolute_url(self):
         return reverse('index')
