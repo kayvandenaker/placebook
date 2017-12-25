@@ -3,8 +3,13 @@
 <!-- import css files -->
 <link rel="stylesheet" type="text/css" href="{% static 'places/style.css' %}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<!-- Custom fonts, use
+font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif;
+as styles -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:400,700" rel="stylesheet">
 
-
+<!-- Page start -->
 <head>
   <title>PlaceBook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,9 +18,9 @@
 
 <body>
 <div class="topnav">
-  <a href="">PlaceBook</a>
-  <a href="{% url 'memory-add' %}">New</a>
-  <a href="" class='info-button'>Info</a>
+  <a href="" id="logo">PlaceBook</a>
+  <a href="{% url 'memory-add' %}" class="nav-text">New</a>
+  <a href="" class='info-button nav-text'>Info</a>
   <a href="" style="float:right;display:none;" class="clear-all">Hide map</a>
 </div>
 
@@ -37,7 +42,7 @@
 {% if all_memorys %}
   {% for memory in all_memorys%}
   <div class='card, mapcard'>
-      <span><h2 class='h2' id='h2'>{{memory.city}}, {{memory.country}}</h2>
+      <span><h2 class='h2' id='h2'>{{memory.city}}, <br/>{{memory.country}}</h2>
       <strong>City: </strong>{{memory.city}}
       <br><strong>Country: </strong>{{memory.country}}
       <br><strong>Info: </strong>{{memory.info}} <br><br>

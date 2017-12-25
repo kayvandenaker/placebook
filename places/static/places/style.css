@@ -4,41 +4,89 @@ html {
 
 body {
   padding:20px;
-  background-color: #222 !important;
+  background-color: #333 !important;
   /* background-image: url("images/map.jpg");
   background-repeat: repeat;
   background-size: 100% auto;
   background-attachment: fixed; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 
   width:100%;
   height:100%;
 }
 
-.h1, .h2{
-  text-align: center;
+/* selection styling */
+
+::-moz-selection {
+  color: #fff;
+  background: #252525;
+  text-shadow: none; }
+
+::selection {
+  color: #fff;
+  background: #252525;
+  text-shadow: none; }
+
+/* no scrollbar visible on body*/
+::-webkit-scrollbar {
+    width: 0px;
 }
 
-.mapcard{
+.centerize {
+text-align: center;}
+
+#logo, .nav-text {
+    font-family: Montserrat !important;
+    font-weight: 700;
+    color: #222 !important;}
+
+.h1, .h2 {
+  font-family: 'Roboto' !important;
+  font-weight: 700 !important;
+  color: #222 !important;
+}
+
+/* Card styles */
+
+.mapcard {
   background-color: rgba(255,255,255,0.9);
   width: 100%;
   display: block;
-  margin: 8px 0;
+  margin: 12px 0;
   padding: 10px;
   border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.3);
   word-wrap: break-word;
 }
 
-.cardholder{
+.cardholder {
   margin: 20px 0;
   border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.3);
   width: 30%;
-  max-height: 82%;
+  max-height: calc(100% - 62px);
   min-width: 320px;
-  padding: 0 8px;
+  max-width: 480px;
+  padding: 0 6px 0 12px;
   background-color: #ccc;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
+
+.cardholder::-webkit-scrollbar {
+    width: 6px !important;
+    background-color: transparent  !important;
+    float: left;
+}
+
+.cardholder::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
+}
+​
+/* Form styles */
 
 #input > input{
   width: 100%;
@@ -46,7 +94,7 @@ body {
   padding-left: 5px;
 }
 
-#submit{
+#submit {
   width: 100%;
   margin: 10px 0 0 0 ;
 }
@@ -66,13 +114,28 @@ body {
   margin: 5px 0 0 0;
 }
 
-input, textarea{
-  background: rgba(255,255,255,0);
+input {
+  background: #eee;
   border: 2px solid grey;
   border-radius: 2px;
+  width: 100%;
 }
 
-.inputcard{
+ textarea {
+   background: #eee;
+   border: 2px solid grey;
+   border-radius: 2px;
+   width: 100%;
+   padding: 0;
+   min-height: 100px;
+   max-height: 300px;
+ }
+
+input:hover, textarea:hover {
+transition: 0.4s;
+background: #fff;}
+
+.inputcard {
   width: 30%;
   background-color: rgba(255,255,255,0.95);
   margin: 20px auto;
@@ -146,13 +209,4 @@ input, textarea{
     overflow-y: initial;
     min-width: 200px;
   }
-}
-
-#style-1::-webkit-scrollbar{
-	width: 10px;
-}
-
-#style-1::-webkit-scrollbar-thumb{
-	border-radius: 5px;
-	background-color: rgba(255,255,255,0.9);;
 }
