@@ -3,7 +3,6 @@ html {
 }
 
 body {
-  padding:20px;
   background-color: #333 !important;
   /* background-image: url("images/map.jpg");
   background-repeat: repeat;
@@ -11,9 +10,11 @@ body {
   background-attachment: fixed; */
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  color: #444;
 
   width:100%;
   height:100%;
+  overflow: hidden;
 }
 
 /* selection styling */
@@ -36,16 +37,69 @@ body {
 .centerize {
 text-align: center;}
 
+/* navbar styles */
+
+.topnav {
+  z-index: 10;
+  background-color: #dedede;
+  overflow: hidden;
+  padding: 2px;
+  height: 64px;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+.topnav .nav-text {
+  color: #444;
+  float: left;
+  text-align: center;
+  padding: 8px 16px;
+  margin: auto;
+
+  display: inline-block;
+  vertical-align: middle;
+
+  text-decoration: none;
+  transition: 0.4s;
+  border-radius: 4px;
+  height: 58px;
+}
+
+.topnav a:hover {
+  color: #23a8e6;
+  background-color: rgba(255,255,255, 0.5);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.infodiv{
+  width: 30%;
+  min-width: 220px;
+  margin-left: 20px;
+  position: absolute;
+  display: none;
+}
+
+
 #logo, .nav-text {
     font-family: Montserrat !important;
-    font-weight: 700;
-    color: #222 !important;}
+    font-weight: 700 !important;
+    font-size: 20pt !important;
+    float: left;
+    border-radius: 4px;
+    }
 
-.h1, .h2 {
+#logo img {
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+
+  margin: 4px;
+  padding: 0;}
+
+h1, h2 {
   font-family: 'Roboto' !important;
   font-weight: 700 !important;
-  color: #222 !important;
-}
+  color: #444 !important;}
 
 /* Card styles */
 
@@ -61,8 +115,7 @@ text-align: center;}
 }
 
 .cardholder {
-  margin: 20px 0;
-  border-radius: 3px;
+  margin: 0;
   border: 1px solid rgba(0,0,0,0.3);
   width: 30%;
   max-height: calc(100% - 62px);
@@ -105,7 +158,7 @@ text-align: center;}
   margin: 5px 0 0 0;
 }
 
-.btn{
+.btn {
   width:100%;
 }
 
@@ -132,8 +185,8 @@ input {
  }
 
 input:hover, textarea:hover {
-transition: 0.4s;
-background: #fff;}
+  transition: 0.4s;
+  background: #fff;}
 
 .inputcard {
   width: 30%;
@@ -144,35 +197,6 @@ background: #fff;}
   min-width: 350px;
 }
 
-.topnav {
-  background-color: rgba(255,255,255,0.9);
-  overflow: hidden;
-  border-radius: 5px;
-}
-
-.topnav a {
-  color: black;
-  float: left;
-  text-align: center;
-  padding: 8px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: rgba(255,255,255,0.5);
-  text-decoration: none;
-  color: black;
-}
-
-.infodiv{
-  width: 30%;
-  min-width: 220px;
-  margin-left: 20px;
-  position: absolute;
-  display: none;
-}
-
 .container {
   width: 100%;
   background-color: rgba(255,255,255,0.95);
@@ -180,9 +204,9 @@ background: #fff;}
   padding: 10px 0 10px 0;
 }
 
-.map{
+.map {
   float:right;
-  width:55%;
+  width: 55%;
   background-color: rgb(255,255,255,0);
   margin: 20px 0 0 0;
   border-radius: 5px;

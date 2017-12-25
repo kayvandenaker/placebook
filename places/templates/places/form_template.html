@@ -1,9 +1,10 @@
-<!-- make a input field for every item -->
+<!-- make an input field for every item -->
 
-{% for field in form %}
-  <div>
-    <div style="color:red;">{{ field.errors }}</div>
-    <label>{{ field.label_tag }}</label>
-    <div id="input">{{ field }}</div>
-  </div>
-{% endfor %}
+{{ form.city.label_tag }}
+<input type="text" name="city" id="id_city" placeholder="What city did you go to?" required/>
+
+{{ form.country.label_tag }}
+<input type="text" name="country" id="id_country" placeholder="What country is this city in?" required/>
+
+{{ form.info.label_tag }}
+<textarea name="info" id="id_info" placeholder="What were your experiences? How was the weather? What activities did you participate in?"></textarea>
