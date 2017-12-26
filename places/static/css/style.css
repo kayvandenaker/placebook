@@ -1,3 +1,12 @@
+/*
+----- COLOR SCHEME -----
+#23a8e6 - highlights
+#444 -text
+#dedede - nav
+#ccc - memories panel (left)
+rgba(0,0,0,0.3) - 1px borders
+*/
+
 html {
   height:100%;
 }
@@ -8,7 +17,7 @@ body {
   background-repeat: repeat;
   background-size: 100% auto;
   background-attachment: fixed; */
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #444;
 
@@ -45,10 +54,10 @@ text-align: center;}
   overflow: hidden;
   padding: 2px;
   height: 64px;
-  border: 1px solid rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
-.topnav .nav-text {
+.nav-text {
   color: #444;
   float: left;
   text-align: center;
@@ -71,7 +80,7 @@ text-align: center;}
   transition: 0.2s;
 }
 
-.infodiv{
+.infodiv {
   width: 30%;
   min-width: 220px;
   margin-left: 20px;
@@ -80,51 +89,68 @@ text-align: center;}
 }
 
 
-#logo, .nav-text {
+.nav-text {
     font-family: Montserrat !important;
     font-weight: 700 !important;
     font-size: 20pt !important;
-    float: left;
     border-radius: 4px;
+    margin: 0 2px;
     }
 
-#logo img {
+#logo {
   height: 50px;
   display: inline-block;
   vertical-align: middle;
 
   margin: 4px;
-  padding: 0;}
+  padding: 0;
+  float: left ;}
+
+.country {
+  transition: 0.4s;
+}
+
+.country:hover {
+  color: #23a8e6;
+  text-decoration: none;
+  transition: 0.2s;
+}
 
 h1, h2 {
-  font-family: 'Roboto' !important;
+  font-family: 'Montserrat' !important;
   font-weight: 700 !important;
   color: #444 !important;}
 
 /* Card styles */
 
-.mapcard {
+.card {
   background-color: rgba(255,255,255,0.9);
   width: 100%;
   display: block;
   margin: 12px 0;
-  padding: 10px;
+
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.3);
   word-wrap: break-word;
+} .card > .memory {
+  padding: 8px;
+} .card > .card-bottom {
+  background-color: rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .cardholder {
   margin: 0;
   border: 1px solid rgba(0,0,0,0.3);
   width: 30%;
-  max-height: calc(100% - 62px);
+  height: calc(100% - 62px);
   min-width: 320px;
   max-width: 480px;
   padding: 0 6px 0 12px;
   background-color: #ccc;
   overflow-x: hidden;
   overflow-y: scroll;
+  resize: horizontal;
 }
 
 .cardholder::-webkit-scrollbar {
@@ -150,21 +176,6 @@ h1, h2 {
 #submit {
   width: 100%;
   margin: 10px 0 0 0 ;
-}
-
-.addbutton{
-  width: 48%;
-  float:right;
-  margin: 5px 0 0 0;
-}
-
-.btn {
-  width:100%;
-}
-
-.mapbutton, .backbutton{
-  width: 100%;
-  margin: 5px 0 0 0;
 }
 
 input {
@@ -211,6 +222,7 @@ input:hover, textarea:hover {
   margin: 20px 0 0 0;
   border-radius: 5px;
   max-height: 500px;
+  display:none;
 }
 
 @media (max-width:800px) {
@@ -234,3 +246,76 @@ input:hover, textarea:hover {
     min-width: 200px;
   }
 }
+
+/* bootstrap overrides */
+.left {
+  float:left;
+}
+.right {
+  float: right;
+}
+
+.btn-tertiary:hover{
+  background-color: #fff;
+}
+
+.btn-edit {
+  border-radius: 100px;
+  height: 38px;
+  margin: 4px;
+  font-size: 11pt !important;
+  color: #444;
+} .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
+  background-color: rgba(0, 0, 0, 0.15);
+  transition: 0.2s;
+} .btn-edit:focus, .btn-edit:active {
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1) !important;
+  transition: 0.2s;
+}
+
+.btn-delete {
+  border-radius: 100px;
+  width: 38px;
+  height: 38px;
+  margin: 4px;
+  padding: 0;
+  font-size: 19pt;
+  color: #444;
+} .btn-delete:hover, .btn-delete:focus .btn-delete:active{
+  background-color: #E7BCBC;
+  transition: 0.2s;
+} .btn-delete:focus, .btn-delete:active {
+  box-shadow: 0 0 0 0.2rem rgba(231, 188, 188, 0.5) !important;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background-color: #23a8e6;
+  height: 38px;
+  margin: 4px;
+  border: none;
+} .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #49c5ff;
+  transition: 0.2s;
+} .btn-primary:focus, .btn-primary:active {
+  box-shadow: 0 0 0 0.2rem rgba(73, 197, 255, 0.5) !important;
+  transition: 0.2s;
+}
+
+.btn-secundary {
+  background-color: #bc4f4f;
+  height: 38px;
+  margin: 4px;
+  color: #eee;
+} .btn-secundary:hover, .btn-secundary:focus, .btn-secundary:active {
+  background-color: #a84545;
+  transition: 0.2s;
+  color: #fff;
+} .btn-secundary:focus, .btn-secundary:active {
+  box-shadow: 0 0 0 0.2rem rgba(168, 69, 69, 0.5) !important;
+  transition: 0.2s;
+}
+
+.mapbutton {
+  height: 38px;
+  margin: 4px;}

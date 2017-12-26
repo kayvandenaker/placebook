@@ -1,10 +1,22 @@
 <!-- make an input field for every item -->
 
 {{ form.city.label_tag }}
+{% if form.city.value %}
+<input type="text" name="city" id="id_city" value="{{ form.city.value }}" placeholder="What city did you go to?" required/>
+{% else %}
 <input type="text" name="city" id="id_city" placeholder="What city did you go to?" required/>
+{% endif %}
 
 {{ form.country.label_tag }}
+{% if form.country.value %}
+<input type="text" name="country" id="id_country" value="{{ form.country.value }}" placeholder="What country is this city in?" required/>
+{% else %}
 <input type="text" name="country" id="id_country" placeholder="What country is this city in?" required/>
+{% endif %}
 
 {{ form.info.label_tag }}
-<textarea name="info" id="id_info" placeholder="What were your experiences? How was the weather? What activities did you participate in?"></textarea>
+{% if form.info %}
+{{ form.info }}
+{% else %}
+<textarea name="info" id="id_info" placeholder="What were your experiences? How was the weather? What activities did you participate in?" required></textarea>
+{% endif %}

@@ -1,12 +1,14 @@
 {% load staticfiles %}
 <!-- import css files -->
-<link rel="stylesheet" type="text/css" href="{% static 'places/style.css' %}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <!-- Custom fonts, use
 font-family: 'Montserrat', sans-serif;
 font-family: 'Roboto', sans-serif;
 as styles -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:400,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'flags/flags.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
+<!-- own styles (overrides bootstrap) -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 <!-- Page start -->
 <head>
@@ -15,68 +17,72 @@ as styles -->
 </head>
 
 <body>
-<div class="topnav">
-  <a href="" id="logo"><img src="{% static 'img/logo.png' %}" alt="PlaceBook"></a>
-  <a href="{% url 'memory-add' %}" class="nav-text">New</a>
-  <a href="" class='info-button nav-text'>Info</a>
-</div>
-
-<div class='infodiv'>
-  <div class="container">
-  <h1 class="h1">Info</h1>
-    <p>This site lets you save your dearest activity memories. You can add a card in the "Add" tab and fill in all the info of the memory!</p>
-    <button class="close-button btn btn-secondary">Close</button>
+  <div class="topnav">
+    <a href=""><img src="{% static 'img/logo.png' %}" alt="" id="logo"></a>
+    <a href="" class="nav-text">Placebook</a>
+    <!-- <a href="{% url 'memory-add' %}" class="nav-text">New</a> -->
+    <a href="" class='info-button nav-text'>Info</a>
   </div>
-</div>
 
-<div class="mapcontainer">
-  <img class="map">
-</div>
-
-<!-- it inserts all the stored memories in the cardholder -->
-<div class="cardholder scrollbar">
-{% if all_memorys %}
-  {% for memory in all_memorys%}
-  <div class='card, mapcard'>
-      <h2> {{memory.city}}, {{memory.country}}</h2>
-      <!-- <strong>City: </strong>{{memory.city}}
-      <br><strong>Country: </strong>{{memory.country}} -->
-      <strong>Info: </strong>{{memory.info}} <br><br>
-
-<!-- button to edit a card -->
-      <form style="width:48%;float:right;" action="{% url 'memory-update' memory.id %}" method="get">
-        {% csrf_token %}
-        <input type="hidden" name="memory_id" value="{{ memory.id }}">
-        <button class='btn btn-secundary' type="submit">Edit Card</button>
-      </form>
-<!-- button to remove a card from the database -->
-      <form style="width:48%;" action="{% url 'memory-delete' memory.id %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="memory_id" value="{{ memory.id }}">
-        <button class='btn btn-danger' type="submit">Delete Card</button>
-      </form>
-<button class='btn btn-primary mapbutton'>Toggle map</button>
-
-    </span>
+  <div class='infodiv'>
+    <div class="container">
+      <h1 class="h1">Info</h1>
+      <p>This site lets you save your dearest memories, bound to a location. You can add a card by choosing "new location" in the left panel.</p>
+      <button class="close-button btn btn-secondary">Close</button>
+    </div>
   </div>
-  {% endfor %}
-{% else %}
-  <!-- if there are no items -->
-  <h2>No memories are added</h2>
-{% endif %}
-</div>
 
-<!-- if something is wrong -->
-{% if error_message %}
+  <div class="mapcontainer">
+    <img class="map">
+  </div>
+
+  <!-- it inserts all the stored memories in the cardholder -->
+  <div class="cardholder scrollbar">
+    <form style="padding-top:10px;"action="{% url 'memory-add' %}">
+      <input type="submit" class="btn btn-tertiary" value="New Memory +" />
+    </form>
+    {% if all_memorys %}
+    {% for memory in all_memorys%}
+    <div class='card'>
+      <div class='memory'>
+        <h2><span class="country" id="location"> {{memory.city}}, {{memory.country}}</span></h2>
+        <!-- <strong>City: </strong>{{memory.city}}
+        <br><strong>Country: </strong>{{memory.country}} -->
+        <strong>Info: <br/></strong>{{memory.info}}
+      </div>
+      <div class="card-bottom">
+        
+        <form class="right" action="{% url 'memory-delete' memory.id %}" method="post">
+          {% csrf_token %}
+          <button class='btn btn-delete' type="submit"><b>&times;</b></button>
+        </form>
+        <form class="right" action="{% url 'memory-update' memory.id %}" method="get">
+          {% csrf_token %}
+          <button class='btn btn-edit' type="submit">EDIT</button>
+        </form>
+
+        <button class='btn btn-primary mapbutton'>Toggle map</button>
+      </div>
+    </div>
+
+    {% endfor %}
+    {% else %}
+    <!-- if there are no items -->
+    <p class="centerize">no memories added</p>
+    {% endif %}
+  </div>
+
+  <!-- if something is wrong -->
+  {% if error_message %}
   <p><strong>{{error_message}}</strong></p>
-{% endif %}
+  {% endif %}
 
-<!-- scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<script src="{% static 'js/main.js' %}"></script>
+  <!-- scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 
 
 </body>
