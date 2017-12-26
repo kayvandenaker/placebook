@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
   $('.info-button').on('click', function() {
     $('.infodiv').toggle();

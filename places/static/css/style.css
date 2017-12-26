@@ -145,6 +145,12 @@ h1, h2 {
   padding: 8px;
 }
 
+.card-top {
+  padding: 8px 0 0 0;
+  background-color: rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
 .card-bottom {
   background-color: rgba(0,0,0,0.05);
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -209,7 +215,7 @@ input:hover, textarea:hover {
 .dark-container {
   z-index: 50;
   text-align: center;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.3);
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -255,7 +261,9 @@ input:hover, textarea:hover {
 @media (max-width:800px) {
   .mapcard, .cardholder{
     width:100%;
+    max-width:100%;
   }
+
   .infodiv{
     width: 80%;
   }
@@ -272,6 +280,7 @@ input:hover, textarea:hover {
     width:100%;
     float:none;
   }
+
   .cardholder{
     max-height: initial;
     overflow-y: initial;
@@ -289,7 +298,7 @@ input:hover, textarea:hover {
 
 .btn-tertiary {
   width: 100%;
-} .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active{
+} .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active {
   background-color: #f8f8f8;
 }
 
@@ -352,4 +361,22 @@ input:hover, textarea:hover {
 
 .mapbutton {
   height: 38px;
-  margin: 4px;}
+  margin: 4px;
+}
+
+/* animations */
+
+.animation-slide {
+    -webkit-animation: slide 0.5s ease;
+    animation: slide 0.5s ease;
+}
+
+@-webkit-keyframes slide {
+    from {-webkit-transform: translateY(-80vh);}
+    to {-webkit-transform: translateY(0);}
+}
+
+@keyframes slide {
+    from {transform: translateY(-80vh);}
+    to {transform: translateY(0);}
+}

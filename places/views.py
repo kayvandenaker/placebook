@@ -24,7 +24,7 @@ class MemoryCreate(CreateView):
         data['all_memorys'] = Memory.objects.all()
         return data
 
-    template_name_suffix = '_form'
+    template_name = 'places/memory_form.html'
 
 class MemoryUpdate(UpdateView):
     model = Memory
@@ -35,7 +35,7 @@ class MemoryUpdate(UpdateView):
         data['all_memorys'] = Memory.objects.all()
         return data
 
-    template_name_suffix = '_form'
+    template_name = 'places/edit_form.html'
 
 class MemoryDelete(DeleteView):
     model = Memory
