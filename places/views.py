@@ -18,11 +18,23 @@ def index(request):
 class MemoryCreate(CreateView):
     model = Memory
     fields = ['city', 'country', 'info']
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['all_memorys'] = Memory.objects.all()
+        return data
+
     template_name_suffix = '_form'
 
 class MemoryUpdate(UpdateView):
     model = Memory
     fields = ['city', 'country', 'info']
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['all_memorys'] = Memory.objects.all()
+        return data
+
     template_name_suffix = '_form'
 
 class MemoryDelete(DeleteView):

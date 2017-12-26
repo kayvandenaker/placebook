@@ -184,20 +184,20 @@ h1, h2 {
 
 /* Form styles */
 input {
+  display: inline;
   background: #eee;
   border: 2px solid grey;
   border-radius: 4px;
   padding: 4px 8px;
-  width: calc(100% - 40px);
+  width: calc(100% - 16px);
 }
 
  textarea {
    background: #eee;
    border: 2px solid grey;
    border-radius: 4px;
-   width: calc(100% - 40px);
+   width: calc(100%);
    padding: 4px 8px;
-   margin: 0 20px;
    min-height: 100px;
    max-height: 300px;
  }
@@ -218,6 +218,7 @@ input:hover, textarea:hover {
 .inputcard {
   z-index: 100;
   width: 80%;
+  max-width: 800px;
   background-color: #fff;
   margin: 20px auto;
   border-radius: 5px;
@@ -225,14 +226,13 @@ input:hover, textarea:hover {
 }
 
 .memory > .input-container {
-  display: block !important;
-  background-color: #f00 !important;
+  display: inline-flex;
   margin: 8px;
 }
+
 .memory > .textarea-container {
-  display: inline !important;
-  background-color: #f00 !important;
-  margin: 8px;
+  display: block !important;
+  margin: 0 8px 8px 8px;
 }
 
 .container {
@@ -264,7 +264,10 @@ input:hover, textarea:hover {
     min-width: 200px;
   }
 
+  .memory > .input-container {
+    display: inline;
   }
+
   .map{
     width:100%;
     float:none;
