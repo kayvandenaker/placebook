@@ -13,10 +13,12 @@ html {
 
 body {
   background-color: #333 !important;
+
   /* background-image: url("images/map.jpg");
   background-repeat: repeat;
   background-size: 100% auto;
   background-attachment: fixed; */
+
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #444;
@@ -40,8 +42,9 @@ body {
 
 /* no scrollbar visible on body*/
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }
+
 
 .centerize {
 text-align: center;}
@@ -165,6 +168,12 @@ h1, h2 {
     border: 1px solid #ccc;
 }
 ​
+.cardholder::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
 /* Form styles */
 
 #input > input{
