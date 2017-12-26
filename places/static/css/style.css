@@ -28,6 +28,10 @@ body {
   overflow: hidden;
 }
 
+p {
+  color: #444;
+}
+
 /* selection styling */
 
 ::-moz-selection {
@@ -135,9 +139,13 @@ h1, h2 {
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.3);
   word-wrap: break-word;
-} .card > .memory {
+}
+
+.memory {
   padding: 8px;
-} .card > .card-bottom {
+}
+
+.card-bottom {
   background-color: rgba(0,0,0,0.05);
   border-top: 1px solid rgba(0,0,0,0.1);
 }
@@ -175,46 +183,56 @@ h1, h2 {
 }
 
 /* Form styles */
-
-#input > input{
-  width: 100%;
-  margin-bottom: 20px;
-  padding-left: 5px;
-}
-
-#submit {
-  width: 100%;
-  margin: 10px 0 0 0 ;
-}
-
 input {
   background: #eee;
   border: 2px solid grey;
-  border-radius: 2px;
-  width: 100%;
+  border-radius: 4px;
+  padding: 4px 8px;
+  width: calc(100% - 40px);
 }
 
  textarea {
    background: #eee;
    border: 2px solid grey;
-   border-radius: 2px;
-   width: 100%;
-   padding: 0;
+   border-radius: 4px;
+   width: calc(100% - 40px);
+   padding: 4px 8px;
+   margin: 0 20px;
    min-height: 100px;
    max-height: 300px;
  }
 
 input:hover, textarea:hover {
   transition: 0.4s;
-  background: #fff;}
+  background: #e8f7ff;}
+
+.dark-container {
+  z-index: 50;
+  text-align: center;
+  background-color: rgba(0,0,0,0.2);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
 
 .inputcard {
-  width: 30%;
-  background-color: rgba(255,255,255,0.95);
+  z-index: 100;
+  width: 80%;
+  background-color: #fff;
   margin: 20px auto;
-  padding: 10px;
   border-radius: 5px;
   min-width: 350px;
+}
+
+.memory > .input-container {
+  display: block !important;
+  background-color: #f00 !important;
+  margin: 8px;
+}
+.memory > .textarea-container {
+  display: inline !important;
+  background-color: #f00 !important;
+  margin: 8px;
 }
 
 .container {
@@ -241,9 +259,11 @@ input:hover, textarea:hover {
   .infodiv{
     width: 80%;
   }
+
   .inputcard{
-    width: 80%;
     min-width: 200px;
+  }
+
   }
   .map{
     width:100%;
@@ -258,14 +278,16 @@ input:hover, textarea:hover {
 
 /* bootstrap overrides */
 .left {
-  float:left;
+  float: left !important;
 }
 .right {
-  float: right;
+  float: right !important;
 }
 
-.btn-tertiary:hover{
-  background-color: #fff;
+.btn-tertiary {
+  width: 100%;
+} .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active{
+  background-color: #f8f8f8;
 }
 
 .btn-edit {

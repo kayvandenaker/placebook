@@ -13,11 +13,12 @@ from django.http import HttpResponse
 def index(request):
     all_memorys = Memory.objects.all()
     context = {'all_memorys': all_memorys}
-    return render(request, 'places/index.html', context)
+    return render(request, 'places/base.html', context)
 
 class MemoryCreate(CreateView):
     model = Memory
     fields = ['city', 'country', 'info']
+    template_name_suffix = '_form'
 
 class MemoryUpdate(UpdateView):
     model = Memory

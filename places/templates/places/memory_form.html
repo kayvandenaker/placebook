@@ -1,26 +1,20 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+{% extends 'places/base.html' %}
 
+{% block newmemory %}
+<div class="dark-container">
+  <div class="inputcard">
+    <h1 class="h1 centerize country">New memory</h1>
+    <!-- create the cards -->
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
 
-<body>
+      {% include 'places/form_template.html'%}
 
-{% block body %}
-<div class="inputcard">
-  <h1 class="h1 centerize">New memory</h1>
-  <!-- create the cards -->
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {% include 'places/form_template.html'%}
-
-    <div>
-      <button class='btn btn-primary' type="submit">SAVE</button>
-      <a href="{% url 'index' %}" class='btn btn-secundary' >BACK</a>
-    </div>
-  </form>
-
+      <div class="card-bottom">
+        <button class='btn btn-primary' type="submit">SAVE</button>
+        <a href="{% url 'index' %}" class='btn btn-secundary' >BACK</a>
+      </div>
+    </form>
+  </div>
 </div>
-
 {% endblock %}
-</body>

@@ -17,15 +17,17 @@ as styles -->
 </head>
 
 <body>
+
   <div class="topnav">
     <a href=""><img src="{% static 'img/logo.png' %}" alt="" id="logo"></a>
     <a href="" class="nav-text">Placebook</a>
     <!-- <a href="{% url 'memory-add' %}" class="nav-text">New</a> -->
     <a href="" class='info-button nav-text'>Info</a>
+    <a href="" class='right nav-text'>Sign-in/up</a>
   </div>
 
   <div class='infodiv'>
-    <div class="container">
+    <div class="card" style="z-index:10;">
       <h1 class="h1">Info</h1>
       <p>This site lets you save your dearest memories, bound to a location. You can add a card by choosing "new location" in the left panel.</p>
       <button class="close-button btn btn-secondary">Close</button>
@@ -35,6 +37,11 @@ as styles -->
   <div class="mapcontainer">
     <img class="map">
   </div>
+
+
+  {% block newmemory %}
+  {% endblock %}
+
 
   <!-- it inserts all the stored memories in the cardholder -->
   <div class="cardholder scrollbar">
@@ -51,7 +58,7 @@ as styles -->
         <strong>Info: <br/></strong>{{memory.info}}
       </div>
       <div class="card-bottom">
-        
+
         <form class="right" action="{% url 'memory-delete' memory.id %}" method="post">
           {% csrf_token %}
           <button class='btn btn-delete' type="submit"><b>&times;</b></button>
@@ -71,6 +78,7 @@ as styles -->
     <p class="centerize">no memories added</p>
     {% endif %}
   </div>
+
 
   <!-- if something is wrong -->
   {% if error_message %}
