@@ -22,7 +22,7 @@ as styles -->
     <a href=""><img src="{% static 'img/logo.png' %}" alt="" id="logo"></a>
     <a href="" class="nav-text">Placebook</a>
     <!-- <a href="{% url 'memory-add' %}" class="nav-text">New</a> -->
-    <a href="" class='info-button nav-text'>Info</a>
+    <a href="" class='info-button nav-text'>Help</a>
     <a href="" class='right nav-text'>Sign-in/up</a>
   </div>
 
@@ -38,10 +38,8 @@ as styles -->
     <img class="map">
   </div>
 
-
   {% block newmemory %}
   {% endblock %}
-
 
   <!-- it inserts all the stored memories in the cardholder -->
   <div class="cardholder scrollbar">

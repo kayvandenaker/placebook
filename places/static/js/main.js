@@ -1,4 +1,12 @@
+// Get the modal
+var container_dark = document.getElementById('dark-container');
 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == container_dark) {
+        container_dark.style.display = "none";
+    }
+}
 
 $(document).ready(function(){
   $('.info-button').on('click', function() {

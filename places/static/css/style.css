@@ -21,6 +21,7 @@ body {
 
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
+  font-size: 11pt;
   color: #444;
 
   width:100%;
@@ -49,7 +50,6 @@ p {
   width: 0px;
 }
 
-
 .centerize {
 text-align: center;}
 
@@ -57,27 +57,39 @@ text-align: center;}
 
 .topnav {
   z-index: 10;
-  background-color: #dedede;
+  background: linear-gradient(#eee, #dedede);
   overflow: hidden;
   padding: 2px;
-  height: 64px;
+  height: 50px;
   border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
 .nav-text {
   color: #444;
   float: left;
-  text-align: center;
-  padding: 8px 16px;
-  margin: auto;
 
   display: inline-block;
   vertical-align: middle;
 
+  font-family: Montserrat !important;
+  font-weight: 700 !important;
+  font-size: 16pt;
+
+  border-radius: 4px;
+  margin: auto;
+  padding: 8px 16px;
+
+  text-align: center;
   text-decoration: none;
+  text-shadow: 1px 1px #eee;
   transition: 0.4s;
   border-radius: 4px;
-  height: 58px;
+  height: 45px;
+
+  lineheight: 64px;
+} .nav-text:hover {
+  transition: 0.4;
+  padding: 6px 16px;
 }
 
 .topnav a:hover {
@@ -95,46 +107,76 @@ text-align: center;}
   display: none;
 }
 
-
-.nav-text {
-    font-family: Montserrat !important;
-    font-weight: 700 !important;
-    font-size: 20pt !important;
-    border-radius: 4px;
-    margin: 0 2px;
-    }
-
 #logo {
-  height: 50px;
+  height: 42px;
   display: inline-block;
   vertical-align: middle;
 
-  margin: 4px;
+  margin: 2px 8px 0 8px;
   padding: 0;
   float: left ;}
 
+/*Text transformations*/
+
 .country {
   transition: 0.4s;
-}
-
-.country:hover {
+} .country:hover {
   color: #23a8e6;
   text-decoration: none;
   transition: 0.2s;
 }
-
-h1, h2 {
+h1 {
   font-family: 'Montserrat' !important;
   font-weight: 700 !important;
-  color: #444 !important;}
+  color: #444 !important;
+  font-size: 18pt;
+}
+
+h2 {
+  font-family: 'Montserrat' !important;
+  font-weight: 700 !important;
+  color: #444 !important;
+  font-size: 16pt;
+}
 
 /* Card styles */
+.cardholder {
+  margin: 0;
+  border: 1px solid rgba(0,0,0,0.3);
+  width: 30%;
+  height: calc(100% - 50px);
+  min-width: 320px;
+  max-width: 480px;
+  padding: 0 8px 0 8px;
+  background-color: #ccc;
+  overflow-x: hidden;
+  overflow-y: hidden;
+} .cardholder:hover {
+  overflow-y: scroll;
+  padding: 0 3px 0 8px;
+}
+
+.cardholder::-webkit-scrollbar {
+    width: 5px !important;
+    background-color: transparent  !important;
+    float: left;
+}
+.cardholder::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid #ccc;
+}
+.cardholder::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
 
 .card {
   background-color: rgba(255,255,255,0.9);
   width: 100%;
   display: block;
-  margin: 12px 0;
+  margin: 8px 0;
 
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.3);
@@ -154,39 +196,9 @@ h1, h2 {
 .card-bottom {
   background-color: rgba(0,0,0,0.05);
   border-top: 1px solid rgba(0,0,0,0.1);
+  padding: 2px;
 }
 
-.cardholder {
-  margin: 0;
-  border: 1px solid rgba(0,0,0,0.3);
-  width: 30%;
-  height: calc(100% - 62px);
-  min-width: 320px;
-  max-width: 480px;
-  padding: 0 6px 0 12px;
-  background-color: #ccc;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  resize: horizontal;
-}
-
-.cardholder::-webkit-scrollbar {
-    width: 6px !important;
-    background-color: transparent  !important;
-    float: left;
-}
-
-.cardholder::-webkit-scrollbar-thumb {
-    border-radius: 6px;
-    background-color: rgba(0,0,0,0.3);
-    border: 1px solid #ccc;
-}
-​
-.cardholder::-webkit-scrollbar-button {
-  display: none;
-  height: 0;
-  width: 0;
-}
 
 /* Form styles */
 input {
@@ -197,8 +209,7 @@ input {
   padding: 4px 8px;
   width: calc(100% - 16px);
 }
-
- textarea {
+textarea {
    background: #eee;
    border: 2px solid grey;
    border-radius: 4px;
@@ -206,19 +217,23 @@ input {
    padding: 4px 8px;
    min-height: 100px;
    max-height: 300px;
- }
+   height: 200px;
+}
 
 input:hover, textarea:hover {
   transition: 0.4s;
   background: #e8f7ff;}
 
-.dark-container {
+#dark-container {
   z-index: 50;
   text-align: center;
-  background-color: rgba(0,0,0,0.3);
   position: absolute;
   width: 100vw;
   height: 100vh;
+
+  background-color: rgba(0,0,0,0.3);
+  -webkit-animation: darken 0.5s ease;
+  animation: darken 0.5s ease;
 }
 
 .inputcard {
@@ -258,12 +273,9 @@ input:hover, textarea:hover {
   display:none;
 }
 
-@media (max-width:800px) {
-  .mapcard, .cardholder{
-    width:100%;
-    max-width:100%;
-  }
+/*changes on media properties*/
 
+@media (max-width:800px) {
   .infodiv{
     width: 80%;
   }
@@ -280,11 +292,17 @@ input:hover, textarea:hover {
     width:100%;
     float:none;
   }
+}
 
+@media (max-width:640px) {
+/*max-width:640px because the card holder is 320px, which leaves at least 
+the same amount for the map*/
   .cardholder{
     max-height: initial;
     overflow-y: initial;
     min-width: 200px;
+    width:100%;
+    max-width:100%;
   }
 }
 
@@ -296,17 +314,14 @@ input:hover, textarea:hover {
   float: right !important;
 }
 
-.btn-tertiary {
-  width: 100%;
-} .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active {
-  background-color: #f8f8f8;
+.btn {
+  font-size: 9pt;
 }
 
 .btn-edit {
   border-radius: 100px;
-  height: 38px;
+  height: 32px;
   margin: 4px;
-  font-size: 11pt !important;
   color: #444;
 } .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
   background-color: rgba(0, 0, 0, 0.15);
@@ -318,11 +333,11 @@ input:hover, textarea:hover {
 
 .btn-delete {
   border-radius: 100px;
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   margin: 4px;
   padding: 0;
-  font-size: 19pt;
+  font-size: 15pt !important;
   color: #444;
 } .btn-delete:hover, .btn-delete:focus .btn-delete:active{
   background-color: #E7BCBC;
@@ -334,7 +349,7 @@ input:hover, textarea:hover {
 
 .btn-primary {
   background-color: #23a8e6;
-  height: 38px;
+  height: 32px;
   margin: 4px;
   border: none;
 } .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
@@ -347,7 +362,7 @@ input:hover, textarea:hover {
 
 .btn-secundary {
   background-color: #bc4f4f;
-  height: 38px;
+  height: 32px;
   margin: 4px;
   color: #eee;
 } .btn-secundary:hover, .btn-secundary:focus, .btn-secundary:active {
@@ -359,12 +374,23 @@ input:hover, textarea:hover {
   transition: 0.2s;
 }
 
+.btn-tertiary {
+  width: 100%;
+} .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active {
+  background-color: #f8f8f8;
+}
+
 .mapbutton {
-  height: 38px;
-  margin: 4px;
+  height: 32px;
+  margin: 3px;
 }
 
 /* animations */
+
+@-webkit-keyframes darken {
+    from { background-color: rgba(0,0,0,0); }
+    to { background-color: rgba(0,0,0,0.3); }
+}
 
 .animation-slide {
     -webkit-animation: slide 0.5s ease;
