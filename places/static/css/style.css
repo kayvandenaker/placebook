@@ -173,7 +173,7 @@ h2 {
 }
 
 .card {
-  background-color: rgba(255,255,255,0.9);
+  background-color: #f8f8f8;
   width: 100%;
   display: block;
   margin: 8px 0;
@@ -293,7 +293,6 @@ input:hover, textarea:hover {
     float:none;
   }
 }
-
 @media (max-width:640px) {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
