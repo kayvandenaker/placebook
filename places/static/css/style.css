@@ -308,15 +308,16 @@ input:hover, textarea:hover {
 .map-container {
   max-width:calc(100% - 320px);
   min-width:calc(100% - 480px);
-  width: 70%;
+  width: 70vw;
   float: right;
-  max-height:100%;
-  height: 100%;
+  max-height: calc((100% - 320px) / 2);
+  min-height: calc((100% - 480px) / 2);
+  height: calc(70vw / 2);
 
-  background-image: url('../img/logo_light.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 200px;
+  text-align: center;
+}.map-container > .loading {
+  width: 24px;
+  margin: 25%;
 }
 
 .map {
@@ -324,7 +325,6 @@ input:hover, textarea:hover {
 
   width: 100%;
   height: auto;
-  z-index: 5;
 }
 
 /*changes on media properties*/
@@ -356,7 +356,6 @@ the same amount for the map*/
   .cardholder {
     max-height: calc(100% - (100vw * .5) - 50px - 48px);
     /* height = full - map - nav - newmemory */
-    overflow-y: initial;
 
     min-width: 200px;
     width: 100%;
@@ -368,8 +367,8 @@ the same amount for the map*/
     width:100%;
     min-width: 100%;
     height: calc(100vw * .5);
-
-    background-size: auto 60%;
+  } .map-container > .loading {
+    margin-top: calc((100vw * .25) - 12px);
   }
 }
 
@@ -454,6 +453,27 @@ the same amount for the map*/
 }
 
 /* animations */
+
+.spin {
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotate {
+        from { -webkit-transform: rotate(0deg); }
+        to { -webkit-transform: rotate(360deg); }
+}
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
 .animation-darken {
   background-color: rgba(0,0,0,0.3);
