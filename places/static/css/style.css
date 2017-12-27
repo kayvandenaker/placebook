@@ -1,18 +1,27 @@
-/*
------ COLOR SCHEME -----
-#23a8e6 - highlights
-#444 -text
-#dedede - nav
-#ccc - memories panel (left)
-rgba(0,0,0,0.3) - 1px borders
-*/
+
+/* ----- GLOBAL VARIABLES ----- */
+:root {
+    --color1: #23a8e6;
+    --color1-s2: #45b6eb;
+
+    --color2: #bc4f4f;
+    --color2-s2: #a84545;
+
+    --dark-border: 1px solid rgba(0,0,0,0.3);
+    --dark-border2: 2px solid rgba(0,0,0,0.3);
+
+    --text-color: #444;
+    --text-color-light: #eee;
+
+    --background: #282828;
+}
 
 html {
   height:100%;
 }
 
 body {
-  background-color: #333 !important;
+  background: var(--background) !important;
 
   /* background-image: url("images/map.jpg");
   background-repeat: repeat;
@@ -22,7 +31,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 11pt;
-  color: #444;
+  color: var(--text-color);
 
   width:100%;
   height:100%;
@@ -30,7 +39,12 @@ body {
 }
 
 p {
-  color: #444;
+  color: var(--text-color);
+}
+
+hr {
+  margin: 10px;
+  background-color: rgba(0,0,0,0.05)
 }
 
 /* selection styling */
@@ -61,11 +75,11 @@ text-align: center;}
   overflow: hidden;
   padding: 2px;
   height: 50px;
-  border-bottom: 1px solid rgba(0,0,0,0.3);
+  border-bottom: var(--dark-border);
 }
 
 .nav-text {
-  color: #444;
+  color: var(--text-color);
   float: left;
 
   display: inline-block;
@@ -93,7 +107,7 @@ text-align: center;}
 }
 
 .topnav a:hover {
-  color: #23a8e6;
+  color: var(--color1);
   background-color: rgba(255,255,255, 0.5);
   text-decoration: none;
   transition: 0.2s;
@@ -121,30 +135,30 @@ text-align: center;}
 .country {
   transition: 0.4s;
 } .country:hover {
-  color: #23a8e6;
+  color: var(--color1);
   text-decoration: none;
   transition: 0.2s;
 }
 h1 {
   font-family: 'Montserrat' !important;
   font-weight: 700 !important;
-  color: #444 !important;
+  color: var(--text-color) !important;
   font-size: 20pt !important;
 }
 
 h2 {
   font-family: 'Montserrat' !important;
   font-weight: 700 !important;
-  color: #444 !important;
+  color: var(--text-color) !important;
   font-size: 16pt;
 }
 
 /* Card styles */
 .cardholder {
   margin: 0;
-  border: 1px solid rgba(0,0,0,0.3);
+  border: var(--dark-border);
   width: 30%;
-  height: calc(100% - 50px);
+  height: calc(100% - 50px - 48px);
   min-width: 320px;
   max-width: 480px;
   padding: 0 8px 0 8px;
@@ -172,6 +186,18 @@ h2 {
   width: 0;
 }
 
+#new_container {
+  margin: 0;
+  width: 30%;
+  height: 48px;
+  min-width: 320px;
+  max-width: 480px;
+  padding: 8px;
+  background-color: #dedede;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 .card {
   background-color: #f8f8f8;
   width: 100%;
@@ -189,30 +215,31 @@ h2 {
 
 .card-top {
   padding: 8px 0 0 0;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0,0,0,0.075);
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .card-bottom {
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0,0,0,0.075);
   border-top: 1px solid rgba(0,0,0,0.1);
   padding: 2px;
 }
 
-
 /* Form styles */
-input {
+
+input[type=text], input[type=password] {
   display: inline;
+  text-align: center;
   background: #eee;
-  border: 2px solid grey;
-  border-radius: 4px;
+  border: var(--dark-border2);
+  border-radius: 5px;
   padding: 4px 8px;
   width: calc(100% - 16px);
 }
 textarea {
    background: #eee;
-   border: 2px solid grey;
-   border-radius: 4px;
+   border: var(--dark-border2);
+   border-radius: 5px;
    width: calc(100%);
    padding: 4px 8px;
    min-height: 100px;
@@ -224,6 +251,10 @@ input:hover, textarea:hover {
   transition: 0.4s;
   background: #e8f7ff;}
 
+.form-text {
+  margin: 6px 0 0 0;
+}
+
 #dark-container {
   z-index: 50;
   text-align: center;
@@ -232,8 +263,6 @@ input:hover, textarea:hover {
   height: 100vh;
 
   background-color: rgba(0,0,0,0.3);
-  -webkit-animation: darken 0.5s ease;
-  animation: darken 0.5s ease;
 }
 
 .inputcard {
@@ -245,6 +274,16 @@ input:hover, textarea:hover {
   border-radius: 5px;
   min-width: 350px;
 }
+
+.logincard {
+  z-index: 100;
+  background-color: #fff;
+  margin: 20px auto;
+  border-radius: 5px;
+  width: 85%;
+  max-width: 500px;
+}
+
 
 .memory > .input-container {
   display: inline-flex;
@@ -258,9 +297,6 @@ input:hover, textarea:hover {
 
 .container {
   width: 100%;
-  background-color: rgba(255,255,255,0.95);
-  border-radius: 0 0 5px 5px;
-  padding: 10px 0 10px 0;
 }
 
 .map {
@@ -296,7 +332,7 @@ input:hover, textarea:hover {
 @media (max-width:640px) {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
-  .cardholder{
+  .cardholder, #new_container{
     max-height: initial;
     overflow-y: initial;
     min-width: 200px;
@@ -306,6 +342,7 @@ the same amount for the map*/
 }
 
 /* bootstrap overrides */
+
 .left {
   float: left !important;
 }
@@ -320,8 +357,8 @@ the same amount for the map*/
 .btn-edit {
   border-radius: 100px;
   height: 32px;
-  margin: 4px;
-  color: #444;
+  margin: 3px;
+  color: var(--text-color);
 } .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
   background-color: rgba(0, 0, 0, 0.15);
   transition: 0.2s;
@@ -334,12 +371,12 @@ the same amount for the map*/
   border-radius: 100px;
   width: 32px;
   height: 32px;
-  margin: 4px;
+  margin: 3px;
   padding: 0;
   font-size: 15pt !important;
   color: #444;
 } .btn-delete:hover, .btn-delete:focus .btn-delete:active{
-  background-color: #E7BCBC;
+  background-color: #d9a7a7;
   transition: 0.2s;
 } .btn-delete:focus, .btn-delete:active {
   box-shadow: 0 0 0 0.2rem rgba(231, 188, 188, 0.5) !important;
@@ -347,12 +384,12 @@ the same amount for the map*/
 }
 
 .btn-primary {
-  background-color: #23a8e6;
+  background-color: var(--color1);
   height: 32px;
-  margin: 4px;
+  margin: 3px;
   border: none;
 } .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #49c5ff;
+  background-color:  var(--color1-s2);
   transition: 0.2s;
 } .btn-primary:focus, .btn-primary:active {
   box-shadow: 0 0 0 0.2rem rgba(73, 197, 255, 0.5) !important;
@@ -360,12 +397,12 @@ the same amount for the map*/
 }
 
 .btn-secundary {
-  background-color: #bc4f4f;
+  background-color: var(--color2);
   height: 32px;
-  margin: 4px;
-  color: #eee;
+  margin: 3px;
+  color: var(--text-color-light);
 } .btn-secundary:hover, .btn-secundary:focus, .btn-secundary:active {
-  background-color: #a84545;
+  background-color: var(--color2-s2);
   transition: 0.2s;
   color: #fff;
 } .btn-secundary:focus, .btn-secundary:active {
@@ -373,11 +410,10 @@ the same amount for the map*/
   transition: 0.2s;
 }
 
-.btn-tertiary {
+.btn-wide {
   width: 100%;
+  margin: 0;
   font-size: 11pt !important;
-} .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active {
-  background-color: #f8f8f8;
 }
 
 .mapbutton {
@@ -387,22 +423,32 @@ the same amount for the map*/
 
 /* animations */
 
+.animation-darken {
+  background-color: rgba(0,0,0,0.3);
+  -webkit-animation: darken 0.5s ease;
+  animation: darken 0.5s ease;
+}
+
 @-webkit-keyframes darken {
+    from { -webkit-background-color: rgba(0,0,0,0); }
+    to { -webkit-background-color: rgba(0,0,0,0.3); }
+}
+@keyframes darken {
     from { background-color: rgba(0,0,0,0); }
     to { background-color: rgba(0,0,0,0.3); }
 }
 
 .animation-slide {
-    -webkit-animation: slide 0.5s ease;
-    animation: slide 0.5s ease;
+    -webkit-animation: slide 0.4s ease;
+    animation: slide 0.4s ease;
 }
 
 @-webkit-keyframes slide {
-    from {-webkit-transform: translateY(-80vh);}
-    to {-webkit-transform: translateY(0);}
+    from { -webkit-transform: translateY(-80vh); }
+    to { -webkit-transform: translateY(0); }
 }
 
 @keyframes slide {
-    from {transform: translateY(-80vh);}
-    to {transform: translateY(0);}
+    from { transform: translateY(-80vh); }
+    to { transform: translateY(0); }
 }

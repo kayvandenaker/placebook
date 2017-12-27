@@ -1,4 +1,5 @@
-var container_dark = document.getElementById('dark-container');
+let container_dark = document.getElementById('dark-container');
+let this_butt = null;
 
 window.onclick = function(event) {
     if (event.target == container_dark) {
@@ -28,11 +29,30 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.mapbutton', function() {
-    // var val1 = $(this).siblings('h2').text().split(' ').join('+');
-    var val1 = $(this).closest('.card').find('#location').text().split(' ').join('+');
-    var str = "https://maps.googleapis.com/maps/api/staticmap?center="+ val1 + "&zoom=12&scale=2&size=600x300&maptype=terrain&key=AIzaSyCdJieNVjZkVK1snuD_zRrruMd-ktMhZBU&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" + val1;
-    console.log(val1);
-    $(".map").toggle().attr("src",str); //toggle map instead of seperate hide/show
+    let new_butt = $(this);
+
+    if (new_butt.is(this_butt)) {
+      // hide map when same button is pressed time
+      if ($(".map").is(":visible")) {
+        $(".map").hide();
+        $(this).val("Show Map");
+      } else {
+        $(".map").show();
+        $(this).val("Hide Map");
+      }
+    } else {
+      if (this_butt){
+        this_butt.val("Show Map");
+      }
+
+      let val1 = $(this).closest('.card').find('#location').text().split(' ').join('+');
+      let str = "https://maps.googleapis.com/maps/api/staticmap?center="+ val1 + "&zoom=12&scale=2&size=600x300&maptype=terrain&key=AIzaSyCdJieNVjZkVK1snuD_zRrruMd-ktMhZBU&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" + val1;
+
+      this_butt = $(this);
+      this_butt.val("Hide Map");
+      $(".map").show().attr("src",str);
+    }
+
     return false;
   });
 });

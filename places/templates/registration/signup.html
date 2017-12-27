@@ -1,16 +1,16 @@
 {% extends 'places/base.html' %}
 
-{% block newmemory %}
+{% block login %}
 <div id="dark-container">
-  <div class="inputcard animation-slide">
+  <div class="logincard">
     <div class="card-top">
-      <h1 class="h1 centerize country">EDIT MEMORY</h1>
+      <h1 class="centerize">SIGN UP</h1>
     </div>
     <!-- create the cards -->
     <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
-      {% include 'places/form_memory.html'%}
+      {% include 'places/form_login.html'%}
 
       <div class="card-bottom">
         <button class='btn btn-primary' type="submit">SAVE</button>

@@ -23,7 +23,7 @@ as styles -->
     <a href="" class="nav-text">Placebook</a>
     <!-- <a href="{% url 'memory-add' %}" class="nav-text">New</a> -->
     <a href="" class='info-button nav-text'>Help</a>
-    <a href="" class='right nav-text'>Sign-in/up</a>
+    <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
   </div>
 
   <div class='infodiv'>
@@ -38,14 +38,21 @@ as styles -->
     <img class="map">
   </div>
 
+  {% block login %}
+  {% endblock %}
+
   {% block newmemory %}
   {% endblock %}
 
+
   <!-- it inserts all the stored memories in the cardholder -->
-  <div class="cardholder scrollbar">
-    <form style="padding-top:10px;"action="{% url 'memory-add' %}">
-      <input type="submit" class="btn btn-tertiary" value="New Memory +" />
+  <div id="new_container">
+    <form action="{% url 'memory-add' %}">
+      <input type="submit" class="btn btn-wide btn-primary" value="New Memory +" />
     </form>
+  </div>
+  <div class="cardholder scrollbar">
+
     {% if all_memorys %}
     {% for memory in all_memorys%}
     <div class='card'>
@@ -66,14 +73,14 @@ as styles -->
           <button class='btn btn-edit' type="submit">EDIT</button>
         </form>
 
-        <button class='btn btn-primary mapbutton'>Toggle map</button>
+        <input type="button" class='btn btn-primary mapbutton' value="Show Map">
       </div>
     </div>
 
     {% endfor %}
     {% else %}
     <!-- if there are no items -->
-    <p class="centerize">no memories added</p>
+    <p class="centerize" style="margin-top: 8px;">no memories added</p>
     {% endif %}
   </div>
 

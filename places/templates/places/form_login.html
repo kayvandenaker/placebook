@@ -1,9 +1,10 @@
 <!-- make an input field for every item -->
 
 <div class="memory">
-
-  <div class="input-container">
-    <strong> {{ form.city.label_tag }} </strong>
+  {{ form.as_p }}
+  
+  <!-- <div class="input-container">
+    <span class="form-text"> <strong> {{ form.city.label_tag }} </strong> </span>
     <div class='centerize'>
     {% if form.city.value %}
     <input type="text" name="city" id="id_city" value="{{ form.city.value }}" placeholder="City" required/>
@@ -12,9 +13,8 @@
     {% endif %}
     </div>
   </div>
-
   <div class="input-container">
-    <strong> {{ form.country.label_tag }} </strong>
+    <span class="form-text"> <strong> {{ form.country.label_tag }} </strong> </span>
     <div class='centerize'>
       {% if form.country.value %}
       <input type="text" name="country" id="id_country" value="{{ form.country.value }}" placeholder="Country" required/>
@@ -24,12 +24,14 @@
     </div>
   </div>
 
+  <hr>
+
   <div class="textarea-container">
-    <strong class="left"> {{ form.info.label_tag }} </strong><br/>
+    <span class="form-text"> <strong class="left"> {{ form.info.label_tag }} </strong> </span> <br/>
     {% if form.info.value %}
     {{ form.info }}
     {% else %}
     <textarea name="info" id="id_info" placeholder="What were your experiences? How was the weather? What activities did you participate in?" required></textarea>
     {% endif %}
-  </div>
+  </div> -->
 </div>
