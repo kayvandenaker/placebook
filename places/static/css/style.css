@@ -13,7 +13,7 @@
     --text-color: #444;
     --text-color-light: #eee;
 
-    --background: #282828;
+    --background: #333;
 }
 
 html {
@@ -121,7 +121,7 @@ text-align: center;}
   display: none;
 }
 
-#logo {
+.topnav > a > #logo {
   height: 42px;
   display: inline-block;
   vertical-align: middle;
@@ -157,10 +157,12 @@ h2 {
 .cardholder {
   margin: 0;
   border: var(--dark-border);
-  width: 30%;
   height: calc(100% - 50px - 48px);
+
+  width: 30%;
   min-width: 320px;
   max-width: 480px;
+
   padding: 0 8px 0 8px;
   background-color: #ccc;
   overflow-x: hidden;
@@ -187,11 +189,15 @@ h2 {
 }
 
 #new_container {
+  border-right: var(--dark-border);
+  border-left: var(--dark-border);
   margin: 0;
-  width: 30%;
   height: 48px;
+
+  width: 30%;
   min-width: 320px;
   max-width: 480px;
+
   padding: 8px;
   background-color: #dedede;
   overflow-x: hidden;
@@ -299,14 +305,26 @@ input:hover, textarea:hover {
   width: 100%;
 }
 
+.map-container {
+  max-width:calc(100% - 320px);
+  min-width:calc(100% - 480px);
+  width: 70%;
+  float: right;
+  max-height:100%;
+  height: 100%;
+
+  background-image: url('../img/logo_light.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 200px;
+}
+
 .map {
-  float:right;
-  width: 55%;
   background-color: rgb(255,255,255,0);
-  margin: 20px 0 0 0;
-  border-radius: 5px;
-  max-height: 500px;
-  display:none;
+
+  width: 100%;
+  height: auto;
+  z-index: 5;
 }
 
 /*changes on media properties*/
@@ -323,21 +341,35 @@ input:hover, textarea:hover {
   .memory > .input-container {
     display: inline;
   }
-
-  .map{
-    width:100%;
-    float:none;
-  }
 }
-@media (max-width:640px) {
+
+@media (max-width: 640px) {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
-  .cardholder, #new_container{
-    max-height: initial;
-    overflow-y: initial;
+  #new_container{
     min-width: 200px;
+    width: 100%;
+    max-width: 100%;
+    border-top: var(--dark-border);
+  }
+
+  .cardholder {
+    max-height: calc(100% - (100vw * .5) - 50px - 48px);
+    /* height = full - map - nav - newmemory */
+    overflow-y: initial;
+
+    min-width: 200px;
+    width: 100%;
+    max-width: 100%;
+    border-top: var(--dark-border);
+  }
+
+  .map-container {
     width:100%;
-    max-width:100%;
+    min-width: 100%;
+    height: calc(100vw * .5);
+
+    background-size: auto 60%;
   }
 }
 
