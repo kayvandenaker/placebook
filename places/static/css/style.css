@@ -129,7 +129,7 @@ h1 {
   font-family: 'Montserrat' !important;
   font-weight: 700 !important;
   color: #444 !important;
-  font-size: 18pt;
+  font-size: 20pt !important;
 }
 
 h2 {
@@ -295,7 +295,7 @@ input:hover, textarea:hover {
 }
 
 @media (max-width:640px) {
-/*max-width:640px because the card holder is 320px, which leaves at least 
+/*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
   .cardholder{
     max-height: initial;
@@ -376,6 +376,7 @@ the same amount for the map*/
 
 .btn-tertiary {
   width: 100%;
+  font-size: 11pt !important;
 } .btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active {
   background-color: #f8f8f8;
 }

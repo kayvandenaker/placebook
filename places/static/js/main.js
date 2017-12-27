@@ -1,11 +1,15 @@
-// Get the modal
 var container_dark = document.getElementById('dark-container');
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == container_dark) {
-        container_dark.style.display = "none";
+        disable_input();
+        location.href="/";
     }
+}
+
+// will make page seem to load faster
+function disable_input() {
+  container_dark.style.display = "none";
 }
 
 $(document).ready(function(){
@@ -17,6 +21,10 @@ $(document).ready(function(){
   $('.close-button').on('click', function() {
     $('.infodiv').hide();
     return false;
+  });
+
+  $('#back').on('click', function() {
+    disable_input();
   });
 
   $(document).on('click', '.mapbutton', function() {
