@@ -1,8 +1,6 @@
 let container_dark = document.getElementById('dark-container');
 let this_butt = null;
 // store loading image, detach immediately
-let loading = $(".loading");
-$(".loading").detach();
 let map = $(".map");
 
 window.onclick = function(event) {
@@ -36,38 +34,30 @@ $(document).ready(function(){
   $(document).on('click', '.mapbutton', function() {
     let new_butt = $(this);
 
-
-
     if (new_butt.is(this_butt)) {
 
       // hide map when same button is pressed time
-      if (jQuery.contains(document, map[0])) {
-        $(".map").detach();
-        $(this).val("Show Map");
+      if (map.is(":visible") ) {
+        map.hide();
+        new_butt.val("Show Map");
       } else {
-        $(".map-container").append(map);
-        $(this).val("Hide Map");
+        map.show();
+        new_butt.val("Hide Map");
       }
     } else {
+
+
       if (this_butt) {
-        // change value of previously pressed button
+        // change value of previously pressed button if it exists
         this_butt.val("Show Map");
       }
-
-      $(".map").detach();
-      $(".map-container").append(loading);
-
       this_butt = $(this);
+
       let val1 = $(this).closest('.card').find('#location').text().split(' ').join('+');
       let str = "https://maps.googleapis.com/maps/api/staticmap?center="+ val1 + "&zoom=12&scale=2&size=600x300&maptype=terrain&key=AIzaSyCdJieNVjZkVK1snuD_zRrruMd-ktMhZBU&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" + val1;
 
       this_butt.val("Hide Map");
-      $(".map-container").append(map.attr("src",str));
-      map.hide();
-      map.on('load', function() {
-        $(".loading").detach();
-        map.show();
-      });
+      map.show("slow").attr("src",str);
     }
 
     return false;

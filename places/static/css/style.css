@@ -46,7 +46,6 @@ hr {
   margin: 10px;
   background-color: rgba(0,0,0,0.05)
 }
-
 /* selection styling */
 
 ::-moz-selection {
@@ -139,6 +138,7 @@ text-align: center;}
   text-decoration: none;
   transition: 0.2s;
 }
+
 h1 {
   font-family: 'Montserrat' !important;
   font-weight: 700 !important;
@@ -290,7 +290,6 @@ input:hover, textarea:hover {
   max-width: 500px;
 }
 
-
 .memory > .input-container {
   display: inline-flex;
   margin: 8px;
@@ -315,16 +314,13 @@ input:hover, textarea:hover {
   height: calc(70vw / 2);
 
   text-align: center;
-}.map-container > .loading {
-  width: 24px;
-  margin: 25%;
 }
 
 .map {
-  background-color: rgb(255,255,255,0);
-
   width: 100%;
   height: auto;
+  /* background doesnt seem to show its loading */
+  background: #f00;
 }
 
 /*changes on media properties*/
@@ -354,7 +350,7 @@ the same amount for the map*/
   }
 
   .cardholder {
-    max-height: calc(100% - (100vw * .5) - 50px - 48px);
+    max-height: calc(100% - 50vw - 50px - 48px);
     /* height = full - map - nav - newmemory */
 
     min-width: 200px;
@@ -366,9 +362,9 @@ the same amount for the map*/
   .map-container {
     width:100%;
     min-width: 100%;
-    height: calc(100vw * .5);
-  } .map-container > .loading {
-    margin-top: calc((100vw * .25) - 12px);
+    height: 50vw;
+    min-height: auto;
+    max-height: auto;
   }
 }
 
@@ -390,6 +386,7 @@ the same amount for the map*/
   height: 32px;
   margin: 3px;
   color: var(--text-color);
+  background-color: rgba(0,0,0,0.1);
 } .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
   background-color: rgba(0, 0, 0, 0.15);
   transition: 0.2s;
@@ -405,7 +402,8 @@ the same amount for the map*/
   margin: 3px;
   padding: 0;
   font-size: 15pt !important;
-  color: #444;
+  color: var(--text-color);
+  background-color: rgba(0,0,0,0.1);
 } .btn-delete:hover, .btn-delete:focus .btn-delete:active{
   background-color: #d9a7a7;
   transition: 0.2s;
@@ -415,12 +413,12 @@ the same amount for the map*/
 }
 
 .btn-primary {
-  background-color: var(--color1);
+  background-color: var(--color1-s2);
   height: 32px;
   margin: 3px;
   border: none;
 } .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color:  var(--color1-s2);
+  background-color:  var(--color1);
   transition: 0.2s;
 } .btn-primary:focus, .btn-primary:active {
   box-shadow: 0 0 0 0.2rem rgba(73, 197, 255, 0.5) !important;
