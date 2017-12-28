@@ -29,7 +29,6 @@ def index(request):
 # ------------------- SIGNUP/LOGIN -------------------
 
 def signup(request):
-    data = Memory.objects.filter(author=request.user).order_by('-date')
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -39,10 +38,10 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('index')
     else:
         form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form, 'all_memorys': data})
+    return render(request, 'registration/signup.html', {'form': form})
 
 def login(request, user):
     return auth_views.login(request)
