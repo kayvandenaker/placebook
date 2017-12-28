@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_views
 from .models import Memory
 
-data = Memory.objects.all()
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.models import User
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -29,7 +31,7 @@ urlpatterns = [
     #/places/<pk>/delete/ --> to edit the card
     path('<pk>/delete/', views.MemoryDelete.as_view(), name='memory-delete'),
     #/registration/login/
-    path('login/', auth_views.login, {'extra_context': {'all_memorys': data}}, name='login'),
+    path('login/', auth_views.login, name='login'),
     #/registration/signup/
     path('signup/', views.signup, name='signup'),
 ]

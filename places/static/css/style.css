@@ -242,6 +242,15 @@ input[type=text], input[type=password] {
   padding: 4px 8px;
   width: calc(100% - 16px);
 }
+input[type=date] {
+  display: inline;
+  text-align: center;
+  background: #eee;
+  border: var(--dark-border2);
+  border-radius: 5px;
+  padding: 4px 8px;
+  width: calc(100% - 16px);
+}
 textarea {
    background: #eee;
    border: var(--dark-border2);

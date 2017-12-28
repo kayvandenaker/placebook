@@ -12,15 +12,24 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.models import User
+
+from django.utils import timezone
+from datetime import date
 
 # handles all the view requests
 def index(request):
-    all_memorys = Memory.objects.all()
-    context = {'all_memorys': all_memorys}
-    return render(request, 'places/base.html', context)
+    if request.user.is_authenticated:
+        all_memorys = Memory.objects.filter(author=request.user).order_by('-date')
+        context = {'all_memorys': all_memorys}
+        return render(request, 'places/base.html', context)
+    else:
+        return auth_views.login(request)
+
+# ------------------- SIGNUP/LOGIN -------------------
 
 def signup(request):
-    all_memorys = Memory.objects.all()
+    data = Memory.objects.filter(author=request.user).order_by('-date')
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -33,34 +42,59 @@ def signup(request):
             return redirect('home')
     else:
         form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form, 'all_memorys': all_memorys})
+    return render(request, 'registration/signup.html', {'form': form, 'all_memorys': data})
 
 def login(request, user):
     return auth_views.login(request)
 
+# ------------------- MEMORY VIEWS -------------------
 
 class MemoryCreate(CreateView):
     model = Memory
-    fields = ['city', 'country', 'info']
+    model.date = date.today()
+    fields = ['city', 'country', 'info', 'date']
 
-    #gets the memories to show while using form
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['all_memorys'] = Memory.objects.all()
-        return data
+    def form_valid(self, form):
+        memo = form.save(commit=False)
+        memo.author = self.request.user
+        #article.save()  # This is redundant, see comments.
+        return super(MemoryCreate, self).form_valid(form)
+
+    # Trying to get memos to show when editting/adding
+
+    # def get_queryset(self):
+    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
+    #     return data
+
+    # def get_context_data(self, **kwargs):
+    #     data = super().get_context_data(**kwargs)
+    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
+    #     return data
 
     template_name = 'places/memory_form.html'
 
 
 class MemoryUpdate(UpdateView):
     model = Memory
-    fields = ['city', 'country', 'info']
+    fields = ['city', 'country', 'info', 'date']
 
-    #gets the memories to show while using form
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['all_memorys'] = Memory.objects.all()
-        return data
+    def form_valid(self, form):
+        memo = form.save(commit=False)
+        memo.author = self.request.username
+
+        #article.save()  # This is redundant, see comments.
+        return super(MemoryCreate, self).form_valid(form)
+
+    # Trying to get memos to show when editting/adding
+
+    # def get_queryset(self):
+    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
+    #     return data
+
+    # def get_context_data(self, **kwargs):
+    #     data = super().get_context_data(**kwargs)
+    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
+    #     return data
 
     template_name = 'places/edit_form.html'
 
@@ -73,7 +107,7 @@ class MemoryDelete(DeleteView):
 class MemoryList(APIView):
 
     def get(self, request):
-        memories = Memory.objects.all()
+        memories = Memory.objects.filter(author=request.user).order_by('-date')
         serializer = MemorySerializer(memories, many=True)
         return Response(serializer.data)
 
