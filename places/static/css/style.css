@@ -43,7 +43,7 @@ body {
   background-image: url('/static/img/welcome_bg.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: bottom;
+  background-position: center;
   background-size: cover;
 
 }
