@@ -1,4 +1,4 @@
-{% extends 'places/base.html' %}
+{% extends 'places/intro.html' %}
 
 {% block login %}
 <div id="dark-container" class="animation-darken">
@@ -14,7 +14,7 @@
 
       <a href="{% url 'signup' %}"><p>Don't have an account? Create one!</p></a>
       <div class="card-bottom">
-        <button class='btn btn-primary' type="submit">SAVE</button>
+        <button class='btn btn-primary' type="submit">LOGIN</button>
         <a href="{% url 'index' %}" class='btn btn-secundary' id="back">BACK</a>
       </div>
     </form>

@@ -23,6 +23,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
 
 urlpatterns = [
+    path('welcome/', views.intro, name='intro'),
     path('', views.index, name='index'),
     #/places/add/
     path('add/', views.MemoryCreate.as_view(), name='memory-add'),

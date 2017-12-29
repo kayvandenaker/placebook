@@ -16,7 +16,7 @@ as styles -->
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
 </head>
 
-<body>
+<body id="welcome-bg">
 
   <div class="topnav">
     <a href=""><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
@@ -26,7 +26,6 @@ as styles -->
     <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
     {% endif %}
     <a href="{% url 'index' %}" class="nav-text">Placebook</a>
-    <a href="" class='info-button nav-text'>Help</a>
   </div>
 
   {% if user.is_authenticated %}
@@ -34,67 +33,21 @@ as styles -->
     <a href="" class="nav-text">Profile </span></a>
     <a href="" class="nav-text">Search <span class="fas fa-search"></span></a>
     <a href="{% url 'logout' %}" class="nav-text">Logout </a><br/>
-
   </div>
   {% endif %}
 
-  <div class='infodiv'>
-    <div class="card" style="z-index:10;">
-      <h1 class="h1">Info</h1>
-      <p>This site lets you save your dearest memories, bound to a location. You can add a card by choosing "new location" in the left panel.</p>
-      <button class="close-button btn btn-secondary">Close</button>
-    </div>
-  </div>
-
-  <div class="map-container">
-    <img class="map">
-  </div>
-
   {% block login %}
-  {% endblock %}
-
-  {% block newmemory %}
-  {% endblock %}
-
-
-  <!-- it inserts all the stored memories in the cardholder -->
-  <div id="new_container">
-    <form action="{% url 'memory-add' %}">
-      <input type="submit" class="btn btn-wide btn-primary" value="New Memory +" />
-    </form>
+  <div class="centerize" id="welcome">
+    <p class="welcome-msg">Welcome to <br/><b>Placebook</b></p>
+    <hr class="welcome-hr">
+    <p class="welcome-txt">A platform where users can store their memories and trips in their personal log. <br/> So many places to visit, yet so little time..
+      <br/><br/> <b> Make an account today. </b></p>
+    <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'login' %}">Get started!</a>
   </div>
-  <div class="cardholder scrollbar">
+  {% endblock %}
 
-    {% if all_memorys %}
-    {% for memory in all_memorys%}
-    <div class='card'>
-      <div class='memory'>
-        <h2><span class="country" id="location"> {{memory.city}}, {{memory.country}}</span></h2>
-        <!-- <strong>City: </strong>{{memory.city}}
-        <br><strong>Country: </strong>{{memory.country}} -->
-        <strong>Info: <br/></strong>{{memory.info}}<br/>
-        <span class="date-text rightize">{{memory.date | date:"DATE_FORMAT" }}</span>
-      </div>
-      <div class="card-bottom">
-
-        <form class="right" action="{% url 'memory-delete' memory.id %}" method="post">
-          {% csrf_token %}
-          <button class='btn btn-delete' type="submit"><b>&times;</b></button>
-        </form>
-        <form class="right" action="{% url 'memory-update' memory.id %}" method="get">
-          {% csrf_token %}
-          <button class='btn btn-edit' type="submit">EDIT</button>
-        </form>
-
-        <input type="button" class='btn btn-primary mapbutton' value="Show Map">
-      </div>
-    </div>
-
-    {% endfor %}
-    {% else %}
-    <!-- if there are no items -->
-    <p class="centerize" style="margin-top: 8px;">no memories added</p>
-    {% endif %}
+  <div id="artist-credit">
+    <p> background by <a href="https://unsplash.com/@paulgilmore_">Paul Gilmore</a></p>
   </div>
 
 

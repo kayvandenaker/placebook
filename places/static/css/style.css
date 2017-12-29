@@ -12,6 +12,7 @@
 
     --text-color: #444;
     --text-color-light: #eee;
+    --welcome-text-color: #444;
 
     --background: #333;
 }
@@ -22,7 +23,7 @@ html {
 }
 
 body {
-  background: var(--background) !important;
+  background: var(--background);
 
   /* background-image: url("images/map.jpg");
   background-repeat: repeat;
@@ -38,6 +39,35 @@ body {
   height:100%;
   overflow: hidden;
 }
+#welcome-bg {
+  background-image: url('/static/img/welcome_bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom;
+  background-size: cover;
+
+}
+
+#welcome {
+  text-align: center;
+  margin: auto;
+  padding: auto;
+  width: 60%;
+  height: 60%;
+
+  color: var(--welcome-text-color) !important;
+}
+
+#artist-credit {
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  background-color: rgba(255,255,255,0.8);
+  color: #444;
+  padding: 6px 8px 0 8px;
+  border-top-left-radius: 5px;
+  font-size: 8pt;
+}
 
 p {
   color: var(--text-color);
@@ -45,7 +75,14 @@ p {
 
 hr {
   margin: 10px;
-  background-color: rgba(0,0,0,0.05)
+  background-color: rgba(0,0,0,0.05);
+}
+.welcome-hr {
+  margin-bottom: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  background-color: var(--welcome-text-color);
 }
 
 ::-moz-selection {
@@ -61,6 +98,55 @@ hr {
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 0px;
+}
+
+/* ---------------- Text transformations ---------------- */
+
+.centerize {
+text-align: center;}
+.rightize {
+text-align: right;}
+
+.welcome-msg {
+  font-size: 24pt;
+  font-weight: 400;
+  padding-top: 20px;
+  color: var(--welcome-text-color);
+}
+.welcome-txt {
+  font-size: 12pt;
+  font-weight: 400;
+  color: var(--welcome-text-color);
+}
+
+.date-text {
+  display: block;
+  font-size: 8pt;
+  padding-top: 4px;
+  padding-right: 4px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.country {
+  transition: 0.4s;
+} .country:hover {
+  color: var(--color1);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+h1 {
+  font-family: 'Montserrat' !important;
+  font-weight: 700 !important;
+  color: var(--text-color) !important;
+  font-size: 20pt !important;
+}
+
+h2 {
+  font-family: 'Montserrat' !important;
+  font-weight: 700 !important;
+  color: var(--text-color) !important;
+  font-size: 16pt;
 }
 
 /* ---------------- Navbar styles ---------------- */
@@ -103,7 +189,7 @@ hr {
   padding: 6px 16px;
 }
 
-.topnav a:hover, .logged-in > a:hover{
+.topnav > a:hover, .logged-in > a:hover{
   color: var(--color1);
   background-color: rgba(255,255,255, 0.5);
   text-decoration: none;
@@ -150,43 +236,13 @@ hr {
   border-bottom: var(--dark-border);
   border-left: var(--dark-border);
 } .logged-in > a {
+  display: inline-block;
   width: 100%;
   text-align: right;
-}
-
-/* ---------------- Text transformations ---------------- */
-
-.centerize {
-text-align: center;}
-.rightize {
-text-align: right;}
-
-.date-text {
-  display: block;
-  font-size: 8pt;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.country {
-  transition: 0.4s;
-} .country:hover {
-  color: var(--color1);
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-h1 {
-  font-family: 'Montserrat' !important;
-  font-weight: 700 !important;
-  color: var(--text-color) !important;
-  font-size: 20pt !important;
-}
-
-h2 {
-  font-family: 'Montserrat' !important;
-  font-weight: 700 !important;
-  color: var(--text-color) !important;
-  font-size: 16pt;
+  margin: 0;
+} .logged-in > .nav-text:hover {
+  transition: 0.4;
+  padding: 8px 20px;
 }
 
 /* ---------------- Card styles ---------------- */
@@ -552,16 +608,31 @@ the same amount for the map*/
 }
 
 .animation-smallslide {
-    -webkit-animation: smallslide 0.3s ease;
-    animation: smallslide 0.3s ease;
+    -webkit-animation: smallslide 0.25s ease;
+    animation: smallslide 0.25s ease;
 }
 
 @-webkit-keyframes smallslide {
-    from { -webkit-transform: translateY(-500px); }
+    from { -webkit-transform: translateY(-200px); }
     to { -webkit-transform: translateY(0); }
 }
 
 @keyframes smallslide {
-    from { transform: translateY(-500px); }
+    from { transform: translateY(-200px); }
     to { transform: translateY(0); }
+}
+
+.animation-slideleft {
+    -webkit-animation: slideleft 0.3s ease;
+    animation: slideleft 0.3s ease;
+}
+
+@-webkit-keyframes slideleft {
+    from { -webkit-transform: translateX(-500px); }
+    to { -webkit-transform: translateX(0); }
+}
+
+@keyframes slideleft {
+    from { transform: translateX(-500px); }
+    to { transform: translateX(0); }
 }

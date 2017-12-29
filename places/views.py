@@ -20,13 +20,16 @@ from datetime import datetime
 
 # ------------------- HOME -------------------
 
+def intro(request):
+        return render(request, 'places/intro.html')
+
 def index(request):
     if request.user.is_authenticated:
         all_memorys = Memory.objects.filter(author=request.user).order_by('-date')
         context = {'all_memorys': all_memorys}
         return render(request, 'places/base.html', context)
     else:
-        return auth_views.login(request)
+        return render(request, 'places/intro.html')
 
 # ------------------- SIGNUP/LOGIN -------------------
 
