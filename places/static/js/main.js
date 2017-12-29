@@ -18,6 +18,7 @@ function disable_input() {
 
 $(document).ready(function(){
 
+  // info button clicks
   $('.info-button').on('click', function() {
     $('.infodiv').toggle();
     return false;
@@ -28,10 +29,7 @@ $(document).ready(function(){
     return false;
   });
 
-  $('#back').on('click', function() {
-    disable_input();
-  });
-
+  // map button clicks
   $(document).on('click', '.mapbutton', function() {
     let new_butt = $(this);
 
@@ -62,4 +60,10 @@ $(document).ready(function(){
 
     return false;
   });
+
+  // User navbar clicks
+  $(document).on('click', '#usermenu', function() {
+    $('.logged-in').toggle();
+  });
+
 });

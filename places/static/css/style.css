@@ -1,5 +1,5 @@
 
-/* ----- GLOBAL VARIABLES ----- */
+/* ---------------- GLOBAL VARIABLES ---------------- */
 :root {
     --color1: #23a8e6;
     --color1-s2: #45b6eb;
@@ -16,6 +16,7 @@
     --background: #333;
 }
 
+/* ---------------- default html tags ---------------- */
 html {
   height:100%;
 }
@@ -46,7 +47,6 @@ hr {
   margin: 10px;
   background-color: rgba(0,0,0,0.05)
 }
-/* selection styling */
 
 ::-moz-selection {
   color: #fff;
@@ -58,18 +58,16 @@ hr {
   background: #252525;
   text-shadow: none; }
 
-/* no scrollbar visible on body*/
+/* scrollbar */
 ::-webkit-scrollbar {
   width: 0px;
 }
 
-.centerize {
-text-align: center;}
-
-/* navbar styles */
+/* ---------------- Navbar styles ---------------- */
 
 .topnav {
-  z-index: 10;
+  position: relative;
+  z-index: 10 !important;
   background: linear-gradient(#eee, #dedede);
   overflow: hidden;
   padding: 2px;
@@ -105,19 +103,11 @@ text-align: center;}
   padding: 6px 16px;
 }
 
-.topnav a:hover {
+.topnav a:hover, .logged-in > a:hover{
   color: var(--color1);
   background-color: rgba(255,255,255, 0.5);
   text-decoration: none;
   transition: 0.2s;
-}
-
-.infodiv {
-  width: 30%;
-  min-width: 220px;
-  margin-left: 20px;
-  position: absolute;
-  display: none;
 }
 
 .topnav > a > #logo {
@@ -127,9 +117,47 @@ text-align: center;}
 
   margin: 2px 8px 0 8px;
   padding: 0;
-  float: left ;}
+  float: left ;
+}
 
-/*Text transformations*/
+.topnav > a > #avatar {
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+
+  margin-left: 12px;
+  padding: 0;
+  float: right;
+}
+
+.infodiv {
+  width: 30%;
+  margin: 8px;
+  min-width: 220px;
+  margin-left: 20px;
+  position: absolute;
+  display: none;
+}
+
+.logged-in {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 150px;
+  background: #ccc;
+  padding: 2px;
+  border-bottom-left-radius: 6px;
+  border-bottom: var(--dark-border);
+  border-left: var(--dark-border);
+} .logged-in > a {
+  width: 100%;
+  text-align: right;
+}
+
+/* ---------------- Text transformations ---------------- */
+
+.centerize {
+text-align: center;}
 
 .country {
   transition: 0.4s;
@@ -153,7 +181,8 @@ h2 {
   font-size: 16pt;
 }
 
-/* Card styles */
+/* ---------------- Card styles ---------------- */
+
 .cardholder {
   margin: 0;
   border: var(--dark-border);
@@ -231,7 +260,7 @@ h2 {
   padding: 2px;
 }
 
-/* Form styles */
+/* ---------------- Form styles ---------------- */
 
 input[type=text], input[type=password] {
   display: inline;
@@ -313,6 +342,8 @@ input:hover, textarea:hover {
   width: 100%;
 }
 
+/* ---------------- Map styles ---------------- */
+
 .map-container {
   max-width:calc(100% - 320px);
   min-width:calc(100% - 480px);
@@ -332,7 +363,7 @@ input:hover, textarea:hover {
   background: #ddd;
 }
 
-/*changes on media properties*/
+/* ---------------- Changes on media properties ---------------- */
 
 @media (max-width:800px) {
   .infodiv{
@@ -377,7 +408,7 @@ the same amount for the map*/
   }
 }
 
-/* bootstrap overrides */
+/* ---------------- Other/Buttons ---------------- */
 
 .left {
   float: left !important;
@@ -459,7 +490,7 @@ the same amount for the map*/
   margin: 3px;
 }
 
-/* animations */
+/* ---------------- Animations ---------------- */
 
 .spin {
   -webkit-animation-name: rotate;
@@ -509,5 +540,20 @@ the same amount for the map*/
 
 @keyframes slide {
     from { transform: translateY(-80vh); }
+    to { transform: translateY(0); }
+}
+
+.animation-smallslide {
+    -webkit-animation: smallslide 0.3s ease;
+    animation: smallslide 0.3s ease;
+}
+
+@-webkit-keyframes smallslide {
+    from { -webkit-transform: translateY(-500px); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@keyframes smallslide {
+    from { transform: translateY(-500px); }
     to { transform: translateY(0); }
 }

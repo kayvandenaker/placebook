@@ -24,12 +24,20 @@ as styles -->
     <!-- <a href="{% url 'memory-add' %}" class="nav-text">New</a> -->
     <a href="" class='info-button nav-text'>Help</a>
     {% if user.is_authenticated %}
-        <a href="{% url 'login' %}" class='right nav-text'>{{ user.get_username }}</a>
+        <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar"></a>
     {% else %}
         <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
     {% endif %}
-
   </div>
+
+  {% if user.is_authenticated %}
+      <div class="logged-in animation-smallslide">
+        <a href="" class="nav-text right">Profile</a>
+        <a href="" class="nav-text right">Search</a>
+        <a href="{% url 'logout' %}" class="nav-text right">Logout</a>
+
+      </div>
+  {% endif %}
 
   <div class='infodiv'>
     <div class="card" style="z-index:10;">

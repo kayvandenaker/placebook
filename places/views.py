@@ -31,7 +31,6 @@ def index(request):
 # ------------------- SIGNUP/LOGIN -------------------
 
 def signup(request):
-
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -46,12 +45,13 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 def login(request, user):
-
     data = {
         'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
     }
-
     return auth_views.login(request, data)
+
+def logout(request, user):
+    return auth_views.logout(request)
 
 # ------------------- MEMORY VIEWS -------------------
 
@@ -61,16 +61,15 @@ class MemoryCreate(CreateView):
     fields = ['city', 'country', 'info', 'date']
 
     def form_valid(self, form):
-        memo = form.save(commit=False)
+        memo = form.save(commit = False)
         memo.author = self.request.user
-        #article.save()  # This is redundant, see comments.
         return super(MemoryCreate, self).form_valid(form)
 
     # Getting memos as context
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
-        return data
+        context = super().get_context_data(**kwargs)
+        context['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        return context
 
     template_name = 'places/memory_form.html'
 
@@ -80,17 +79,15 @@ class MemoryUpdate(UpdateView):
     fields = ['city', 'country', 'info', 'date']
 
     def form_valid(self, form):
-        memo = form.save(commit=False)
-        memo.author = self.request.username
-
-        #article.save()  # This is redundant, see comments.
-        return super(MemoryCreate, self).form_valid(form)
+        memo = form.save(commit = False)
+        memo.author = self.request.user
+        return super(MemoryUpdate, self).form_valid(form)
 
     # Getting memos as context
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
-        return data
+        context = super().get_context_data(**kwargs)
+        context['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        return context
 
     template_name = 'places/edit_form.html'
 
