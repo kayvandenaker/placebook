@@ -1,16 +1,6 @@
 let container_dark = document.getElementById('dark-container');
 let this_butt = null;
-// store loading image, detach immediately
 let map = $(".map");
-
-// date
-
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
-today = yyyy+'-'+mm+'-'+dd;
-document.getElementById("id_date").setAttribute("value", today);
 
 // JQuery
 
@@ -56,19 +46,18 @@ $(document).ready(function(){
         new_butt.val("Hide Map");
       }
     } else {
-
-
       if (this_butt) {
         // change value of previously pressed button if it exists
         this_butt.val("Show Map");
       }
+      map.show();
       this_butt = $(this);
 
       let val1 = $(this).closest('.card').find('#location').text().split(' ').join('+');
       let str = "https://maps.googleapis.com/maps/api/staticmap?center="+ val1 + "&zoom=12&scale=2&size=600x300&maptype=terrain&key=AIzaSyCdJieNVjZkVK1snuD_zRrruMd-ktMhZBU&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" + val1;
 
       this_butt.val("Hide Map");
-      map.show("slow").attr("src",str);
+      map.attr("src",str);
     }
 
     return false;

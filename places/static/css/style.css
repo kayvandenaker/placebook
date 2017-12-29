@@ -329,7 +329,7 @@ input:hover, textarea:hover {
   width: 100%;
   height: auto;
   /* background doesnt seem to show its loading */
-  background: #f00;
+  background: #ddd;
 }
 
 /*changes on media properties*/

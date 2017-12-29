@@ -18,7 +18,8 @@ from django.utils import timezone
 from datetime import date
 from datetime import datetime
 
-# handles all the view requests
+# ------------------- HOME -------------------
+
 def index(request):
     if request.user.is_authenticated:
         all_memorys = Memory.objects.filter(author=request.user).order_by('-date')
@@ -45,7 +46,12 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 def login(request, user):
-    return auth_views.login(request)
+
+    data = {
+        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+    }
+
+    return auth_views.login(request, data)
 
 # ------------------- MEMORY VIEWS -------------------
 
