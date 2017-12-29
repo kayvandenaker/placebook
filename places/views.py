@@ -16,6 +16,7 @@ from django.contrib.auth.models import User
 
 from django.utils import timezone
 from datetime import date
+from datetime import datetime
 
 # handles all the view requests
 def index(request):
@@ -59,16 +60,11 @@ class MemoryCreate(CreateView):
         #article.save()  # This is redundant, see comments.
         return super(MemoryCreate, self).form_valid(form)
 
-    # Trying to get memos to show when editting/adding
-
-    # def get_queryset(self):
-    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
-    #     return data
-
-    # def get_context_data(self, **kwargs):
-    #     data = super().get_context_data(**kwargs)
-    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
-    #     return data
+    # Getting memos as context
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        return data
 
     template_name = 'places/memory_form.html'
 
@@ -84,16 +80,11 @@ class MemoryUpdate(UpdateView):
         #article.save()  # This is redundant, see comments.
         return super(MemoryCreate, self).form_valid(form)
 
-    # Trying to get memos to show when editting/adding
-
-    # def get_queryset(self):
-    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
-    #     return data
-
-    # def get_context_data(self, **kwargs):
-    #     data = super().get_context_data(**kwargs)
-    #     data['all_memorys'] = Memory.objects.filter(author=request.user).order_by('-date')
-    #     return data
+    # Getting memos as context
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        return data
 
     template_name = 'places/edit_form.html'
 

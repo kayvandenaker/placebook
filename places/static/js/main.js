@@ -3,6 +3,17 @@ let this_butt = null;
 // store loading image, detach immediately
 let map = $(".map");
 
+// date
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("id_date").setAttribute("value", today);
+
+// JQuery
+
 window.onclick = function(event) {
     if (event.target == container_dark) {
         disable_input();

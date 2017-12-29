@@ -28,14 +28,12 @@
     <span class="form-text"> <strong> {{ form.date.label_tag }} </strong> </span>
     <div class='centerize'>
       {% if form.date.value %}
-      <input type="date" name="date" id="id_date" value="{{ form.country.value }}" autocomplete="off"/>
+      <input type="date" name="date" id="id_date" value="{{ form.date.value|date:'Y-m-d' }}" autocomplete="off"/>
       {% else %}
        <input type="date" name="date" id="id_date" autocomplete="off"/>
       {% endif %}
     </div>
   </div>
-
-
 
   <hr>
 
