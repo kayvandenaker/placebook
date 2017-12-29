@@ -158,6 +158,14 @@ hr {
 
 .centerize {
 text-align: center;}
+.rightize {
+text-align: right;}
+
+.date-text {
+  display: block;
+  font-size: 8pt;
+  color: rgba(0, 0, 0, 0.5);
+}
 
 .country {
   transition: 0.4s;

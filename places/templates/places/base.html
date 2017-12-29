@@ -5,7 +5,7 @@
 font-family: 'Montserrat', sans-serif;
 font-family: 'Roboto', sans-serif;
 as styles -->
-<link rel="stylesheet" type="text/css" href="{% static 'flags/flags.css' %}">
+<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
 <!-- own styles (overrides bootstrap) -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
@@ -24,19 +24,19 @@ as styles -->
     <!-- <a href="{% url 'memory-add' %}" class="nav-text">New</a> -->
     <a href="" class='info-button nav-text'>Help</a>
     {% if user.is_authenticated %}
-        <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar"></a>
+    <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar"></a>
     {% else %}
-        <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
+    <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
     {% endif %}
   </div>
 
   {% if user.is_authenticated %}
-      <div class="logged-in animation-smallslide">
-        <a href="" class="nav-text right">Profile</a>
-        <a href="" class="nav-text right">Search</a>
-        <a href="{% url 'logout' %}" class="nav-text right">Logout</a>
+  <div class="logged-in animation-smallslide">
+    <a href="" class="nav-text">Profile </span></a>
+    <a href="" class="nav-text">Search <span class="fas fa-search"></span></a>
+    <a href="{% url 'logout' %}" class="nav-text">Logout</a>
 
-      </div>
+  </div>
   {% endif %}
 
   <div class='infodiv'>
@@ -73,7 +73,8 @@ as styles -->
         <h2><span class="country" id="location"> {{memory.city}}, {{memory.country}}</span></h2>
         <!-- <strong>City: </strong>{{memory.city}}
         <br><strong>Country: </strong>{{memory.country}} -->
-        <strong>Info: <br/></strong>{{memory.info}}
+        <strong>Info: <br/></strong>{{memory.info}}<br/>
+        <span class="date-text rightize">{{memory.date | date:"DATE_FORMAT" }}</span>
       </div>
       <div class="card-bottom">
 
