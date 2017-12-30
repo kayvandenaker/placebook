@@ -35,9 +35,10 @@ as styles -->
 
   {% if user.is_authenticated %}
   <div class="logged-in animation-smallslide">
-    <a href="" class="nav-text">Profile </span></a>
+    <a href="{% url 'avatar' %}" class="nav-text">Profile </span></a>
     <a href="" class="nav-text">Search <span class="fas fa-search"></span></a>
     <a href="{% url 'logout' %}" class="nav-text">Logout </a><br/>
+
   </div>
   {% endif %}
 
