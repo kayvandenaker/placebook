@@ -75,7 +75,7 @@ $(document).ready(function(){
     strArr.push($(this).text());
   });
 
-  $(document).on('click', '.mapbutton', function() {
+  $(document).on('mouseenter', '.mapbutton', function() {
       nextLoc = $(this).closest('.card').find('#location').text();
       panMap();
 
