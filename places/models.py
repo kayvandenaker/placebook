@@ -21,7 +21,7 @@ class Memory(models.Model):
 
 class UserProfile(models.Model):
     user   = models.ForeignKey('auth.User', on_delete = models.CASCADE)
-    avatar = models.ImageField(upload_to='avatars/', default = 'profile_icon.png')
+    avatar = models.ImageField(upload_to = 'avatars/', default = 'media/profile_icon.png')
 
     def get_absolute_url(self):
         return reverse('index')

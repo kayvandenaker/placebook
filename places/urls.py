@@ -24,6 +24,7 @@ from django.contrib.auth.models import User
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
     path('welcome/', views.intro, name='intro'),
@@ -38,8 +39,10 @@ urlpatterns = [
     path('login/', auth_views.login, name='login'),
     #/registration/signup/
     path('signup/', views.signup, name='signup'),
-    #Logout
+    # Logout
     path('logout/', auth_views.logout,{'next_page': 'index'}, name='logout'),
-    #avatar
+    # Avatar
     path('avatar/', views.avatar, name='avatar'),
-]   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

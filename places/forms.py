@@ -1,5 +1,7 @@
 from django import forms
 from django.core.files.images import get_image_dimensions
+from django.core.files import File  # you need this somewhere
+import urllib
 
 from .models import UserProfile
 
@@ -38,5 +40,6 @@ class UserProfileForm(forms.ModelForm):
             and do not supply a new avatar
             """
             pass
+
 
         return avatar

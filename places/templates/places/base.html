@@ -21,10 +21,10 @@ as styles -->
   <div class="topnav">
     <a href="{% url 'intro' %}"><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
     {% if user.is_authenticated %}
-      {% if UserProfile.avatar %}
+      {% if UserProfile.avatar and UserProfile.avatar != "media/profile_icon.png" %}
       <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
       {% else %}
-      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar2"></a>
+      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar-d"></a>
       {% endif %}
     {% else %}
     <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
@@ -43,7 +43,7 @@ as styles -->
   {% endif %}
 
   <div class='infodiv'>
-    <div class="card" style="z-index:10;">
+    <div class="card" style="z-index:50;">
       <h1 class="h1">Info</h1>
       <p>This site lets you save your dearest memories, bound to a location. You can add a card by choosing "new location" in the left panel.</p>
       <button class="close-button btn btn-secondary">Close</button>

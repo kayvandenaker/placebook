@@ -21,10 +21,10 @@ as styles -->
   <div class="topnav">
     <a href="{% url 'intro' %}"><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
     {% if user.is_authenticated %}
-      {% if UserProfile.avatar %}
+      {% if UserProfile.avatar and UserProfile.avatar != "media/profile_icon.png" %}
       <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
       {% else %}
-      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar2"></a>
+      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar-d"></a>
       {% endif %}
     {% else %}
     <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>

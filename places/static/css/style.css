@@ -218,7 +218,7 @@ h2 {
   float: right;
   border-radius: 4px;
   border: var(--light-border);
-}.topnav > a > #avatar2 {
+}.topnav > a > #avatar-d {
   height: 32px;
   display: inline-block;
   vertical-align: middle;
@@ -350,7 +350,7 @@ input[type=text], input[type=password] {
   padding: 4px 8px;
   width: calc(100% - 16px);
 }
-input[type=date] {
+input[type=date], input[type=file] {
   display: inline;
   text-align: center;
   background: #eee;
@@ -419,6 +419,28 @@ input:hover, textarea:hover {
 
 .container {
   width: 100%;
+}
+
+.input-container > #avatar {
+  height: 128px;
+  display: inline-block;
+  vertical-align: middle;
+
+  margin-left: 12px;
+  padding: 0;
+  float: right;
+  border-radius: 8px;
+  border: var(--light-border);
+}.input-container > #avatar-d {
+  height: 128px;
+  display: inline-block;
+  vertical-align: middle;
+
+  margin-left: 12px;
+  padding: 0;
+  float: right;
+  border-radius: 128px;
+  border: var(--light-border);
 }
 
 /* ---------------- Map styles ---------------- */

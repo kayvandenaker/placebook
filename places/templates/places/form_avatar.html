@@ -1,8 +1,22 @@
+{% load staticfiles %}
 <!-- make an input field for every item -->
 
 <div class="memory">
-  {{ form.as_p }}
 
+  <div class="input-container">
+      <span class="form-text"> <strong> {{ form.city.label_tag }} </strong> </span>
+      <p>
+        <label for="id_avatar">Upload avatar:</label>
+        <input type="file" name="avatar" id="id_avatar"><br/><br/>
+        Leave empty for default icon.<br/>
+        Maximum size is 2mb, 1000x1000 pixels.
+      </p>
+      {% if UserProfile.avatar and UserProfile.avatar != "media/profile_icon.png" %}
+      <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
+      {% else %}
+      <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar-d">
+      {% endif %}
+  </div>
   <!-- <div class="input-container">
     <span class="form-text"> <strong> {{ form.city.label_tag }} </strong> </span>
     <div class='centerize'>
