@@ -58,11 +58,13 @@ def signup(request):
 
 def login(request, user):
     if request.user.is_authenticated:
+        # bottom statement might throw error on new users, needs testing
         data = {
             'UserProfile': UserProfile.objects.filter(user = request.user).last(),
             'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
         }
-    return auth_views.login(request, data)
+        return auth_views.login(request, data)
+    return auth_views.login(request)
 
 def logout(request, user):
     return auth_views.logout(request)
@@ -71,14 +73,21 @@ def avatar(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            profile = form.save(commit=False)
+            profile = form.save(commit = False)
             profile.user = request.user
-            profile.avatar = form.cleaned_data['avatar']
+            profile.avatar = form.clean_avatar()
             profile.save()
             return redirect('index')
     else:
         form = UserProfileForm()
-    return render(request, 'places/avatar_form.html', {'form': form})
+
+    data = {
+        'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        'form': form,
+    }
+
+    return render(request, 'places/avatar_form.html', data)
 
 # ------------------- MEMORY VIEWS -------------------
 
