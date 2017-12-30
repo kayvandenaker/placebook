@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.utils import timezone
 from datetime import date
 
+from django.contrib.auth.models import User
+
 # Create your models here.
 class Memory(models.Model):
     author = models.ForeignKey('auth.User', on_delete = models.CASCADE)
@@ -16,3 +18,10 @@ class Memory(models.Model):
 
     def __str__(self):
         return self.city + " - " + self.country
+
+class UserProfile(models.Model):
+    user   = models.ForeignKey('auth.User', on_delete = models.CASCADE)
+    avatar = models.ImageField(upload_to='avatars/', default = 'profile_icon.png')
+
+    def get_absolute_url(self):
+        return reverse('index')

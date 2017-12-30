@@ -22,6 +22,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('welcome/', views.intro, name='intro'),
     path('', views.index, name='index'),
@@ -37,4 +40,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     #Logout
     path('logout/', auth_views.logout,{'next_page': 'index'}, name='logout'),
-]
+    #avatar
+    path('avatar/', views.avatar, name='avatar'),
+]   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -19,9 +19,13 @@ as styles -->
 <body>
 
   <div class="topnav">
-    <a href=""><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
+    <a href="{% url 'intro' %}"><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
     {% if user.is_authenticated %}
-    <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar"></a>
+      {% if UserProfile.avatar %}
+      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
+      {% else %}
+      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar2"></a>
+      {% endif %}
     {% else %}
     <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
     {% endif %}
@@ -31,7 +35,7 @@ as styles -->
 
   {% if user.is_authenticated %}
   <div class="logged-in animation-smallslide">
-    <a href="" class="nav-text">Profile </span></a>
+    <a href="{% url 'avatar' %}" class="nav-text">Profile </span></a>
     <a href="" class="nav-text">Search <span class="fas fa-search"></span></a>
     <a href="{% url 'logout' %}" class="nav-text">Logout </a><br/>
 

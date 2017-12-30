@@ -10,6 +10,8 @@
     --dark-border: 1px solid rgba(0,0,0,0.3);
     --dark-border2: 2px solid rgba(0,0,0,0.3);
 
+    --light-border: 1px solid rgba(255,255,255,0.4);
+
     --text-color: #444;
     --text-color-light: #eee;
     --welcome-text-color: #444;
@@ -153,7 +155,7 @@ h2 {
 
 .topnav {
   position: relative;
-  z-index: 10 !important;
+  z-index: 100 !important;
   background: linear-gradient(#eee, #dedede);
   overflow: hidden;
   padding: 2px;
@@ -214,6 +216,18 @@ h2 {
   margin-left: 12px;
   padding: 0;
   float: right;
+  border-radius: 4px;
+  border: var(--light-border);
+}.topnav > a > #avatar2 {
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+
+  margin-left: 12px;
+  padding: 0;
+  float: right;
+  border-radius: 100px;
+  border: var(--light-border);
 }
 
 .infodiv {
@@ -226,11 +240,12 @@ h2 {
 }
 
 .logged-in {
+  z-index: 75;
   display: none;
   position: absolute;
   right: 0;
   width: 150px;
-  background: #ccc;
+  background: #ddd;
   padding: 2px;
   border-bottom-left-radius: 6px;
   border-bottom: var(--dark-border);

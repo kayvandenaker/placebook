@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from .models import Memory
+from .models import UserProfile
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from rest_framework.views import APIView
@@ -18,16 +19,24 @@ from django.utils import timezone
 from datetime import date
 from datetime import datetime
 
+from .forms import UserProfileForm
+
 # ------------------- HOME -------------------
 
 def intro(request):
-        return render(request, 'places/intro.html')
+    data = {
+        'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+    }
+    return render(request, 'places/intro.html', data)
 
 def index(request):
     if request.user.is_authenticated:
-        all_memorys = Memory.objects.filter(author=request.user).order_by('-date')
-        context = {'all_memorys': all_memorys}
-        return render(request, 'places/base.html', context)
+        data = {
+            'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+            'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        }
+        return render(request, 'places/base.html', data)
     else:
         return render(request, 'places/intro.html')
 
@@ -48,13 +57,28 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 def login(request, user):
-    data = {
-        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
-    }
+    if request.user.is_authenticated:
+        data = {
+            'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+            'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        }
     return auth_views.login(request, data)
 
 def logout(request, user):
     return auth_views.logout(request)
+
+def avatar(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.avatar = form.cleaned_data['avatar']
+            profile.save()
+            return redirect('index')
+    else:
+        form = UserProfileForm()
+    return render(request, 'places/avatar_form.html', {'form': form})
 
 # ------------------- MEMORY VIEWS -------------------
 
@@ -68,10 +92,10 @@ class MemoryCreate(CreateView):
         memo.author = self.request.user
         return super(MemoryCreate, self).form_valid(form)
 
-    # Getting memos as context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        context['UserProfile'] = UserProfile.objects.filter(user = self.request.user).last()
         return context
 
     template_name = 'places/memory_form.html'
@@ -90,6 +114,7 @@ class MemoryUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        context['UserProfile'] = UserProfile.objects.filter(user = self.request.user).last()
         return context
 
     template_name = 'places/edit_form.html'

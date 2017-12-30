@@ -19,13 +19,18 @@ as styles -->
 <body id="welcome-bg">
 
   <div class="topnav">
-    <a href=""><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
+    <a href="{% url 'intro' %}"><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
     {% if user.is_authenticated %}
-    <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar"></a>
+      {% if UserProfile.avatar %}
+      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
+      {% else %}
+      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar2"></a>
+      {% endif %}
     {% else %}
     <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
     {% endif %}
     <a href="{% url 'index' %}" class="nav-text">Placebook</a>
+    <a href="" class='info-button nav-text'>Help</a>
   </div>
 
   {% if user.is_authenticated %}
@@ -40,7 +45,7 @@ as styles -->
   <div class="centerize" id="welcome">
     <p class="welcome-msg">Welcome to <br/><b>Placebook</b></p>
     <hr class="welcome-hr">
-    <p class="welcome-txt">A platform where travelers can store memories and trips in their personal log.
+    <p class="welcome-txt">A platform where users can store memories and trips in their personal log.
       <br/> Designed for adventurers and explorers.
       <br/><br/> Make an account today. </p>
     <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'login' %}">Get started!</a>
