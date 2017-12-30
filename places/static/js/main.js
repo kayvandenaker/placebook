@@ -12,7 +12,7 @@ function disable_input() {
   container_dark.style.display = "none";
 }
 
-//Jquery
+//jQuery
 $(document).ready(function(){
 
   // info button clicks

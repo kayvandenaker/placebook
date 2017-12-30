@@ -20,7 +20,6 @@ from datetime import date
 from datetime import datetime
 
 from .forms import UserProfileForm
-
 # ------------------- HOME -------------------
 
 def intro(request):
@@ -43,6 +42,12 @@ def index(request):
 # ------------------- SIGNUP/LOGIN -------------------
 
 def signup(request):
+    if request.user.is_authenticated:
+        data = {
+            'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+            'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        }
+        return render(request, 'places/base.html', data)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -57,13 +62,14 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 def login(request, user):
-    if request.user.is_authenticated:
-        data = {
-            'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-            'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
-        }
-        return auth_views.login(request, data)
-    return auth_views.login(request)
+    if not request.user.is_authenticated:
+        return auth_views.login(request)
+
+    data = {
+        'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+    }
+    return render(request, 'places/base.html', data)
 
 def logout(request, user):
     return auth_views.logout(request)
