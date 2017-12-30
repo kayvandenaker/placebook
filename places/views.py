@@ -58,7 +58,6 @@ def signup(request):
 
 def login(request, user):
     if request.user.is_authenticated:
-        # bottom statement might throw error on new users, needs testing
         data = {
             'UserProfile': UserProfile.objects.filter(user = request.user).last(),
             'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
