@@ -128,7 +128,6 @@ function addMarkers( resultsMap ) {
           locate = marker.getPosition();
           map.panTo( locate );
           marker.setIcon( icon2 );
-
         });
       } else {
         succeed = false;

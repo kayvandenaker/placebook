@@ -7,8 +7,8 @@
     --color2: #bc4f4f;
     --color2-s2: #a84545;
 
-    --dark-border: 1px solid rgba(0,0,0,0.25);
-    --dark-border2: 2px solid rgba(0,0,0,0.25);
+    --dark-border: 1px solid rgba(0,0,0,0.3);
+    --dark-border2: 2px solid rgba(0,0,0,0.3);
 
     --light-border: 1px solid rgba(255,255,255,0.4);
 
@@ -218,9 +218,6 @@ h2 {
   padding: 0;
   float: right;
   border-radius: 4px;
-  border-top: var(--dark-border);
-  border-left: var(--dark-border);
-
   border-bottom: var(--light-border);
   border-right: var(--light-border);
 }.topnav > a > #avatar-d {
@@ -232,9 +229,6 @@ h2 {
   padding: 0;
   float: right;
   border-radius: 100px;
-  border-top: var(--dark-border);
-  border-left: var(--dark-border);
-
   border-bottom: var(--light-border);
   border-right: var(--light-border);
 }
@@ -276,7 +270,7 @@ h2 {
   border: var(--dark-border);
   height: calc(100% - 50px - 48px);
 
-  width: 30%;
+  width: 25%;
   min-width: 320px;
   max-width: 480px;
 
@@ -311,7 +305,7 @@ h2 {
   margin: 0;
   height: 48px;
 
-  width: 30%;
+  width: 25%;
   min-width: 320px;
   max-width: 480px;
 
@@ -452,15 +446,19 @@ input:hover, textarea:hover {
   border: var(--dark-border);
 }
 
+/* ---------------- Bottom Panel ---------------- */
+
+
+
 /* ---------------- Map styles ---------------- */
 
 .map-container {
   max-width:calc(100% - 320px);
   min-width:calc(100% - 480px);
-  width: 70vw;
+  width: 75vw;
   float: right;
   max-height: 100%;
-  height: calc(100% - 50px);
+  height: calc(100% - 400px);
 
   text-align: center;
 }
