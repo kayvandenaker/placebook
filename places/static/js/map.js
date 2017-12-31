@@ -103,7 +103,7 @@ function addMarkers( resultsMap ) {
   };
   icon2 = {
       url: markerImageLight, // url defined in template (static)
-      scaledSize: new google.maps.Size(40, 40), // scale icon size
+      scaledSize: new google.maps.Size(38, 38), // scale icon size
   };
 
   var succeed = true;
