@@ -111,6 +111,11 @@ as styles -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
+  <script>
+    var markerImage = "{% static 'img/marker.png' %}";
+    markerImage.width = 32;
+    markerImage.height = 32;
+  </script>
   <script src="{% static 'js/map.js' %}"></script>
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRAAmE5TswTx5EnJdwcuUGUv_kkRqtyUM&callback=initMap">

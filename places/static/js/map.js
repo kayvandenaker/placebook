@@ -1,72 +1,10 @@
-// let mapdiv = $("#map");
-// let val1 = $(".mapbutton").first().closest('.card').find('#location').text().split(' ').join('+');
-//
-// var map;
-// var location;
-// var current;
-//
-// // jQuery ready
-// $(document).ready(function(){
-//   $(document).on('click', '.mapbutton', function() {
-//
-//     current = $(this).closest('.card').find('#location').text();
-//     console.log(current);
-//     //current = $(this).closest('.card').index();
-//     codeAddress();
-//
-//     return false;
-//   });
-//
-//   // $(document).on('click', '.mapbutton', function() {
-//   //   val1 = $(this).closest('.card').find('#location').text().split(' ').join('+');
-//   //   codeAddress();
-//   //
-//   //   return false;
-//   // });
-//
-// });
-//
-// function codeAddress() {
-//    var geocoder = new google.maps.Geocoder();
-//
-//    var address = current;
-//    console.log(current);
-//    geocoder.geocode( { 'address': address}, function(results, status) {
-//      if (status == google.maps.GeocoderStatus.OK) {
-//
-//        initMap(results[0].geometry.location.lat(), results[0].geometry.location.lng())
-//      // alert("Latitude: "+results[0].geometry.location.lat());
-//      // alert("Longitude: "+results[0].geometry.location.lng());
-//      } else {
-//        alert("Geocode was not successful for the following reason: " + status);
-//      }
-//    });
-//  }
-//
-// function initMap(lat, lng) {
-//   //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDRAAmE5TswTx5EnJdwcuUGUv_kkRqtyUM
-//
-//   location = {"lat": lat, "lng": lng};
-//   map = new google.maps.Map(document.getElementById('map'), {
-//     zoom: 7,
-//     center: location,
-//     fullscreenControl: false,
-//     minZoom: 2,
-//     maxZoom: 17,
-//   });
-//   map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-//
-//   var marker = new google.maps.Marker({
-//     position: location,
-//     map: map
-//   });
-// }
-
-let mapdiv = $("#map");
-let currentLoc = $(".mapbutton").first().closest('.card').find('#location').text();
-let nextLoc;
+// initial location in string
+let firstLocation = $(".mapbutton").first().closest('.card').find('#location').text();
+// variable to store location in lat, lng (meant to edit over time)
+let locate;
+// array of places (in strings) to add markers, markers are added after map render
 let strArr = [];
-
+// Google map element
 var map;
 
 // JQuery
@@ -76,8 +14,8 @@ $(document).ready(function(){
   });
 
   $(document).on('mouseenter', '.mapbutton', function() {
-      nextLoc = $(this).closest('.card').find('#location').text();
-      panMap();
+    nextLoc = $(this).closest('.card').find('#location').text();
+    panMap();
 
     return false;
   });
@@ -88,22 +26,31 @@ $(document).ready(function(){
 
 function initMap() {
   geocoder = new google.maps.Geocoder();
-  geocoder.geocode( { 'address': currentLoc}, function(results, status) {
+  geocoder.geocode( { 'address': firstLocation}, function(results, status) {
     if (status == "OK") {
-      var firstLocation = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
+      locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 7,
-        center: firstLocation,
+        center: locate,
         fullscreenControl: false,
         minZoom: 2,
         maxZoom: 17,
       });
       map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+
+      // listeners (we're here for you)
+      google.maps.event.addDomListener(window, 'resize', function() {
+        // keeps location in center on resize
+        map.setCenter(locate);
+      });
+
+
+
       addMarkers(map);
     }
     else {
       if ( status == "ZERO_RESULTS" ) {
-        alert("Geocode could not find any results");
+        alert("Geocode could not find any results for '" + firstLocation + "'");
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
@@ -114,35 +61,47 @@ function initMap() {
 
 // create markers for all memories
 function addMarkers(resultsMap) {
-  for (let i = 0; i < strArr.length; i++) {
+  // load custom icon
+  var icon = {
+      url: markerImage, // url
+      scaledSize: new google.maps.Size(32, 32), // scaled size
+  };
+  var succeed = true;
 
+  for (let i = 0; i < strArr.length; i++) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': strArr[i]}, function(results, status) {
-      if (status === 'OK') {
+      if ( status == 'OK' ) {
+        // create marker
         var marker = new google.maps.Marker({
           map: resultsMap,
-          position: results[0].geometry.location
+          position: results[0].geometry.location,
+          icon: icon
         });
       } else {
-        //alert('Geocode was not successful for the following reason: ' + status);
+        succeed = false;
       }
     });
+  }
 
+  // if loop has an error making markers, show alert
+  if ( !succeed ) {
+    alert('Some markers could not be created, check your memory values');
   }
 }
 
-// pan the map to new location
+// pan the map to a new location
 function panMap() {
 
   geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'address': nextLoc}, function(results, status) {
     if (status == "OK") {
-      var nextLocation = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
-      map.panTo( nextLocation );
+      locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
+      map.panTo( locate );
     }
     else {
       if ( status == "ZERO_RESULTS" ) {
-        alert("Geocode could not find any results");
+        alert("Geocode could not find any results for '" + nextLoc + "'");
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
