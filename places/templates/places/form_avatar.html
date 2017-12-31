@@ -12,7 +12,7 @@
         Maximum size is 2mb, 1000x1000 pixels.
       </p>
       {% if UserProfile.avatar and UserProfile.avatar != "media/profile_icon.png" %}
-      <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
+      <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar">
       {% else %}
       <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar-d">
       {% endif %}

@@ -16,7 +16,7 @@ $(document).ready(function () {
     strArr.push($(this).text());
   });
 
-  $(document).on('mouseenter', '.mapbutton', function() {
+  $(document).on('click', '.mapbutton', function() {
     // change nextLoc and pan the map to it
     nextLoc = $(this).closest('.card').find('#location').text();
     panMap();
@@ -86,6 +86,12 @@ function initMap() {
     map.setCenter( locate );
   });
 
+  map.addListener('click', function() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setIcon( icon );
+    }
+  });
+
 }
 
 // create markers for all memories
@@ -93,11 +99,11 @@ function addMarkers( resultsMap ) {
   // load custom icon
   icon = {
       url: markerImage, // url defined in template (static)
-      scaledSize: new google.maps.Size(40, 40), // scale icon size
+      scaledSize: new google.maps.Size(38, 38), // scale icon size
   };
   icon2 = {
       url: markerImageLight, // url defined in template (static)
-      scaledSize: new google.maps.Size(48, 48), // scale icon size
+      scaledSize: new google.maps.Size(40, 40), // scale icon size
   };
 
   var succeed = true;
@@ -141,7 +147,7 @@ function panMap() {
   // only use the geocoder if value is changed
   // ( pressing same button twice shouldnt use it )
   if ( nextLoc != currentLoc ) {
-    currentLoc = nextLoc;
+
 
     geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': nextLoc}, function(results, status) {
@@ -149,11 +155,11 @@ function panMap() {
         locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
 
         map.panTo( locate );
-
+        currentLoc = nextLoc;
       } else {
         // nested if for errors
         if ( status == "ZERO_RESULTS" ) {
-          alert("Geocode could not find any results for '" + firstLocation + "'");
+          alert("Geocode could not find any results for '" + nextLoc + "'");
         } else if ( status == "INVALID_REQUEST" ) {
           // no memories (probably)
         } else if ( status == "OVER_QUERY_LIMIT" ) {
