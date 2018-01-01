@@ -14,18 +14,32 @@ function disable_input() {
 
 //jQuery
 $(document).ready(function(){
-
   // info button clicks
   $('.info-button').on('click', function() {
     $('.infodiv').toggle();
     return false;
   });
-
   $('.close-button').on('click', function() {
     $('.infodiv').hide();
     return false;
   });
 
+  // show memory options on card click
+  $(document).on('mouseenter', '.card', function() {
+    let edit = $(this).find('.card-bottom');
+      if (edit.is(":hidden")) {
+        edit.slideDown( 200 );
+      }
+    return false;
+  });
+  // hide options on card leave
+  $(document).on('mouseleave', '.card', function() {
+    let edit = $(this).find('.card-bottom');
+      if (edit.is(":visible")) {
+        edit.slideUp( 200 );
+      }
+    return false;
+  });
 
   // User navbar clicks
   $(document).on('click', '#usermenu', function() {

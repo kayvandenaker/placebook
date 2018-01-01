@@ -3,7 +3,7 @@
 {% block newmemory %}
 <div id="dark-container">
   <div class="inputcard animation-slide">
-    <div class="card-top">
+    <div class="input-top">
       <h1 class="centerize">NEW MEMORY</h1>
     </div>
     <!-- create the cards -->
@@ -12,7 +12,7 @@
 
       {% include 'places/form_memory.html'%}
 
-      <div class="card-bottom">
+      <div class="input-bottom">
         <button class='btn btn-primary' type="submit">SAVE</button>
         <a href="{% url 'index' %}" class='btn btn-secundary' id="back">BACK</a>
       </div>

@@ -330,16 +330,11 @@ h2 {
   padding: 8px;
 }
 
-.card-top {
-  padding: 8px 0 0 0;
-  background-color: rgba(0,0,0,0.075);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
 .card-bottom {
+  display: none;
   background-color: rgba(0,0,0,0.075);
   border-top: 1px solid rgba(0,0,0,0.1);
-  padding: 2px;
+  height: 39px;
 }
 
 /* ---------------- Form styles ---------------- */
@@ -444,6 +439,18 @@ input:hover, textarea:hover {
   float: right;
   border-radius: 128px;
   border: var(--dark-border);
+}
+
+.input-top {
+  padding: 8px 0 0 0;
+  background-color: rgba(0,0,0,0.075);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.input-bottom {
+  background-color: rgba(0,0,0,0.075);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding: 2px;
 }
 
 /* ---------------- Bottom Panel ---------------- */

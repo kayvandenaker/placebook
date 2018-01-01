@@ -29,6 +29,14 @@ $(document).ready(function () {
 // ------------- GOOGLE MAPS API -------------
 
 function initMap() {
+  if ( document.getElementById('id_city') ) {
+    var city_input = document.getElementById('id_city');
+    var options = {
+     types: ['(cities)'],
+    };
+    var autocomplete = new google.maps.places.Autocomplete(city_input, options);
+  }
+
   if ( nextLoc ) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': nextLoc }, function(results, status) {
