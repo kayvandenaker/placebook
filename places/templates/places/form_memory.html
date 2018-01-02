@@ -5,10 +5,10 @@
   <div class="input-container">
     <span class="form-text"> <strong> {{ form.place.label_tag }} </strong> </span>
     <div class='centerize'>
-    {% if form.city.value %}
-    <input type="text" name="city" id="id_place" value="{{ form.place.value }}" autocomplete="off" placeholder="City" required/>
+    {% if form.place.value %}
+    <input type="text" name="place" id="id_place" value="{{ form.place.value }}" autocomplete="off" placeholder="City" required/>
     {% else %}
-    <input type="text" name="city" id="id_place" placeholder="Location" autocomplete="off" required/>
+    <input type="text" name="place" id="id_place" placeholder="Location" autocomplete="off" required/>
     {% endif %}
     </div>
   </div>

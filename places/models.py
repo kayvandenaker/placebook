@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 class Memory(models.Model):
     author = models.ForeignKey('auth.User', on_delete = models.CASCADE)
     place = models.CharField(max_length=250)
-    #country = models.CharField(max_length=250)
     info = models.TextField(default='')
     date = models.DateField(default=date.today)
 
