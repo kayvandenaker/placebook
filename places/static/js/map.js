@@ -1,14 +1,18 @@
 // initial location in string
-let nextLoc = $(".mapbutton").first().closest('.card').find('#location').text();
+let nextLoc = $(".mapbutton").first().closest('.card').find('.location').text();
 let currentLoc = null; // for comparison with nextLoc
+// info html element
+let infoDiv = $('#info');
 // variable to store location in lat, lng (meant to edit over time)
 let locate;
 // array of places (in strings) to add markers, markers are added after map render
 let strArr = [];
+
 // Google map elements
 var map;
-var markers = [];
+var gMarkers = [];
 var icon, icon2;
+
 
 // JQuery
 $(document).ready(function () {
@@ -18,7 +22,7 @@ $(document).ready(function () {
 
   $(document).on('click', '.mapbutton', function() {
     // change nextLoc and pan the map to it
-    nextLoc = $(this).closest('.card').find('#location').text();
+    nextLoc = $(this).closest('.card').find('.location').text();
     panMap();
 
     return false;
@@ -29,6 +33,7 @@ $(document).ready(function () {
 // ------------- GOOGLE MAPS API -------------
 
 function initMap() {
+  // setup autocomplete
   if ( document.getElementById('id_city') ) {
     var city_input = document.getElementById('id_city');
     var options = {
@@ -37,6 +42,17 @@ function initMap() {
     var autocomplete = new google.maps.places.Autocomplete(city_input, options);
   }
 
+  // load custom icons
+  icon = {
+      url: markerImage, // url defined in template (static)
+      scaledSize: new google.maps.Size(38, 38), // scale icon size
+  };
+  icon2 = {
+      url: markerImageLight, // url defined in template (static)
+      scaledSize: new google.maps.Size(38, 38), // scale icon size
+  };
+
+  // see if there exist any memories (by nextLoc)
   if ( nextLoc ) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': nextLoc }, function(results, status) {
@@ -63,7 +79,7 @@ function initMap() {
       addMarkers(map);
     });
   } else {
-    // random location on map init
+    // choose a random location from coordinates
     let coordinates = [
      [2.33, 48.87],
      [50.43, 30.52],
@@ -95,8 +111,8 @@ function initMap() {
   });
 
   map.addListener('click', function() {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setIcon( icon );
+    for (var i = 0; i < gMarkers.length; i++) {
+      gMarkers[i].setIcon( icon );
     }
   });
 
@@ -104,15 +120,7 @@ function initMap() {
 
 // create markers for all memories
 function addMarkers( resultsMap ) {
-  // load custom icon
-  icon = {
-      url: markerImage, // url defined in template (static)
-      scaledSize: new google.maps.Size(38, 38), // scale icon size
-  };
-  icon2 = {
-      url: markerImageLight, // url defined in template (static)
-      scaledSize: new google.maps.Size(38, 38), // scale icon size
-  };
+
 
   var succeed = true;
 
@@ -127,15 +135,20 @@ function addMarkers( resultsMap ) {
           icon: icon
         });
         // push marker into the array
-        markers.push(marker);
+        gMarkers[i] = marker;
 
         marker.addListener('click', function() {
-          for (var i = 0; i < markers.length; i++) {
-            markers[i].setIcon( icon );
+          for (var i = 0; i < gMarkers.length; i++) {
+            if (gMarkers[i] === marker){
+              locate = marker.getPosition();
+              map.panTo( locate );
+              marker.setIcon( icon2 );
+              infoDiv.text( convert(infos[i]) );
+            } else {
+              gMarkers[i].setIcon( icon );
+            }
           }
-          locate = marker.getPosition();
-          map.panTo( locate );
-          marker.setIcon( icon2 );
+
         });
       } else {
         succeed = false;
@@ -155,12 +168,12 @@ function panMap() {
   // ( pressing same button twice shouldnt use it )
   if ( nextLoc != currentLoc ) {
 
-
     geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': nextLoc}, function(results, status) {
       if ( status == "OK" ) {
         locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
 
+        selectMarker( locate );
         map.panTo( locate );
         currentLoc = nextLoc;
       } else {
@@ -178,5 +191,19 @@ function panMap() {
     });
 
 
+  }
+}
+
+function selectMarker( loc ) {
+  // find right index by strArr and use it to change the markers array
+  for (let i = 0; i < strArr.length; i++) {
+    //console.log(strArr[i] + " " + nextLoc);
+    if ( strArr[i] == nextLoc ) {
+      //console.log( convert(infos[i]) );
+      gMarkers[i].setIcon( icon2 );
+      infoDiv.text( convert(infos[i]) );
+    } else {
+      gMarkers[i].setIcon( icon );
+    }
   }
 }
