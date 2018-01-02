@@ -25,10 +25,10 @@ $(document).ready(function(){
   });
 
   // show memory options on card click
-  $(document).on('mouseenter', '.card', function() {
+  $(document).on('click', '.card', function() {
     let edit = $(this).find('.card-bottom');
       if (edit.is(":hidden")) {
-        edit.slideDown( 200 );
+        edit.slideDown( 100 );
       }
     return false;
   });
@@ -36,7 +36,7 @@ $(document).ready(function(){
   $(document).on('mouseleave', '.card', function() {
     let edit = $(this).find('.card-bottom');
       if (edit.is(":visible")) {
-        edit.slideUp( 200 );
+        edit.slideUp( 100 );
       }
     return false;
   });

@@ -28,6 +28,13 @@ $(document).ready(function () {
     return false;
   });
 
+  $(document).on('click', '.card', function() {
+    // change nextLoc and pan the map to it
+    nextLoc = $(this).find('.location').text();
+    panMap();
+
+    return false;
+  });
 });
 
 // ------------- GOOGLE MAPS API -------------

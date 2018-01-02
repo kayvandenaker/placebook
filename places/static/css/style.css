@@ -122,9 +122,11 @@ text-align: right;}
   color: var(--welcome-text-color);
 }
 
-.date-text {
+.info-text {
+  display: none;
+}.date-text {
   display: block;
-  font-size: 8pt;
+  font-size: 10pt;
   padding-top: 4px;
   padding-right: 4px;
   color: rgba(0, 0, 0, 0.5);
@@ -245,7 +247,6 @@ h2 {
   background: rgb(255, 255, 191);
   border-radius: 4px;
   border: var(--dark-border);
-
 }
 
 .logged-in {
@@ -487,7 +488,7 @@ input:hover, textarea:hover {
 
   overflow-y: auto;
 
-  background: #ddd;
+  background: #eee;
   border-top: var(--dark-border);
 }
 
@@ -536,6 +537,17 @@ the same amount for the map*/
     height: 50vw;
     min-height: auto;
     max-height: auto;
+  }
+
+  .info-text {
+    display: block;
+  }
+
+  #map {
+    height: 100% !important;
+  }
+  #info-panel {
+    display: none;
   }
 }
 
