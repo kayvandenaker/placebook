@@ -50,7 +50,7 @@ as styles -->
   <div class="map-container">
       <div id="map"></div>
       <div id="info-panel">
-        <strong>Info: <br/></strong><span id='info'>-</span><br/>
+        <strong>Info: <br/></strong><span id='info'>none selected</span><br/>
       </div>
   </div>
 
@@ -72,7 +72,12 @@ as styles -->
 
     {% if all_memorys %}
     {% for memory in all_memorys%}
-    <div class='card'>
+      {% if memory.date_past %}
+      <div class='card'>
+      {% else %}
+      <div class='card highlighted-card'>
+      {% endif %}
+
       <div class='memory'>
         <h2><span class="country location" id="location">{{memory.city}}, {{memory.country}}</span></h2>
         <!-- <strong>City: </strong>{{memory.city}}

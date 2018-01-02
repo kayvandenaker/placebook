@@ -111,6 +111,7 @@ function initMap() {
   });
 
   map.addListener('click', function() {
+    infoDiv.text( "none selected" );
     for (var i = 0; i < gMarkers.length; i++) {
       gMarkers[i].setIcon( icon );
     }
@@ -201,7 +202,7 @@ function selectMarker( loc ) {
     if ( strArr[i] == nextLoc ) {
       //console.log( convert(infos[i]) );
       gMarkers[i].setIcon( icon2 );
-      infoDiv.text( convert(infos[i]) );
+      infoDiv.text( convert( infos[i]) );
     } else {
       gMarkers[i].setIcon( icon );
     }

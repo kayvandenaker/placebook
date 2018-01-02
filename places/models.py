@@ -13,6 +13,10 @@ class Memory(models.Model):
     info = models.TextField(default='')
     date = models.DateField(default=date.today)
 
+    @property
+    def date_past(self):
+        return date.today() > self.date
+
     def get_absolute_url(self):
         return reverse('index')
 

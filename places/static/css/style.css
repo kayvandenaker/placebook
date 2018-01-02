@@ -331,6 +331,9 @@ h2 {
   border: 1px solid rgba(0,0,0,0.3);
   word-wrap: break-word;
 }
+.highlighted-card {
+  background-color: #eff8ef !important;
+}
 
 .memory {
   padding: 8px;
@@ -483,7 +486,7 @@ input:hover, textarea:hover {
   padding: 8px;
 
   overflow-y: auto;
-  
+
   background: #ddd;
   border-top: var(--dark-border);
 }
@@ -631,10 +634,9 @@ the same amount for the map*/
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
-
 @-webkit-keyframes rotate {
-        from { -webkit-transform: rotate(0deg); }
-        to { -webkit-transform: rotate(360deg); }
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
 }
 @keyframes rotate {
     from { transform: rotate(0deg); }
@@ -646,7 +648,6 @@ the same amount for the map*/
   -webkit-animation: darken 0.5s ease;
   animation: darken 0.5s ease;
 }
-
 @-webkit-keyframes darken {
     from { -webkit-background-color: rgba(0,0,0,0); }
     to { -webkit-background-color: rgba(0,0,0,0.3); }
@@ -660,7 +661,6 @@ the same amount for the map*/
     -webkit-animation: slide 0.4s ease;
     animation: slide 0.4s ease;
 }
-
 @-webkit-keyframes slide {
     from { -webkit-transform: translateY(-80vh); }
     to { -webkit-transform: translateY(0); }
@@ -675,7 +675,6 @@ the same amount for the map*/
     -webkit-animation: smallslide 0.25s ease;
     animation: smallslide 0.25s ease;
 }
-
 @-webkit-keyframes smallslide {
     from { -webkit-transform: translateY(-200px); }
     to { -webkit-transform: translateY(0); }
@@ -690,7 +689,6 @@ the same amount for the map*/
     -webkit-animation: slideleft 0.3s ease;
     animation: slideleft 0.3s ease;
 }
-
 @-webkit-keyframes slideleft {
     from { -webkit-transform: translateX(-500px); }
     to { -webkit-transform: translateX(0); }
