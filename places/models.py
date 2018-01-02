@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Memory(models.Model):
     author = models.ForeignKey('auth.User', on_delete = models.CASCADE)
-    city = models.CharField(max_length=250)
-    country = models.CharField(max_length=250)
+    place = models.CharField(max_length=250)
+    #country = models.CharField(max_length=250)
     info = models.TextField(default='')
     date = models.DateField(default=date.today)
 
@@ -21,7 +21,7 @@ class Memory(models.Model):
         return reverse('index')
 
     def __str__(self):
-        return self.city + " - " + self.country
+        return self.place
 
 class UserProfile(models.Model):
     user   = models.ForeignKey('auth.User', on_delete = models.CASCADE)

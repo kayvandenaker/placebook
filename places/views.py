@@ -99,7 +99,7 @@ def avatar(request):
 class MemoryCreate(CreateView):
     model = Memory
     model.date = date.today()
-    fields = ['city', 'country', 'info', 'date']
+    fields = ['place', 'info', 'date']
 
     def form_valid(self, form):
         memo = form.save(commit = False)
@@ -117,7 +117,7 @@ class MemoryCreate(CreateView):
 
 class MemoryUpdate(UpdateView):
     model = Memory
-    fields = ['city', 'country', 'info', 'date']
+    fields = ['place', 'info', 'date']
 
     def form_valid(self, form):
         memo = form.save(commit = False)

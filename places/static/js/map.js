@@ -34,12 +34,12 @@ $(document).ready(function () {
 
 function initMap() {
   // setup autocomplete
-  if ( document.getElementById('id_city') ) {
-    var city_input = document.getElementById('id_city');
+  if ( document.getElementById('id_place') ) {
+    var input = document.getElementById('id_place');
     var options = {
      types: ['(cities)'],
     };
-    var autocomplete = new google.maps.places.Autocomplete(city_input, options);
+    var autocomplete = new google.maps.places.Autocomplete( input, options );
   }
 
   // load custom icons

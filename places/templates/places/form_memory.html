@@ -3,17 +3,17 @@
 <div class="memory">
 
   <div class="input-container">
-    <span class="form-text"> <strong> {{ form.city.label_tag }} </strong> </span>
+    <span class="form-text"> <strong> {{ form.place.label_tag }} </strong> </span>
     <div class='centerize'>
     {% if form.city.value %}
-    <input type="text" name="city" id="id_city" value="{{ form.city.value }}" autocomplete="off" placeholder="City" required/>
+    <input type="text" name="city" id="id_place" value="{{ form.place.value }}" autocomplete="off" placeholder="City" required/>
     {% else %}
-    <input type="text" name="city" id="id_city" placeholder="City" autocomplete="off" required/>
+    <input type="text" name="city" id="id_place" placeholder="Location" autocomplete="off" required/>
     {% endif %}
     </div>
   </div>
 
-  <div class="input-container">
+  <!-- <div class="input-container">
     <span class="form-text"> <strong> {{ form.country.label_tag }} </strong> </span>
     <div class='centerize'>
       {% if form.country.value %}
@@ -22,7 +22,7 @@
       <input type="text" name="country" id="id_country" autocomplete="off" placeholder="Country" required/>
       {% endif %}
     </div>
-  </div>
+  </div> -->
 
   <div class="input-container">
     <span class="form-text"> <strong> {{ form.date.label_tag }} </strong> </span>

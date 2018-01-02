@@ -79,11 +79,11 @@ as styles -->
       {% endif %}
 
       <div class='memory'>
-        <h2><span class="country location" id="location">{{memory.city}}, {{memory.country}}</span></h2>
+        <h2><span class="country location" id="location">{{ memory.place }}</span></h2>
         <!-- <strong>City: </strong>{{memory.city}}
         <br><strong>Country: </strong>{{memory.country}} -->
-        <strong>Info: <br/></strong>{{memory.info}}<br/>
-        <span class="date-text rightize">{{memory.date | date:"DATE_FORMAT" }}</span>
+        <strong>Info: <br/></strong>{{ memory.info }}<br/>
+        <span class="date-text rightize">{{ memory.date | date:"DATE_FORMAT" }}</span>
       </div>
       <div class="card-bottom">
 
