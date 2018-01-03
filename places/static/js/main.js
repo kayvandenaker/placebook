@@ -30,9 +30,3 @@ $(document).ready(function(){
   });
 
 });
-
-// function for deenitize stored javascript symbols ("<", "&", etc.)
-var convert = function(convert){
-    return $("<span />", { html: convert }).text();
-    //return document.createElement("span").innerText;
-};

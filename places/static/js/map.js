@@ -1,12 +1,11 @@
 // initial location in string
 let nextLoc = $(".mapbutton").first().closest('.card').find('.location').text();
 let currentLoc = null; // for comparison with nextLoc
-// info html element
+// html elements in info panel
 let infoDiv = $('#info');
+let placeDiv = $('#place');
 // variable to store location in lat, lng (meant to edit over time)
 let locate;
-// array of places (in strings) to add markers, markers are added after map render
-let strArr = [];
 
 // Google map elements
 var map;
@@ -16,9 +15,9 @@ var icon, icon2;
 
 // JQuery
 $(document).ready(function () {
-  $('.location').each (function () {
-    strArr.push($(this).text());
-  });
+  // $('.location').each (function () {
+  //   strArr.push($(this).text());
+  // });
 
   $(document).on('click', '.mapbutton', function() {
     // change nextLoc and pan the map to it
@@ -111,6 +110,7 @@ function initMap() {
     center: locate,
     fullscreenControl: false,
     disableDoubleClickZoom: true,
+    gestureHandling: 'greedy',
     minZoom: 2,
     maxZoom: 17,
   });
@@ -123,7 +123,7 @@ function initMap() {
   });
 
   map.addListener('click', function() {
-    infoDiv.text( "none selected" );
+    clearInfoPanel();
     for (var i = 0; i < gMarkers.length; i++) {
       if ( gMarkers[i] ) {
           gMarkers[i].setIcon( icon );
@@ -157,7 +157,7 @@ function addMarkers( resultsMap ) {
               locate = marker.getPosition();
               map.panTo( locate );
               gMarkers[i].setIcon( icon2 );
-              infoDiv.text( convert(infos[i]) );
+              updateInfoPanel(i);
               currentLoc = null;
             } else if ( gMarkers[i] ) {
                 gMarkers[i].setIcon( icon );
@@ -216,9 +216,18 @@ function selectMarker( loc ) {
     if ( strArr[i] == nextLoc ) {
       //console.log( convert(infos[i]) );
       gMarkers[i].setIcon( icon2 );
-      infoDiv.text( convert( infos[i]) );
+      updateInfoPanel(i);
     } else if ( gMarkers[i] ) {
         gMarkers[i].setIcon( icon );
     }
   }
+}
+
+function updateInfoPanel(index) {
+  infoDiv.html( infos[index] );
+  placeDiv.html( strArr[index] );
+}
+function clearInfoPanel() {
+  infoDiv.html( 'none selected' );
+  placeDiv.html( 'none selected' );
 }

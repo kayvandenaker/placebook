@@ -49,7 +49,10 @@ as styles -->
 
   <div class="map-container">
       <div id="map"></div>
+
       <div id="info-panel">
+        <h2><span class="country location" id='place'>none selected</span></h2>
+        <hr>
         <strong>Info: <br/></strong><span id='info'>none selected</span><br/>
       </div>
   </div>
@@ -123,15 +126,21 @@ as styles -->
   <script>
     var markerImage = "{% static 'img/marker.png' %}";
     var markerImageLight = "{% static 'img/marker_light.png' %}";
+    // array of places (in strings) to add markers, markers are added after map render
+    let strArr = [];
     var infos = [];
+    var j = 0;
+    // iterate over the memories
+    {% if all_memorys %}
+    {% for memory in all_memorys%}
+
+    infos[j]="{{ memory.info | linebreaksbr }}";
+    strArr[j]='{{ memory.place }}';
+    j++;
+
+    {% endfor %}
+    {% endif %}
   </script>
-  {% if all_memorys %}
-  {% for memory in all_memorys%}
-  <script>
-    infos.push('{{memory.info}}');
-  </script>
-  {% endfor %}
-  {% endif %}
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRAAmE5TswTx5EnJdwcuUGUv_kkRqtyUM&callback=initMap&libraries=places&language=en">
   </script>

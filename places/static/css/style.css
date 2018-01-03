@@ -486,10 +486,29 @@ input:hover, textarea:hover {
   height: 40%;
   padding: 8px;
 
-  overflow-y: auto;
+  overflow-y: none;
 
   background: #eee;
   border-top: var(--dark-border);
+} #info-panel:hover {
+  overflow-y: scroll;
+  padding: 8px 3px 8px 8px;
+}
+
+#info-panel::-webkit-scrollbar {
+    width: 5px !important;
+    background-color: transparent  !important;
+    float: left;
+}
+#info-panel::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid #ccc;
+}
+#info-panel::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
 
 /* ---------------- Changes on media properties ---------------- */
