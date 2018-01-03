@@ -125,8 +125,11 @@ function initMap() {
   map.addListener('click', function() {
     infoDiv.text( "none selected" );
     for (var i = 0; i < gMarkers.length; i++) {
-      gMarkers[i].setIcon( icon );
+      if ( gMarkers[i] ) {
+          gMarkers[i].setIcon( icon );
+      }
     }
+    currentLoc = null;
   });
 
 }
@@ -153,11 +156,11 @@ function addMarkers( resultsMap ) {
             if (gMarkers[i] === marker){
               locate = marker.getPosition();
               map.panTo( locate );
-              marker.setIcon( icon2 );
+              gMarkers[i].setIcon( icon2 );
               infoDiv.text( convert(infos[i]) );
               currentLoc = null;
-            } else {
-              gMarkers[i].setIcon( icon );
+            } else if ( gMarkers[i] ) {
+                gMarkers[i].setIcon( icon );
             }
           }
 
@@ -214,8 +217,8 @@ function selectMarker( loc ) {
       //console.log( convert(infos[i]) );
       gMarkers[i].setIcon( icon2 );
       infoDiv.text( convert( infos[i]) );
-    } else {
-      gMarkers[i].setIcon( icon );
+    } else if ( gMarkers[i] ) {
+        gMarkers[i].setIcon( icon );
     }
   }
 }
