@@ -30,8 +30,8 @@ $(document).ready(function () {
 
   $(document).on('click', '#click1', function() {
     // change nextLoc and pan the map to it
-    // nextLoc = $(this).find('.location').text();
-    // panMap();
+    nextLoc = $(this).find('.location').text();
+    panMap();
 
     let editBar = $(this).closest('.card').find('.card-bottom');
     $('.card-bottom').not( editBar ).slideUp( 100 );
