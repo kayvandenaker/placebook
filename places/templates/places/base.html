@@ -72,18 +72,22 @@ as styles -->
 
     {% if all_memorys %}
     {% for memory in all_memorys%}
-      {% if memory.date_past %}
-      <div class='card'>
-      {% else %}
-      <div class='card highlighted-card'>
-      {% endif %}
 
+      {% if memory.date_due %}
+    <div class='card highlighted-card'>
+
+      {% else %}
+    <div class='card'>
+
+      {% endif %}
       <div class='memory'>
-        <h2><span class="country location" id="location">{{ memory.place }}</span></h2>
-        <!-- <strong>City: </strong>{{memory.city}}
-        <br><strong>Country: </strong>{{memory.country}} -->
-        <span class="info-text"><strong>Info: <br/></strong>{{ memory.info }}<br/></span>
-        <span class="date-text rightize">{{ memory.date | date:"DATE_FORMAT" }}</span>
+        <div id='click1'>
+          <h2><a class="country location" id="location">{{ memory.place }}</a></h2>
+          <!-- <strong>City: </strong>{{memory.city}}
+          <br><strong>Country: </strong>{{memory.country}} -->
+          <span class="info-text"><strong>Info: <br/></strong>{{ memory.info }}<br/></span>
+          <span class="date-text rightize">{{ memory.date | date:"DATE_FORMAT" }}</span>
+        </div>
       </div>
       <div class="card-bottom">
 

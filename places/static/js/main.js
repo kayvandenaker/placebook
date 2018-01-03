@@ -24,23 +24,6 @@ $(document).ready(function(){
     return false;
   });
 
-  // show memory options on card click
-  $(document).on('click', '.card', function() {
-    let edit = $(this).find('.card-bottom');
-      if (edit.is(":hidden")) {
-        edit.slideDown( 100 );
-      }
-    return false;
-  });
-  // hide options on card leave
-  $(document).on('mouseleave', '.card', function() {
-    let edit = $(this).find('.card-bottom');
-      if (edit.is(":visible")) {
-        edit.slideUp( 100 );
-      }
-    return false;
-  });
-
   // User navbar clicks
   $(document).on('click', '#usermenu', function() {
     $('.logged-in').toggle();

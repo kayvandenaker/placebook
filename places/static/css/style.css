@@ -135,7 +135,7 @@ text-align: right;}
 .country {
   transition: 0.4s;
 } .country:hover {
-  color: var(--color1);
+  color: var(--color1) !important;
   text-decoration: none;
   transition: 0.2s;
 }
@@ -568,6 +568,7 @@ the same amount for the map*/
   border-radius: 100px;
   height: 32px;
   margin: 3px;
+
   color: var(--text-color);
   background-color: rgba(0,0,0,0.1);
 } .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
@@ -584,6 +585,7 @@ the same amount for the map*/
   height: 32px;
   margin: 3px;
   padding: 0;
+
   font-size: 15pt !important;
   color: var(--text-color);
   background-color: rgba(0,0,0,0.1);

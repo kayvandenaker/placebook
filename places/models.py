@@ -13,8 +13,8 @@ class Memory(models.Model):
     date = models.DateField(default=date.today)
 
     @property
-    def date_past(self):
-        return date.today() > self.date
+    def date_due(self):
+        return date.today() < self.date
 
     def get_absolute_url(self):
         return reverse('index')

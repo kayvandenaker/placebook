@@ -28,15 +28,20 @@ $(document).ready(function () {
     return false;
   });
 
-  $(document).on('click', '.card', function() {
+  $(document).on('click', '#click1', function() {
     // change nextLoc and pan the map to it
-    nextLoc = $(this).find('.location').text();
-    panMap();
+    // nextLoc = $(this).find('.location').text();
+    // panMap();
+
+    let editBar = $(this).closest('.card').find('.card-bottom');
+    $('.card-bottom').not( editBar ).slideUp( 100 );
+    if (editBar.is(":hidden")) {
+      editBar.slideDown( 100 );
+    }
 
     return false;
   });
 });
-
 // ------------- GOOGLE MAPS API -------------
 
 function initMap() {
@@ -128,8 +133,6 @@ function initMap() {
 
 // create markers for all memories
 function addMarkers( resultsMap ) {
-
-
   var succeed = true;
 
   for (let i = 0; i < strArr.length; i++) {
@@ -152,6 +155,7 @@ function addMarkers( resultsMap ) {
               map.panTo( locate );
               marker.setIcon( icon2 );
               infoDiv.text( convert(infos[i]) );
+              currentLoc = null;
             } else {
               gMarkers[i].setIcon( icon );
             }
