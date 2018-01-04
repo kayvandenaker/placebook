@@ -181,40 +181,45 @@ function addMarkers( resultsMap ) {
 function panMap() {
   // only use the geocoder if value is changed
   // ( pressing same button twice shouldnt use it )
-  if ( nextLoc != currentLoc ) {
-
-    geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': nextLoc}, function(results, status) {
-      if ( status == "OK" ) {
-        locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
-
-        selectMarker( locate );
-        map.panTo( locate );
-        currentLoc = nextLoc;
-      } else {
-        // nested if for errors
-        if ( status == "ZERO_RESULTS" ) {
-          alert("Geocode could not find any results for '" + nextLoc + "'");
-        } else if ( status == "INVALID_REQUEST" ) {
-          // no memories (probably)
-        } else if ( status == "OVER_QUERY_LIMIT" ) {
-          alert("Too many requests. Calm down!");
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      }
-    });
-
-
+  for (let i = 0; i < strArr.length; i++) {
+    if ( strArr[i] == nextLoc ) {
+      map.panTo( gMarkers[i].getPosition() );
+      gMarkers[i].setIcon( icon2 );
+      updateInfoPanel(i);
+    } else if ( gMarkers[i] ) {
+        gMarkers[i].setIcon( icon );
+    }
   }
+  // if ( nextLoc != currentLoc ) {
+  //
+  //   geocoder = new google.maps.Geocoder();
+  //   geocoder.geocode( { 'address': nextLoc}, function(results, status) {
+  //     if ( status == "OK" ) {
+  //       locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
+  //
+  //       selectMarker( locate );
+  //       map.panTo( locate );
+  //       currentLoc = nextLoc;
+  //     } else {
+  //       // nested if for errors
+  //       if ( status == "ZERO_RESULTS" ) {
+  //         alert("Geocode could not find any results for '" + nextLoc + "'");
+  //       } else if ( status == "INVALID_REQUEST" ) {
+  //         // no memories (probably)
+  //       } else if ( status == "OVER_QUERY_LIMIT" ) {
+  //         alert("Too many requests. Calm down!");
+  //       } else {
+  //         alert("Geocode was not successful for the following reason: " + status);
+  //       }
+  //     }
+  //   });
+  // }
 }
 
 function selectMarker( loc ) {
   // find right index by strArr and use it to change the markers array
   for (let i = 0; i < strArr.length; i++) {
-    //console.log(strArr[i] + " " + nextLoc);
     if ( strArr[i] == nextLoc ) {
-      //console.log( convert(infos[i]) );
       gMarkers[i].setIcon( icon2 );
       updateInfoPanel(i);
     } else if ( gMarkers[i] ) {
