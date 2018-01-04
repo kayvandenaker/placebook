@@ -273,6 +273,8 @@ h2 {
 /* ---------------- Card styles ---------------- */
 
 .cardholder {
+  position: relative;
+  z-index: 1;
   margin: 0;
   border: var(--dark-border);
   height: calc(100% - 50px - 48px);
@@ -323,6 +325,7 @@ h2 {
 }
 
 .card {
+  transition: 0.2s;
   background-color: #f8f8f8;
   width: 100%;
   display: block;
@@ -331,11 +334,24 @@ h2 {
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.3);
   word-wrap: break-word;
+} .card:hover {
+  transition: 0.2s;
+  background-color: #fff !important;
+  width: calc(100% + 6px);
+  margin: 8px -3px;
+} .card > .memory > #click1 > h2 {
+  transition: 0.4s;
+} .card:hover > .memory > #click1 > h2 {
+  transition: 0.2s;
+  color: var(--color1) !important;
 }
+
 .highlighted-card {
+  transition: 0.2s;
   background-color: #eff8ef !important;
 }
 
+/* simple padding */
 .memory {
   padding: 8px;
 }
@@ -344,7 +360,7 @@ h2 {
   display: none;
   background-color: rgba(0,0,0,0.075);
   border-top: 1px solid rgba(0,0,0,0.1);
-  height: 39px;
+  height: 33px;
 }
 
 /* ---------------- Form styles ---------------- */
@@ -484,31 +500,54 @@ input:hover, textarea:hover {
 #info-panel {
   width: 100%;
   height: 40%;
-  padding: 8px;
-
-  overflow-y: none;
 
   background: #eee;
   border-top: var(--dark-border);
-} #info-panel:hover {
+}
+#info-top {
+  width: 100%;
+  height: calc( 100% - 32px);
+  padding: 8px;
+
+  overflow-y: hidden;
+
+} #info-top:hover {
   overflow-y: scroll;
-  padding: 8px 3px 8px 8px;
+  padding-right: 0px;
 }
 
-#info-panel::-webkit-scrollbar {
-    width: 5px !important;
-    background-color: transparent  !important;
-    float: left;
+#info-top::-webkit-scrollbar {
+  width: 8px !important;
+  background-color: transparent  !important;
+  float: left;
 }
-#info-panel::-webkit-scrollbar-thumb {
-    border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 1px solid #ccc;
+#info-top::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid #eee;
 }
-#info-panel::-webkit-scrollbar-button {
+#info-top::-webkit-scrollbar-button {
   display: none;
   height: 0;
   width: 0;
+}
+
+#info-bottom {
+  position: absolute;
+  z-index: 0;
+  vertical-align: middle;
+  display:none;
+
+  max-width:calc(100% - 320px);
+  min-width:calc(100% - 480px);
+  width: 75vw;
+  height: 32px;
+  line-height: 24px;
+
+  bottom: 0;
+  right: 0;
+
+  background: #ddd;
+  border-top: 1px dashed #aaa;
 }
 
 /* ---------------- Changes on media properties ---------------- */
@@ -585,8 +624,9 @@ the same amount for the map*/
 
 .btn-edit {
   border-radius: 100px;
-  height: 32px;
-  margin: 3px;
+  height: 28px;
+  margin: 2px;
+  padding: 0 8px;
 
   color: var(--text-color);
   background-color: rgba(0,0,0,0.1);
@@ -600,12 +640,12 @@ the same amount for the map*/
 
 .btn-delete {
   border-radius: 100px;
-  width: 32px;
-  height: 32px;
-  margin: 3px;
+  width: 28px;
+  height: 28px;
+  margin: 2px;
   padding: 0;
 
-  font-size: 15pt !important;
+  font-size: 14pt !important;
   color: var(--text-color);
   background-color: rgba(0,0,0,0.1);
 } .btn-delete:hover, .btn-delete:focus .btn-delete:active{

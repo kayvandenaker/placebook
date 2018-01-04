@@ -1,9 +1,11 @@
 // initial location in string
-let nextLoc = $(".mapbutton").first().closest('.card').find('.location').text();
+let nextLoc = $(".card").first().find('.location').text();
 let currentLoc = null; // for comparison with nextLoc
 // html elements in info panel
-let infoDiv = $('#info');
-let placeDiv = $('#place');
+let infoSpan = $('#info');
+let placeSpan = $('#place');
+let dateSpan = $('#date');
+let bottomDiv = $('#info-bottom');
 // variable to store location in lat, lng (meant to edit over time)
 let locate;
 
@@ -19,14 +21,6 @@ $(document).ready(function () {
   //   strArr.push($(this).text());
   // });
 
-  $(document).on('click', '.mapbutton', function() {
-    // change nextLoc and pan the map to it
-    nextLoc = $(this).closest('.card').find('.location').text();
-    panMap();
-
-    return false;
-  });
-
   $(document).on('click', '#click1', function() {
     // change nextLoc and pan the map to it
     nextLoc = $(this).find('.location').text();
@@ -41,6 +35,7 @@ $(document).ready(function () {
     return false;
   });
 });
+
 // ------------- GOOGLE MAPS API -------------
 
 function initMap() {
@@ -190,30 +185,6 @@ function panMap() {
         gMarkers[i].setIcon( icon );
     }
   }
-  // if ( nextLoc != currentLoc ) {
-  //
-  //   geocoder = new google.maps.Geocoder();
-  //   geocoder.geocode( { 'address': nextLoc}, function(results, status) {
-  //     if ( status == "OK" ) {
-  //       locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
-  //
-  //       selectMarker( locate );
-  //       map.panTo( locate );
-  //       currentLoc = nextLoc;
-  //     } else {
-  //       // nested if for errors
-  //       if ( status == "ZERO_RESULTS" ) {
-  //         alert("Geocode could not find any results for '" + nextLoc + "'");
-  //       } else if ( status == "INVALID_REQUEST" ) {
-  //         // no memories (probably)
-  //       } else if ( status == "OVER_QUERY_LIMIT" ) {
-  //         alert("Too many requests. Calm down!");
-  //       } else {
-  //         alert("Geocode was not successful for the following reason: " + status);
-  //       }
-  //     }
-  //   });
-  // }
 }
 
 function selectMarker( loc ) {
@@ -229,10 +200,13 @@ function selectMarker( loc ) {
 }
 
 function updateInfoPanel(index) {
-  infoDiv.html( infos[index] );
-  placeDiv.html( strArr[index] );
+  infoSpan.html( infos[index] );
+  placeSpan.html( strArr[index] );
+  dateSpan.html( dates[index] );
+  bottomDiv.show();
 }
 function clearInfoPanel() {
-  infoDiv.html( 'none selected' );
-  placeDiv.html( 'none selected' );
+  infoSpan.html( '-' );
+  placeSpan.html( 'none selected' );
+  bottomDiv.hide();
 }

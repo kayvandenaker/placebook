@@ -35,9 +35,8 @@ as styles -->
   {% if user.is_authenticated %}
   <div class="logged-in animation-smallslide">
     <a href="{% url 'avatar' %}" class="nav-text">Profile </span></a>
-    <a href="" class="nav-text">Search <span class="fas fa-search"></span></a>
+    <a href="" class="nav-text">Search <span class="fas fa-search"></span> </a>
     <a href="{% url 'logout' %}" class="nav-text">Logout </a><br/>
-
   </div>
   {% endif %}
 
@@ -51,10 +50,20 @@ as styles -->
       <div id="map"></div>
 
       <div id="info-panel">
-        <h2><span class="country location" id='place'>none selected</span></h2>
-        <hr>
-        <strong>Info: <br/></strong><span id='info'>none selected</span><br/>
+        <div id='info-top'>
+          <h2><span class="country location" id='place'>none selected</span></h2>
+          <hr>
+          <strong>Info: <br/></strong><span id='info'>-</span>
+        </div>
+
+        <div id='info-bottom'>
+          <p class="date-text">
+          <span class="right" id='date'>-</span>
+          </p>
+        </div>
       </div>
+
+
   </div>
 
 
@@ -85,7 +94,7 @@ as styles -->
       {% endif %}
       <div class='memory'>
         <div id='click1'>
-          <h2><a class="country location" id="location">{{ memory.place }}</a></h2>
+          <h2><a class="location" id="location">{{ memory.place }}</a></h2>
           <!-- <strong>City: </strong>{{memory.city}}
           <br><strong>Country: </strong>{{memory.country}} -->
           <span class="info-text"><strong>Info: <br/></strong>{{ memory.info }}<br/></span>
@@ -100,10 +109,10 @@ as styles -->
         </form>
         <form class="right" action="{% url 'memory-update' memory.id %}" method="get">
           {% csrf_token %}
-          <button class='btn btn-edit' type="submit">EDIT</button>
+          <button class='btn btn-edit' type="submit">edit</button>
         </form>
 
-        <input type="button" class='btn btn-primary mapbutton' value="Map">
+        <!-- <input type="button" class='btn btn-primary mapbutton' value="Map"> -->
       </div>
     </div>
 
@@ -124,17 +133,21 @@ as styles -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script>
+    // Dynamic js, needs to be stated here to use django variables
     var markerImage = "{% static 'img/marker.png' %}";
     var markerImageLight = "{% static 'img/marker_light.png' %}";
-    // array of places (in strings) to add markers, markers are added after map render
-    let strArr = [];
+    // string arrays for places, infos and dates
+    var strArr = [];
     var infos = [];
-    var j = 0;
+    var dates = [];
+    let j = 0;
+
     // iterate over the memories
     {% if all_memorys %}
     {% for memory in all_memorys%}
 
-    infos[j]="{{ memory.info | linebreaksbr }}";
+    dates[j]='{{ memory.date }}';
+    infos[j]='{{ memory.info | linebreaksbr }}';
     strArr[j]='{{ memory.place }}';
     j++;
 
