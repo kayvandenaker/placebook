@@ -7,7 +7,7 @@
     --color2: #bc4f4f;
     --color2-s2: #a84545;
 
-    --color3: #35cd35;
+    --color3: #3aaf3a;
 
     --dark-border: 1px solid rgba(0,0,0,0.3);
     --dark-border2: 2px solid rgba(0,0,0,0.3);
@@ -128,10 +128,7 @@ text-align: right;}
   display: none;
 }
 .date-text {
-  display: block;
   font-size: 10pt;
-  padding-top: 4px;
-  padding-right: 4px;
   color: rgba(51, 51, 51, 0.7);
 }
 
@@ -342,11 +339,18 @@ h2 {
   background-color: #fff;
   width: calc(100% + 6px);
   margin: 8px -3px;
-} .card > .memory > #click1 > h2, .card > .memory > #click1 > .date-text {
+} .card > .memory > #click1 > h2 {
   transition: 0.4s;
-} .card:hover > .memory > #click1 > h2, .card:hover > .memory > #click1 > .date-text  {
+} .card > .memory > #click1 > .card-datediv > .dark-padding {
+  transition: 0.4s;
+  text-shadow: 0px 1px rgba(255, 255, 255, 0.4);
+} .card:hover > .memory > #click1 > h2 {
   transition: 0.2s;
   color: var(--color1) !important;
+} .card:hover > .memory > #click1 > .card-datediv > .dark-padding {
+  transition: 0.2s;
+  background: var(--color1) !important;
+  color: #fff !important;
 }
 
 .highlighted-card {
@@ -355,16 +359,41 @@ h2 {
 } .highlighted-card:hover {
   transition: 0.2s;
   background-color: #e3ffe3 !important;
-} .highlighted-card > .memory > #click1 > h2, .highlighted-card > .memory > #click1 > .date-text {
+} .highlighted-card > .memory > #click1 > h2 {
   transition: 0.4s;
-} .highlighted-card:hover > .memory > #click1 > h2, .highlighted-card:hover > .memory > #click1 > .date-text  {
+} .highlighted-card:hover > .memory > #click1 > h2 {
   transition: 0.2s;
   color: var(--color3) !important;
+} .highlighted-card > .memory > #click1 > .card-datediv > .dark-padding {
+  transition: 0.4s;
+  color: #c7ecc7 !important;
+  text-shadow: 0px 1px rgba(0,255,0,0.4);
+} .highlighted-card:hover > .memory > #click1 > .card-datediv > .dark-padding {
+  transition: 0.2s;
+  background: var(--color3) !important;
+  color: #e3ffe3 !important;
 }
 
 /* simple padding */
 .memory {
   padding: 8px;
+}
+
+.card-datediv {
+  display: block;
+  height: 22px;
+  /* background: #f88; */
+}
+.dark-padding {
+  background: #444;
+  padding: 1px 12px;
+  border-radius: 3px;
+  color: #eee;
+}
+.dark-padding2 {
+  background: rgba(0,0,0,0.1);
+  padding: 1px 12px;
+  border-radius: 100px;
 }
 
 .card-bottom {
@@ -512,13 +541,13 @@ input:hover, textarea:hover {
   width: 100%;
   height: 40%;
 
-  background: #eee;
+  background: #ffa;
   border-top: var(--dark-border);
 }
 #info-top {
   width: 100%;
   height: calc( 100% - 32px);
-  padding: 8px;
+  padding: 10px;
 
   overflow-y: hidden;
 
@@ -528,13 +557,14 @@ input:hover, textarea:hover {
 }
 
 #info-top::-webkit-scrollbar {
-  width: 8px !important;
+  width: 10px !important;
   background-color: transparent  !important;
   float: left;
 }
 #info-top::-webkit-scrollbar-thumb {
+  border: 1px solid #ff8;
   background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid #eee;
+
 }
 #info-top::-webkit-scrollbar-button {
   display: none;
@@ -557,8 +587,8 @@ input:hover, textarea:hover {
   bottom: 0;
   right: 0;
 
-  background: #ddd;
-  border-top: 1px dashed #aaa;
+  background: #ff8;
+  border-top: 1px dashed rgba(0,0,0,0.2);
 }
 
 /* ---------------- Changes on media properties ---------------- */
@@ -621,7 +651,9 @@ the same amount for the map*/
 }
 
 /* ---------------- Other/Buttons ---------------- */
-
+.flex {
+  display: flex;
+}
 .left {
   float: left !important;
 }

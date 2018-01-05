@@ -51,7 +51,7 @@ as styles -->
 
       <div id="info-panel">
         <div id='info-top'>
-          <h2><span class="country location" id='place'>none selected</span></h2>
+          <h2><span class="location" id='place'>none selected</span></h2>
           <hr>
           <strong>Info: <br/></strong><span id='info'>-</span>
         </div>
@@ -95,10 +95,10 @@ as styles -->
       <div class='memory'>
         <div id='click1'>
           <h2><a class="location" id="location">{{ memory.place }}</a></h2>
-          <!-- <strong>City: </strong>{{memory.city}}
-          <br><strong>Country: </strong>{{memory.country}} -->
           <span class="info-text"><strong>Info: <br/></strong>{{ memory.info | linebreaksbr }}<br/></span>
-          <span class="date-text rightize">{{ memory.date | date:"DATE_FORMAT" }}</span>
+          <div class="card-datediv">
+            <span class="date-text dark-padding right">{{ memory.date | date:"SHORT_DATE_FORMAT" }}</span>
+          </div>
         </div>
       </div>
       <div class="card-bottom">
@@ -146,7 +146,7 @@ as styles -->
     {% if all_memorys %}
     {% for memory in all_memorys%}
 
-    dates[j]='{{ memory.date }}';
+    dates[j]='{{ memory.date | date:"DATE_FORMAT" }}';
     infos[j]='{{ memory.info | linebreaksbr }}';
     strArr[j]='{{ memory.place }}';
     j++;
