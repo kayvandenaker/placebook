@@ -97,7 +97,7 @@ as styles -->
           <h2><a class="location" id="location">{{ memory.place }}</a></h2>
           <!-- <strong>City: </strong>{{memory.city}}
           <br><strong>Country: </strong>{{memory.country}} -->
-          <span class="info-text"><strong>Info: <br/></strong>{{ memory.info }}<br/></span>
+          <span class="info-text"><strong>Info: <br/></strong>{{ memory.info | linebreaksbr }}<br/></span>
           <span class="date-text rightize">{{ memory.date | date:"DATE_FORMAT" }}</span>
         </div>
       </div>
