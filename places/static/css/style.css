@@ -3,11 +3,13 @@
 :root {
     --color1: #23a8e6;
     --color1-s2: #45b6eb;
+    --color1-80a: #23a8e680;
 
     --color2: #bc4f4f;
     --color2-s2: #a84545;
 
     --color3: #3aaf3a;
+    --color3-80a: #3aaf3a80;
 
     --dark-border: 1px solid rgba(0,0,0,0.3);
     --dark-border2: 2px solid rgba(0,0,0,0.3);
@@ -129,7 +131,7 @@ text-align: right;}
 }
 .date-text {
   font-size: 10pt;
-  color: rgba(51, 51, 51, 0.7);
+  color: #444444ff;
 }
 
 .country {
@@ -148,6 +150,7 @@ h1 {
 }
 
 h2 {
+  transition: 0.2s;
   font-family: 'Montserrat' !important;
   font-weight: 700 !important;
   color: var(--text-color) !important;
@@ -196,7 +199,7 @@ h2 {
 
 .topnav > a:hover, .logged-in > a:hover{
   color: var(--color1);
-  background-color: rgba(255,255,255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   transition: 0.2s;
 }
@@ -335,40 +338,30 @@ h2 {
   border: 1px solid rgba(0,0,0,0.3);
   word-wrap: break-word;
 } .card:hover {
-  transition: 0.2s;
   background-color: #fff;
   width: calc(100% + 6px);
   margin: 8px -3px;
-} .card > .memory > #click1 > h2 {
-  transition: 0.4s;
 } .card > .memory > #click1 > .card-datediv > .dark-padding {
   transition: 0.4s;
 } .card:hover > .memory > #click1 > h2 {
-  transition: 0.2s;
   color: var(--color1) !important;
 } .card:hover > .memory > #click1 > .card-datediv > .dark-padding {
   transition: 0.2s;
-  background: var(--color1) !important;
+  background: var(--color1-80a) !important;
   color: #fff !important;
 }
 
 .highlighted-card {
-  transition: 0.2s;
+  transition: 0.3s;
   background-color: #c7ecc7 !important;
 } .highlighted-card:hover {
-  transition: 0.2s;
   background-color: #e3ffe3 !important;
-} .highlighted-card > .memory > #click1 > h2 {
-  transition: 0.4s;
 } .highlighted-card:hover > .memory > #click1 > h2 {
-  transition: 0.2s;
   color: var(--color3) !important;
 } .highlighted-card > .memory > #click1 > .card-datediv > .dark-padding {
-  transition: 0.4s;
   color: #c7ecc7 !important;
 } .highlighted-card:hover > .memory > #click1 > .card-datediv > .dark-padding {
-  transition: 0.2s;
-  background: var(--color3) !important;
+  background: var(--color3-80a) !important;
   color: #e3ffe3 !important;
 }
 
@@ -383,10 +376,11 @@ h2 {
   /* background: #f88; */
 }
 .dark-padding {
-  background: #444;
+  background: #00000040;
   padding: 1px 12px;
-  border-radius: 3px;
-  color: #eee;
+  border-radius: 25px;
+  color: #f8f8f8;
+  transition: 0.3s;
 }
 .dark-padding2 {
   background: rgba(0,0,0,0.1);
@@ -574,13 +568,13 @@ input:hover, textarea:hover {
   position: absolute;
   z-index: 0;
   vertical-align: middle;
-  display:none;
 
   max-width:calc(100% - 320px);
   min-width:calc(100% - 480px);
   width: 75vw;
   height: 32px;
-  line-height: 24px;
+  line-height: 30px;
+  padding: 0px 12px;
 
   bottom: 0;
   right: 0;

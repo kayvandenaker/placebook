@@ -2,17 +2,17 @@
 let nextLoc = $(".card").first().find('.location').text();
 let currentLoc = null; // for comparison with nextLoc
 // html elements in info panel
-let infoSpan = $('#info');
-let placeSpan = $('#place');
-let dateSpan = $('#date');
-let bottomDiv = $('#info-bottom');
-// variable to store location in lat, lng (meant to edit over time)
+const infoSpan = $('#info');
+const placeSpan = $('#place');
+const dateSpan = $('#date');
+const bottomDiv = $('#info-bottom');
+// variable to store location in lat, lng ( changes with functions )
 let locate;
 
 // Google map elements
-var map;
-var gMarkers = [];
-var icon, icon2;
+let map;
+let gMarkers = [];
+let icon, icon2;
 
 
 // JQuery
@@ -41,11 +41,11 @@ $(document).ready(function () {
 function initMap() {
   // setup autocomplete
   if ( document.getElementById('id_place') ) {
-    var input = document.getElementById('id_place');
-    var options = {
+    let input = document.getElementById('id_place');
+    let options = {
      types: ['(cities)'],
     };
-    var autocomplete = new google.maps.places.Autocomplete( input, options );
+    let autocomplete = new google.maps.places.Autocomplete( input, options );
   }
 
   // load custom icons
@@ -119,7 +119,7 @@ function initMap() {
 
   map.addListener('click', function() {
     clearInfoPanel();
-    for (var i = 0; i < gMarkers.length; i++) {
+    for (let i = 0; i < gMarkers.length; i++) {
       if ( gMarkers[i] ) {
           gMarkers[i].setIcon( icon );
       }
@@ -131,14 +131,14 @@ function initMap() {
 
 // create markers for all memories
 function addMarkers( resultsMap ) {
-  var succeed = true;
+  let succeed = true;
 
   for (let i = 0; i < strArr.length; i++) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': strArr[i]}, function(results, status) {
       if ( status == 'OK' ) {
         // create marker
-        var marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
           map: resultsMap,
           position: results[0].geometry.location,
           icon: icon
@@ -147,7 +147,7 @@ function addMarkers( resultsMap ) {
         gMarkers[i] = marker;
 
         marker.addListener('click', function() {
-          for (var i = 0; i < gMarkers.length; i++) {
+          for (let i = 0; i < gMarkers.length; i++) {
             if (gMarkers[i] === marker){
               locate = marker.getPosition();
               map.panTo( locate );
