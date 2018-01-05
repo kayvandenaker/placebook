@@ -343,7 +343,6 @@ h2 {
   transition: 0.4s;
 } .card > .memory > #click1 > .card-datediv > .dark-padding {
   transition: 0.4s;
-  text-shadow: 0px 1px rgba(255, 255, 255, 0.4);
 } .card:hover > .memory > #click1 > h2 {
   transition: 0.2s;
   color: var(--color1) !important;
@@ -367,7 +366,6 @@ h2 {
 } .highlighted-card > .memory > #click1 > .card-datediv > .dark-padding {
   transition: 0.4s;
   color: #c7ecc7 !important;
-  text-shadow: 0px 1px rgba(0,255,0,0.4);
 } .highlighted-card:hover > .memory > #click1 > .card-datediv > .dark-padding {
   transition: 0.2s;
   background: var(--color3) !important;
