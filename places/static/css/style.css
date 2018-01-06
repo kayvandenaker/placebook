@@ -574,7 +574,7 @@ input:hover, textarea:hover {
   width: 75vw;
   height: 32px;
   line-height: 30px;
-  padding: 0px 12px;
+  padding: 0px;
 
   bottom: 0;
   right: 0;
@@ -680,13 +680,10 @@ the same amount for the map*/
   padding: 0 8px;
   font-weight: 400 !important;
   color: var(--text-color);
-  background-color: rgba(0,0,0,0.1);
-} .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
-  background-color: rgba(0, 0, 0, 0.15);
-  transition: 0.2s;
-} .btn-edit:focus, .btn-edit:active {
-  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1) !important;
-  transition: 0.2s;
+  background-color: rgba(0, 0, 0, 0.1);;
+} .btn-edit2:hover, .btn-edit2:focus, .btn-edit:active {
+  background-color: rgba(0, 0, 0, 0);
+  transition: 0.4s;
 }
 
 .btn-delete {
