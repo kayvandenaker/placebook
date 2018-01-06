@@ -68,23 +68,37 @@ function initMap() {
         locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
         map.setCenter( locate );
 
+        // add markers once script has found a valid location.
+        addMarkers(map);
       } else {
         // nested if for errors
         if ( status == "ZERO_RESULTS" ) {
-          alert("Geocode could not find any results for '" + firstLocation + "'");
+          alert("Geocode could not find any results for '" + nextLoc + "'");
+          mIndex++;
+          if ( strArr[mIndex] ){
+            nextLoc = strArr[mIndex];
+            initMap();
+          } else {
+            let coordinates = [
+             [2.33, 48.87],
+             [50.43, 30.52],
+             [52.35, 4.92],
+             [38.88,-77],
+             [45.42, -75.7],
+             [39.91, 116.38],
+             [9.93,-84.08]
+            ];
+            index = Math.floor((Math.random() * coordinates.length));
+            locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
+          }
         } else if ( status == "INVALID_REQUEST" ) {
-          // no memories (probably)
+          // no memories
         } else if ( status == "OVER_QUERY_LIMIT" ) {
           alert("Too many requests. Calm down!");
         } else {
           alert("Geocode was not successful for the following reason: " + status);
         }
       }
-
-      // for some reason, if this is places outside of th geocode function,
-      // it will run on an empty strArr, and thus creating no markers.
-      // might have something to do how the jquery retrieves the strArr values
-      addMarkers(map);
     });
   } else {
     // choose a random location from coordinates
@@ -112,7 +126,7 @@ function initMap() {
     maxZoom: 17,
   });
   map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-  updateInfoPanel(mIndex);
+  updateInfoPanel( mIndex );
 
   // listeners (we're here for you)
   google.maps.event.addDomListener(window, 'resize', function() {
@@ -129,13 +143,10 @@ function initMap() {
   //   }
   //   currentLoc = null;
   // });
-
 }
 
 // create markers for all memories
 function addMarkers( resultsMap ) {
-  let succeed = true;
-
   for (let i = 0; i < strArr.length; i++) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': strArr[i]}, function(results, status) {
@@ -146,6 +157,7 @@ function addMarkers( resultsMap ) {
           position: results[0].geometry.location,
           icon: icon
         });
+
         // push marker into the array
         gMarkers[i] = marker;
 
@@ -161,17 +173,11 @@ function addMarkers( resultsMap ) {
                 gMarkers[i].setIcon( icon );
             }
           }
-
         });
-      } else {
-        succeed = false;
+
       }
     });
-  }
 
-  // if loop has an error making markers, show alert
-  if ( !succeed ) {
-    alert('Some markers could not be created, check your memory values');
   }
 }
 
@@ -180,10 +186,12 @@ function panMap() {
   // only use the geocoder if value is changed
   // ( pressing same button twice shouldnt use it )
   for (let i = 0; i < strArr.length; i++) {
-    if ( strArr[i] == nextLoc ) {
+    if ( strArr[i] == nextLoc && gMarkers[i] ) {
       map.panTo( gMarkers[i].getPosition() );
       gMarkers[i].setIcon( icon2 );
       updateInfoPanel(i);
+    } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
+        alert("Geocode could not find any results for '" + strArr[i] + "'");
     } else if ( gMarkers[i] ) {
         gMarkers[i].setIcon( icon );
     }
