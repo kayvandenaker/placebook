@@ -35,8 +35,8 @@ urlpatterns = [
     #/places/<pk>/edit/ --> to edit the card
     path('<pk>/edit', views.MemoryUpdate.as_view(), name='memory-update'),
     #/places/<pk>/delete/ --> to edit the card
-    path('<pk>/delete/', views.MemoryDelete.as_view(), name='memory-delete'),
-    
+    path('<pk>/delete', views.MemoryDelete.as_view(), name='memory-delete'),
+
     #/registration/login/
     path('login/', auth_views.login, name='login'),
     #/registration/signup/

@@ -143,16 +143,16 @@ text-align: right;}
 }
 
 h1 {
-  font-family: 'Montserrat' !important;
-  font-weight: 700 !important;
+  font-family: 'Montserrat';
+  font-weight: 700;
   color: var(--text-color) !important;
-  font-size: 20pt !important;
+  font-size: 20pt;
 }
 
 h2 {
   transition: 0.2s;
-  font-family: 'Montserrat' !important;
-  font-weight: 700 !important;
+  font-family: 'Montserrat';
+  font-weight: 700;
   color: var(--text-color) !important;
   font-size: 16pt;
 }
@@ -663,6 +663,22 @@ the same amount for the map*/
   margin: 2px;
   padding: 0 8px;
 
+  color: var(--text-color);
+  background-color: rgba(0,0,0,0.1);
+} .btn-edit:hover, .btn-edit:focus, .btn-edit:active {
+  background-color: rgba(0, 0, 0, 0.15);
+  transition: 0.2s;
+} .btn-edit:focus, .btn-edit:active {
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1) !important;
+  transition: 0.2s;
+}
+
+.btn-edit2 {
+  border-radius: 4px;
+  height: 28px;
+  margin: 2px;
+  padding: 0 8px;
+  font-weight: 400 !important;
   color: var(--text-color);
   background-color: rgba(0,0,0,0.1);
 } .btn-edit:hover, .btn-edit:focus, .btn-edit:active {

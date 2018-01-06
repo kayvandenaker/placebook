@@ -51,13 +51,17 @@ as styles -->
       <div id="info-panel">
         <div id='info-top'>
           <h2><span class="location" id='place'>none selected</span></h2>
+          <span id='date'></span>
+
           <hr>
           <strong>Info: <br/></strong><span id='info'>-</span>
         </div>
 
         <div id='info-bottom'>
+
           <p class="date-text">
-          <span class="right" id='date'>-</span>
+            <button class='btn btn-edit2 right' onclick='editRedirect()'><b>edit</b></button>
+
           </p>
         </div>
       </div>
@@ -96,7 +100,7 @@ as styles -->
           <h2><a class="location" id="location">{{ memory.place }}</a></h2>
           <span class="info-text"><strong>Info: <br/></strong>{{ memory.info | linebreaksbr }}<br/></span>
           <div class="card-datediv">
-            <span class="date-text dark-padding right">{{ memory.date | date:"SHORT_DATE_FORMAT" }}</span>
+            <span class="date-text dark-padding right">{{ memory.date }}</span>
           </div>
         </div>
       </div>
@@ -132,10 +136,11 @@ as styles -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script>
-    // Dynamic js, needs to be stated here to use django variables
+    // Dynamic js, needs to be stated here to use django template tags
     const markerImage = "{% static 'img/marker.png' %}";
     const markerImageLight = "{% static 'img/marker_light.png' %}";
-    // string arrays for places, infos and dates
+    // global string arrays for places, infos and dates
+    let ids = [];
     let strArr = [];
     let infos = [];
     let dates = [];
@@ -145,6 +150,7 @@ as styles -->
     {% if all_memorys %}
     {% for memory in all_memorys%}
 
+    ids[j]='{{ memory.id }}';
     dates[j]='{{ memory.date | date:"DATE_FORMAT" }}';
     infos[j]='{{ memory.info | linebreaksbr }}';
     strArr[j]='{{ memory.place }}';
@@ -158,7 +164,6 @@ as styles -->
   </script>
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/map.js' %}"></script>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>

@@ -7,7 +7,9 @@ const placeSpan = $('#place');
 const dateSpan = $('#date');
 const bottomDiv = $('#info-bottom');
 // variable to store location in lat, lng ( changes with functions )
+// variable to store memory index
 let locate;
+let mIndex = 0;
 
 // Google map elements
 let map;
@@ -110,6 +112,7 @@ function initMap() {
     maxZoom: 17,
   });
   map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+  updateInfoPanel(mIndex);
 
   // listeners (we're here for you)
   google.maps.event.addDomListener(window, 'resize', function() {
@@ -117,15 +120,15 @@ function initMap() {
     map.setCenter( locate );
   });
 
-  map.addListener('click', function() {
-    clearInfoPanel();
-    for (let i = 0; i < gMarkers.length; i++) {
-      if ( gMarkers[i] ) {
-          gMarkers[i].setIcon( icon );
-      }
-    }
-    currentLoc = null;
-  });
+  // map.addListener('click', function() {
+  //   clearInfoPanel();
+  //   for (let i = 0; i < gMarkers.length; i++) {
+  //     if ( gMarkers[i] ) {
+  //         gMarkers[i].setIcon( icon );
+  //     }
+  //   }
+  //   currentLoc = null;
+  // });
 
 }
 
@@ -187,26 +190,19 @@ function panMap() {
   }
 }
 
-function selectMarker( loc ) {
-  // find right index by strArr and use it to change the markers array
-  for (let i = 0; i < strArr.length; i++) {
-    if ( strArr[i] == nextLoc ) {
-      gMarkers[i].setIcon( icon2 );
-      updateInfoPanel(i);
-    } else if ( gMarkers[i] ) {
-        gMarkers[i].setIcon( icon );
-    }
-  }
-}
-
+// update / clear the inforpanel
 function updateInfoPanel(index) {
+  mIndex = index;
   infoSpan.html( infos[index] );
   placeSpan.html( strArr[index] );
   dateSpan.html( dates[index] );
-  bottomDiv.show();
 }
 function clearInfoPanel() {
   infoSpan.html( '-' );
   placeSpan.html( 'none selected' );
-  bottomDiv.hide();
+  dateSpan.html( '' );
+}
+// for edit buttons
+function editRedirect() {
+  location.href = "/" + ids[mIndex] + "/edit";
 }
