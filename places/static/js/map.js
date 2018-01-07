@@ -27,6 +27,7 @@ $(document).ready(function () {
   $(document).on('click', '#click1', function() {
     // change nextLoc and pan the map to it
     nextLoc = $(this).find('.location').text();
+    mIndex = $(this).closest('.card').index() - 1;
     panMap();
 
     let editBar = $(this).closest('.card').find('.card-bottom');
@@ -212,27 +213,25 @@ function validateMarkers() {
   }, 500);
 }
 
-
 // pan the map to a new location
 function panMap() {
-  // only use the geocoder if value is changed
-  // ( pressing same button twice shouldnt use it )
   for (let i = 0; i < strArr.length; i++) {
     if ( strArr[i] == nextLoc && gMarkers[i] ) {
       map.panTo( gMarkers[i].getPosition() );
       gMarkers[i].setIcon( icon2 );
-      updateInfoPanel(i);
     } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
-        alert("Geocode could not find any results for '" + nextLoc + "'");
+        alert("Geocode could not find any results for '" + nextLoc
+         + "'");
     } else if ( gMarkers[i] ) {
         gMarkers[i].setIcon( icon );
     }
   }
+
+  updateInfoPanel(mIndex);
 }
 
 // update / clear the inforpanel
 function updateInfoPanel(index) {
-  mIndex = index;
   infoSpan.html( infos[index] );
   placeSpan.html( strArr[index] );
   dateSpan.html( dates[index] );
