@@ -327,6 +327,14 @@ h2 {
   overflow-y: hidden;
 }
 
+#locError {
+  display: none;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgb(217, 90, 90);
+  border-radius: 4px;
+}
+
 .card {
   transition: 0.2s;
   background-color: #f8f8f8;

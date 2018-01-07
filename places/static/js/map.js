@@ -6,6 +6,7 @@ const infoSpan = $('#info');
 const placeSpan = $('#place');
 const dateSpan = $('#date');
 const bottomDiv = $('#info-bottom');
+const locError = $('#locError');
 // variable to store location in lat, lng ( changes with functions )
 // variable to store memory index
 let locate;
@@ -73,11 +74,11 @@ function initMap() {
       } else {
         // nested if for errors
         if ( status == "ZERO_RESULTS" ) {
-          alert("Geocode could not find any results for '" + nextLoc + "'");
+          //alert("Geocode could not find any results for '" + nextLoc + "'");
           mIndex++;
           if ( strArr[mIndex] ){
             nextLoc = strArr[mIndex];
-            initMap();
+            locate = getLocation( nextLoc );
           } else {
             let coordinates = [
              [2.33, 48.87],
@@ -134,15 +135,7 @@ function initMap() {
     map.setCenter( locate );
   });
 
-  // map.addListener('click', function() {
-  //   clearInfoPanel();
-  //   for (let i = 0; i < gMarkers.length; i++) {
-  //     if ( gMarkers[i] ) {
-  //         gMarkers[i].setIcon( icon );
-  //     }
-  //   }
-  //   currentLoc = null;
-  // });
+  validateMarkers();
 }
 
 // create markers for all memories
@@ -177,9 +170,48 @@ function addMarkers( resultsMap ) {
 
       }
     });
-
   }
 }
+
+function getLocation( loc ) {
+  geocoder.geocode({'address': loc}, function(results, status) {
+    if ( status == 'OK' ) {
+      locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
+    } else {
+      mIndex++;
+      if ( strArr[mIndex] ) {
+        nextLoc = strArr[mIndex];
+        locate = getLocation( nextLoc );
+      } else {
+        let coordinates = [
+         [2.33, 48.87],
+         [50.43, 30.52],
+         [52.35, 4.92],
+         [38.88,-77],
+         [45.42, -75.7],
+         [39.91, 116.38],
+         [9.93,-84.08]
+        ];
+        index = Math.floor((Math.random() * coordinates.length));
+        locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
+      }
+    }
+  });
+
+  initMap();
+  return locate;
+}
+
+function validateMarkers() {
+  setTimeout(() => {
+    if ( gMarkers.includes(undefined)) {
+      // could not create one of the markers
+      //alert("Couldn't map all memory locations, check your memory values!");
+      locError.slideDown();
+    }
+  }, 500);
+}
+
 
 // pan the map to a new location
 function panMap() {
@@ -191,7 +223,7 @@ function panMap() {
       gMarkers[i].setIcon( icon2 );
       updateInfoPanel(i);
     } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
-        alert("Geocode could not find any results for '" + strArr[i] + "'");
+        alert("Geocode could not find any results for '" + nextLoc + "'");
     } else if ( gMarkers[i] ) {
         gMarkers[i].setIcon( icon );
     }

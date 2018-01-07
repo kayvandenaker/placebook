@@ -114,7 +114,7 @@ class MemoryCreate(CreateView):
 
     template_name = 'places/memory_form.html'
 
-
+# any user can request any note to edit, how do we fix this?
 class MemoryUpdate(UpdateView):
     model = Memory
     fields = ['place', 'info', 'date']
@@ -133,7 +133,7 @@ class MemoryUpdate(UpdateView):
 
     template_name = 'places/edit_form.html'
 
-
+# any user can delete any note, how do we fix this?
 class MemoryDelete(DeleteView):
     model = Memory
     success_url = reverse_lazy('index')
