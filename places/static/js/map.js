@@ -126,6 +126,16 @@ function initMap() {
     gestureHandling: 'greedy',
     minZoom: 2,
     maxZoom: 17,
+    mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.TOP_RIGHT
+    },
+    zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+    },
+    streetViewControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+    },
   });
   map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
   updateInfoPanel( mIndex );
