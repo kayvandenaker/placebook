@@ -330,8 +330,7 @@ h2 {
 #locError {
   display: none;
   margin-top: 12px;
-  color: rgba.
-  (255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   background: rgb(217, 90, 90);
   border-radius: 4px;
 }
