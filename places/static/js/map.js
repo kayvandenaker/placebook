@@ -24,9 +24,9 @@ let icon, icon2;
 $(document).ready(function () {
 
   $('#info-panel').hover(function() {
-    $('#info-top').slideDown(400);
+    $('#info-top').slideDown(150);
   }, function() {
-    $('#info-top').slideUp(400);
+    $('#info-top').slideUp(300);
   });
 
   $(document).on('click', '#click1', function() {
