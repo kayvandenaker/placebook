@@ -553,7 +553,7 @@ input:hover, textarea:hover {
   padding-top: 33px;
 
   transition: 0.2s;
-  background: #ffffaa80;
+  background: #ffffaacc;
   border-radius: 4px;
   border: var(--dark-border);
 } #info-panel:hover {
