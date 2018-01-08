@@ -4,7 +4,9 @@ let currentLoc = null; // for comparison with nextLoc
 // html elements in info panel
 const infoSpan = $('#info');
 const placeSpan = $('#place');
+const placeSpan2 = $('#place-2');
 const dateSpan = $('#date');
+const dateSpan2 = $('#date-2');
 const bottomDiv = $('#info-bottom');
 const locError = $('#locError');
 // variable to store location in lat, lng ( changes with functions )
@@ -20,9 +22,12 @@ let icon, icon2;
 
 // JQuery
 $(document).ready(function () {
-  // $('.location').each (function () {
-  //   strArr.push($(this).text());
-  // });
+
+  $('#info-panel').hover(function() {
+    $('#info-top').slideDown();
+  }, function() {
+    $('#info-top').slideUp();
+  });
 
   $(document).on('click', '#click1', function() {
     // change nextLoc and pan the map to it
@@ -214,13 +219,14 @@ function getLocation( loc ) {
 }
 
 function validateMarkers() {
+  // markers are being validated after 2s
   setTimeout(() => {
     if ( gMarkers.includes(undefined)) {
       // could not create one of the markers
       //alert("Couldn't map all memory locations, check your memory values!");
       locError.slideDown();
     }
-  }, 500);
+  }, 2000);
 }
 
 // pan the map to a new location
@@ -244,12 +250,16 @@ function panMap() {
 function updateInfoPanel(index) {
   infoSpan.html( infos[index] );
   placeSpan.html( strArr[index] );
+  placeSpan2.html( strArr[index] );
   dateSpan.html( dates[index] );
+  dateSpan2.html( dates[index] );
 }
 function clearInfoPanel() {
   infoSpan.html( '-' );
   placeSpan.html( 'none selected' );
+  placeSpan2.html( 'none selected' );
   dateSpan.html( '' );
+  dateSpan2.html( '' );
 }
 // for edit buttons
 function editRedirect() {

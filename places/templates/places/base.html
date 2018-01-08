@@ -49,12 +49,18 @@ as styles -->
       <div id="map"></div>
 
       <div id="info-panel">
-        <div id='info-top'>
-          <h2><span class="location" id='place'>none selected</span></h2>
-          <span id='date'></span>
 
-          <hr>
-          <strong>Info: <br/></strong><span id='info'>-</span>
+        <div id='info-main'>
+
+          <div id="info-title">
+            <h2><span class="location" id='place'>none selected</span></h2>
+            <span id='date'></span>
+          </div>
+          <div id="info-top">
+            <hr>
+            <strong>Info: <br/></strong><span id='info'>-</span>
+          </div>
+
         </div>
 
         <div id='info-bottom'>
@@ -83,6 +89,7 @@ as styles -->
       <input type="submit" class="btn btn-wide btn-primary" value="New Memory +" />
     </form>
   </div>
+
   <div class="cardholder scrollbar">
     <p class="centerize" id="locError">Could not map all memory locations.
       Please, check your memory values!</p>

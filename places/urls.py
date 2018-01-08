@@ -29,6 +29,7 @@ from django.contrib.staticfiles.urls import static
 urlpatterns = [
     path('welcome/', views.intro, name='intro'),
     path('', views.index, name='index'),
+    path('rest/', views.MemoryList.as_view()),
 
     #/places/add/
     path('add/', views.MemoryCreate.as_view(), name='memory-add'),

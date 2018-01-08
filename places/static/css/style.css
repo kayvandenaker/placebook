@@ -153,7 +153,7 @@ h2 {
   transition: 0.2s;
   font-family: 'Montserrat';
   font-weight: 700;
-  color: var(--text-color) !important;
+  color: var(--text-color);
   font-size: 16pt;
 }
 
@@ -239,7 +239,7 @@ h2 {
 }
 
 .infodiv {
-  z-index: 10;
+  z-index: 100;
   position: absolute;
   display: none;
 
@@ -281,7 +281,7 @@ h2 {
   top: 98px;
   left: 0;
   margin: 0;
-  /* border: var(--dark-border); */
+  border-right: var(--dark-border);
   height: calc(100% - 50px - 48px);
 
   width: 25%;
@@ -289,7 +289,7 @@ h2 {
   max-width: 480px;
 
   padding: 0 8px 0 8px;
-  background-color: #cccccc00;
+  background-color: rgba(0,0,0,0.2);
   overflow-x: hidden;
   overflow-y: hidden;
 } .cardholder:hover {
@@ -317,8 +317,8 @@ h2 {
   position: absolute;
   top: 50px;
   z-index: 40;
-  /* border-right: var(--dark-border);
-  border-left: var(--dark-border); */
+  border-right: var(--dark-border);
+  border-bottom: var(--dark-border);
   margin: 0;
   height: 48px;
 
@@ -327,7 +327,7 @@ h2 {
   max-width: 480px;
 
   padding: 8px;
-  background-color: #dedede00;
+  background-color: #ccc;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -335,7 +335,7 @@ h2 {
 #locError {
   display: none;
   margin-top: 12px;
-  color: rgbaz(255, 255, 255, 0.8);
+  color: rgba(255, 200, 200, 0.8);
   background: rgb(217, 90, 90);
   border-radius: 4px;
 }
@@ -348,7 +348,7 @@ h2 {
   margin: 8px 0;
 
   border-radius: 3px;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.2);
   word-wrap: break-word;
 } .card:hover {
   background-color: #fff;
@@ -548,36 +548,59 @@ input:hover, textarea:hover {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  width: 20%;
-  height: 30%;
+  width: 296px;
+  max-height: 30%;
+  min-height: 110px;
+  padding-top: 33px;
 
-  background: #ffa;
+  transition: 0.2s;
+  background: #ffffaa80;
   border-radius: 4px;
   border: var(--dark-border);
+} #info-panel:hover {
+  transition: 0.2s;
+  background: #ffa;
 }
-#info-top {
-  width: 100%;
-  height: calc( 100% - 32px);
-  padding: 10px;
 
+#info-title {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+#info-top {
+  position: relative;
+  display: none;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+#info-main {
+  position: relative;
+  width: 100%;
+  max-height: calc(30vh - 33px);
+  padding: 10px 10px 0 10px;
+  bottom: 33px;
   overflow-y: hidden;
 
-} #info-top:hover {
+} #info-main:hover {
   overflow-y: scroll;
   padding-right: 0px;
+
 }
 
-#info-top::-webkit-scrollbar {
+#info-main::-webkit-scrollbar {
   width: 10px !important;
   background-color: transparent  !important;
   float: left;
 }
-#info-top::-webkit-scrollbar-thumb {
+#info-main::-webkit-scrollbar-thumb {
   border: 1px solid #ff8;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 
 }
-#info-top::-webkit-scrollbar-button {
+#info-main::-webkit-scrollbar-button {
   display: none;
   height: 0;
   width: 0;
@@ -596,8 +619,10 @@ input:hover, textarea:hover {
   bottom: 0;
   right: 0;
 
-  background: #ff8;
+  background: #00000011;
   border-top: 1px dashed rgba(0,0,0,0.2);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 /* ---------------- Changes on media properties ---------------- */
@@ -605,7 +630,7 @@ input:hover, textarea:hover {
 @media (max-width:800px) {
 
 
-  .inputcard{
+  .inputcard {
     min-width: 200px;
   }
 
@@ -622,23 +647,26 @@ the same amount for the map*/
     width: calc(100% - 8px);
   }
 
-  #new_container{
-    min-width: 200px;
+  #new_container {
+    position: relative;
+    top: 0;
     width: 100%;
-    max-width: 100%;
+    min-width: 100%;
     border-top: var(--dark-border);
+    border-bottom: var(--dark-border);
+    border-right: 0;
+
   }
 
   .cardholder {
     position: relative;
     top: 0;
-    background: rgba(0,0,0,0.5);
-    max-height: calc(100% - 50vw - 50px - 48px);
-    /* height = full - map - nav - newmemory */
+    height: calc(100% - 50vw - 48px - 50px);
     min-width: 200px;
     width: 100%;
     max-width: 100%;
-    /* border-top: var(--dark-border); */
+    border-right: 0;
+    background: #ccc;
   }
 
   .map-container {
