@@ -24,9 +24,13 @@ let icon, icon2;
 $(document).ready(function () {
 
   $('#info-panel').hover(function() {
-    $('#info-top').slideDown(150);
+    if ($('#info-top').is(":hidden")) {
+      $('#info-top').slideDown(150);
+    }
   }, function() {
-    $('#info-top').slideUp(300);
+    if ($('#info-top').is(":visible")) {
+      $('#info-top').slideUp(300);
+    }
   });
 
   $(document).on('click', '#click1', function() {
@@ -253,6 +257,15 @@ function updateInfoPanel(index) {
   placeSpan2.html( strArr[index] );
   dateSpan.html( dates[index] );
   dateSpan2.html( dates[index] );
+
+  if ($('#info-top').is(":hidden")) {
+    $('#info-top').slideDown(150);
+  }
+  setTimeout(() => {
+    if ($('#info-top').is(":visible")) {
+      $('#info-top').slideUp(300);
+    }
+  }, 2500);
 }
 function clearInfoPanel() {
   infoSpan.html( '-' );
