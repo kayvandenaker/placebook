@@ -284,9 +284,7 @@ h2 {
   border-right: var(--dark-border);
   height: calc(100% - 50px - 48px);
 
-  width: 25%;
-  min-width: 320px;
-  max-width: 480px;
+  width: 320px;
 
   padding: 0 8px 0 8px;
   background-color: rgba(0,0,0,0.2);

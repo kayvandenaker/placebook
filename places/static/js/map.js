@@ -138,6 +138,7 @@ function initMap() {
     gestureHandling: 'greedy',
     minZoom: 2,
     maxZoom: 17,
+    mapTypeId: google.maps.MapTypeId.TERRAIN,
     mapTypeControlOptions: {
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
               position: google.maps.ControlPosition.TOP_RIGHT
@@ -149,8 +150,6 @@ function initMap() {
               position: google.maps.ControlPosition.RIGHT_CENTER
     },
   });
-  map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-  updateInfoPanel( mIndex );
 
   // listeners (we're here for you)
   google.maps.event.addDomListener(window, 'resize', function() {
@@ -158,8 +157,12 @@ function initMap() {
     map.setCenter( locate );
   });
 
+  // pan map's center
+  centerOffset(300);
+  updateInfoPanel( mIndex );
   validateMarkers();
 }
+
 
 // create markers for all memories
 function addMarkers( resultsMap ) {
@@ -171,7 +174,8 @@ function addMarkers( resultsMap ) {
         let marker = new google.maps.Marker({
           map: resultsMap,
           position: results[0].geometry.location,
-          icon: icon
+          icon: icon,
+          animation: google.maps.Animation.DROP
         });
 
         // push marker into the array
@@ -183,17 +187,20 @@ function addMarkers( resultsMap ) {
               locate = marker.getPosition();
               map.panTo( locate );
               gMarkers[i].setIcon( icon2 );
+              //gMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
               updateInfoPanel(i);
+
               currentLoc = null;
             } else if ( gMarkers[i] ) {
                 gMarkers[i].setIcon( icon );
+                //gMarkers[i].setAnimation(null);
             }
           }
         });
 
       } else {
+        // this location is faulty
         let wCard = $('.card').get( i );
-        console.log(wCard);
         wCard.className += " wrong-card";
       }
 
@@ -250,13 +257,18 @@ function panMap() {
       gMarkers[i].setIcon( icon2 );
     } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
         //alert("Geocode could not find any results for '" + nextLoc + "'");
-         updateInfoPanel(mIndex);
     } else if ( gMarkers[i] ) {
         gMarkers[i].setIcon( icon );
     }
   }
-
   updateInfoPanel(mIndex);
+}
+
+function centerOffset(wait) {
+  setTimeout(() => {
+    let x = -160;
+    map.panBy( x, 0)
+  }, wait);
 }
 
 // update / clear the inforpanel
