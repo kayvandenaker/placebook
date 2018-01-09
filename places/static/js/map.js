@@ -66,11 +66,19 @@ function initMap() {
 
   // load custom icons
   icon = {
-    url: markerImage, // url defined in template (static)
+    url: markerImage[0], // url defined in template (static)
+    scaledSize: new google.maps.Size(38, 38), // scale icon size
+  };
+  icon_s = {
+    url: markerImage[1], // url defined in template (static)
     scaledSize: new google.maps.Size(38, 38), // scale icon size
   };
   icon2 = {
-    url: markerImageLight, // url defined in template (static)
+    url: markerImage[2], // url defined in template (static)
+    scaledSize: new google.maps.Size(38, 38), // scale icon size
+  };
+  icon2_s = {
+    url: markerImage[3], // url defined in template (static)
     scaledSize: new google.maps.Size(38, 38), // scale icon size
   };
 
@@ -186,6 +194,11 @@ function makeMarker( i ) {
           animation: google.maps.Animation.DROP
         });
 
+        // change marker if memory is due
+        if ( memories[i].due == "True" ){
+          marker.setIcon( icon2 );
+        }
+
         // push marker into the array
         gMarkers[i] = marker;
 
@@ -194,13 +207,21 @@ function makeMarker( i ) {
             if (gMarkers[i] === marker){
               locate = marker.getPosition();
               map.panTo( locate );
-              gMarkers[i].setIcon( icon2 );
+              if ( memories[i].due == "True" ){
+                gMarkers[i].setIcon( icon2_s );
+              } else {
+                gMarkers[i].setIcon( icon_s );
+              }
               //gMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
               updateInfoPanel(i);
 
               currentLoc = null;
             } else if ( gMarkers[i] ) {
-              gMarkers[i].setIcon( icon );
+              if ( memories[i].due == "True" ){
+                gMarkers[i].setIcon( icon2 );
+              } else {
+                gMarkers[i].setIcon( icon );
+              }
               //gMarkers[i].setAnimation(null);
             }
           }
@@ -265,11 +286,19 @@ function panMap() {
   for (let i = 0; i < memories.length; i++) {
     if ( memories[i].loc == nextLoc && gMarkers[i] ) {
       map.panTo( gMarkers[i].getPosition() );
-      gMarkers[i].setIcon( icon2 );
-    } else if ( memories[i].loc == nextLoc && !gMarkers[i] ) {
-      //alert("Geocode could not find any results for '" + nextLoc + "'");
+
+      if ( memories[i].due == "True" ){
+        gMarkers[i].setIcon( icon2_s );
+      } else {
+        gMarkers[i].setIcon( icon_s );
+      }
+
     } else if ( gMarkers[i] ) {
-      gMarkers[i].setIcon( icon );
+      if ( memories[i].due == "True" ){
+        gMarkers[i].setIcon( icon2 );
+      } else {
+        gMarkers[i].setIcon( icon );
+      }
     }
   }
   updateInfoPanel(mIndex);

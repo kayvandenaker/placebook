@@ -147,8 +147,11 @@ as styles -->
 
   <script>
     // Dynamic js, needs to be stated here to use django template tags
-    const markerImage = "{% static 'img/marker.png' %}";
-    const markerImageLight = "{% static 'img/marker_light.png' %}";
+    const markerImage = [4];
+    markerImage[0] = "{% static 'img/marker.png' %}";
+    markerImage[1] = "{% static 'img/marker_s.png' %}";
+    markerImage[2] = "{% static 'img/marker_green.png' %}";
+    markerImage[3] = "{% static 'img/marker_green_s.png' %}";
     // create Memory objects in memories[]
     let j = 0;
     let memories = [];
@@ -160,7 +163,8 @@ as styles -->
       '{{ memory.id }}',
       '{{ memory.date | date:"DATE_FORMAT" }}',
       '{{ memory.info | linebreaksbr }}',
-      '{{ memory.place }}'
+      '{{ memory.place }}',
+      '{{ memory.date_due }}'
     );
     j++;
 
