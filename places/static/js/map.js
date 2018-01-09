@@ -167,50 +167,7 @@ function initMap() {
 // create markers for all memories
 function addMarkers( resultsMap ) {
   for (let i = 0; i < strArr.length; i++) {
-    geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': strArr[i]}, function(results, status) {
-      if ( status == 'OK' ) {
-
-        // create marker
-        let marker = new google.maps.Marker({
-          map: resultsMap,
-          position: results[0].geometry.location,
-          icon: icon,
-          animation: google.maps.Animation.DROP
-        });
-
-        // push marker into the array
-        gMarkers[i] = marker;
-
-        marker.addListener('click', function() {
-          for (let i = 0; i < strArr.length; i++) {
-            if (gMarkers[i] === marker){
-              locate = marker.getPosition();
-              map.panTo( locate );
-              gMarkers[i].setIcon( icon2 );
-              //gMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
-              updateInfoPanel(i);
-
-              currentLoc = null;
-            } else if ( gMarkers[i] ) {
-              gMarkers[i].setIcon( icon );
-              //gMarkers[i].setAnimation(null);
-            }
-          }
-        });
-
-      } else if ( status == "INVALID_REQUEST" ) {
-        alert("no memories..");
-      } else if ( status == "OVER_QUERY_LIMIT" ) {
-        //alert("Too many requests. Calm down!");
-        makeMarker( i );
-      } else {
-        // this location is faulty
-        let wCard = $('.card').get( i );
-        wCard.className += " wrong-card";
-      }
-
-    });
+    makeMarker( i );
   }
 }
 
@@ -260,7 +217,7 @@ function makeMarker( i ) {
         wCard.className += " wrong-card";
       }
     });
-  }, 100);
+  }, 250);
 }
 
 function getLocation( loc ) {
