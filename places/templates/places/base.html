@@ -143,26 +143,25 @@ as styles -->
 
   <!-- scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="{% static 'js/memo.js' %}"></script>
 
   <script>
     // Dynamic js, needs to be stated here to use django template tags
     const markerImage = "{% static 'img/marker.png' %}";
     const markerImageLight = "{% static 'img/marker_light.png' %}";
-    // global string arrays for places, infos and dates
-    let ids = [];
-    let strArr = [];
-    let infos = [];
-    let dates = [];
+    // create Memory objects in memories[]
     let j = 0;
+    let memories = [];
 
     // iterate over the memories
     {% if all_memorys %}
     {% for memory in all_memorys%}
-
-    ids[j]='{{ memory.id }}';
-    dates[j]='{{ memory.date | date:"DATE_FORMAT" }}';
-    infos[j]='{{ memory.info | linebreaksbr }}';
-    strArr[j]='{{ memory.place }}';
+    memories[j] = new Memory(
+      '{{ memory.id }}',
+      '{{ memory.date | date:"DATE_FORMAT" }}',
+      '{{ memory.info | linebreaksbr }}',
+      '{{ memory.place }}'
+    );
     j++;
 
     {% endfor %}

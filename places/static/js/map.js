@@ -89,8 +89,8 @@ function initMap() {
         if ( status == "ZERO_RESULTS" ) {
           //alert("Geocode could not find any results for '" + nextLoc + "'");
           mIndex++;
-          if ( strArr[mIndex] ){
-            nextLoc = strArr[mIndex];
+          if ( memories[i].loc ){
+            nextLoc = memories[i].loc;
             locate = getLocation( nextLoc );
           } else {
             let coordinates = [
@@ -166,7 +166,7 @@ function initMap() {
 
 // create markers for all memories
 function addMarkers( resultsMap ) {
-  for (let i = 0; i < strArr.length; i++) {
+  for (let i = 0; i < memories.length; i++) {
     makeMarker( i );
   }
 }
@@ -175,7 +175,7 @@ function addMarkers( resultsMap ) {
 function makeMarker( i ) {
   setTimeout(() => {
     geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': strArr[i]}, function(results, status) {
+    geocoder.geocode({'address': memories[i].loc}, function(results, status) {
       if ( status == 'OK' ) {
 
         // create marker
@@ -190,7 +190,7 @@ function makeMarker( i ) {
         gMarkers[i] = marker;
 
         marker.addListener('click', function() {
-          for (let i = 0; i < strArr.length; i++) {
+          for (let i = 0; i < memories.length; i++) {
             if (gMarkers[i] === marker){
               locate = marker.getPosition();
               map.panTo( locate );
@@ -226,8 +226,8 @@ function getLocation( loc ) {
       locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
     } else {
       mIndex++;
-      if ( strArr[mIndex] ) {
-        nextLoc = strArr[mIndex];
+      if ( memories[mIndex].loc ) {
+        nextLoc = memories[mIndex].loc;
         locate = getLocation( nextLoc );
       } else {
         let coordinates = [
@@ -262,11 +262,11 @@ function validateMarkers() {
 
 // pan the map to a new location
 function panMap() {
-  for (let i = 0; i < strArr.length; i++) {
-    if ( strArr[i] == nextLoc && gMarkers[i] ) {
+  for (let i = 0; i < memories.length; i++) {
+    if ( memories[i].loc == nextLoc && gMarkers[i] ) {
       map.panTo( gMarkers[i].getPosition() );
       gMarkers[i].setIcon( icon2 );
-    } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
+    } else if ( memories[i].loc == nextLoc && !gMarkers[i] ) {
       //alert("Geocode could not find any results for '" + nextLoc + "'");
     } else if ( gMarkers[i] ) {
       gMarkers[i].setIcon( icon );
@@ -284,11 +284,11 @@ function centerOffset(wait) {
 
 // update / clear the inforpanel
 function updateInfoPanel(index) {
-  infoSpan.html( infos[index] );
-  placeSpan.html( strArr[index] );
-  placeSpan2.html( strArr[index] );
-  dateSpan.html( dates[index] );
-  dateSpan2.html( dates[index] );
+  infoSpan.html( memories[index].info );
+  placeSpan.html( memories[index].loc );
+  placeSpan2.html( memories[index].loc );
+  dateSpan.html( memories[index].date );
+  dateSpan2.html( memories[index].date );
 
   clearTimeout(memoSlide);
   if ($('#info-top').is(":hidden")) {
@@ -309,5 +309,5 @@ function clearInfoPanel() {
 }
 // for edit buttons
 function editRedirect() {
-  location.href = "/" + ids[mIndex] + "/edit";
+  location.href = "/" + memories[mIndex].id + "/edit";
 }
