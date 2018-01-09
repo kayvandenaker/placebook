@@ -255,7 +255,7 @@ function validateMarkers() {
     if ( gMarkers.includes(undefined)) {
       // could not create one of the markers
       //alert("Couldn't map all memory locations, check your memory values!");
-      locError.slideDown();
+      locError.show(200);
     }
   }, 2000);
 }
