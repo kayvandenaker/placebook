@@ -335,7 +335,7 @@ h2 {
 #locError {
   display: none;
   margin-top: 12px;
-  color: rgba(255, 200, 200, 0.8);
+  color: rgb(255,255,255);
   background: rgb(217, 90, 90);
   border-radius: 4px;
 }
@@ -376,6 +376,20 @@ h2 {
 } .highlighted-card:hover > .memory > #click1 > .card-datediv > .dark-padding {
   background: var(--color3-80a) !important;
   color: #e3ffe3 !important;
+}
+
+.wrong-card {
+  transition: 0.3s;
+  background-color: #ecc7c7cc !important;
+} .wrong-card:hover {
+  background-color: #ffe3e3 !important;
+} .wrong-card:hover > .memory > #click1 > h2 {
+  color: #444 !important;
+} .wrong-card > .memory > #click1 > .card-datediv > .dark-padding {
+  color: #ecc7c7 !important;
+} .wrong-card:hover > .memory > #click1 > .card-datediv > .dark-padding {
+  background: #44444480 !important;
+  color: #ffe3e3 !important;
 }
 
 /* simple padding */

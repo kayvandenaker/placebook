@@ -1,6 +1,8 @@
 // initial location in string
 let nextLoc = $(".card").first().find('.location').text();
 let currentLoc = null; // for comparison with nextLoc
+
+let memoSlide;
 // html elements in info panel
 const infoSpan = $('#info');
 const placeSpan = $('#place');
@@ -24,6 +26,7 @@ let icon, icon2;
 $(document).ready(function () {
 
   $('#info-panel').hover(function() {
+    clearTimeout(memoSlide);
     if ($('#info-top').is(":hidden")) {
       $('#info-top').slideDown(150);
     }
@@ -188,7 +191,13 @@ function addMarkers( resultsMap ) {
           }
         });
 
+      } else {
+        let wCard = $('.card').get( i );
+        console.log(wCard);
+        wCard.className += " wrong-card";
       }
+
+
     });
   }
 }
@@ -240,8 +249,8 @@ function panMap() {
       map.panTo( gMarkers[i].getPosition() );
       gMarkers[i].setIcon( icon2 );
     } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
-        alert("Geocode could not find any results for '" + nextLoc
-         + "'");
+        //alert("Geocode could not find any results for '" + nextLoc + "'");
+         updateInfoPanel(mIndex);
     } else if ( gMarkers[i] ) {
         gMarkers[i].setIcon( icon );
     }
@@ -258,14 +267,15 @@ function updateInfoPanel(index) {
   dateSpan.html( dates[index] );
   dateSpan2.html( dates[index] );
 
+  clearTimeout(memoSlide);
   if ($('#info-top').is(":hidden")) {
     $('#info-top').slideDown(150);
   }
-  setTimeout(() => {
+  memoSlide = setTimeout(() => {
     if ($('#info-top').is(":visible")) {
       $('#info-top').slideUp(300);
     }
-  }, 2500);
+  }, 3000);
 }
 function clearInfoPanel() {
   infoSpan.html( '-' );
