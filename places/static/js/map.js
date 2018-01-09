@@ -59,19 +59,19 @@ function initMap() {
   if ( document.getElementById('id_place') ) {
     let input = document.getElementById('id_place');
     let options = {
-     types: ['(cities)'],
+      types: ['(cities)'],
     };
     let autocomplete = new google.maps.places.Autocomplete( input, options );
   }
 
   // load custom icons
   icon = {
-      url: markerImage, // url defined in template (static)
-      scaledSize: new google.maps.Size(38, 38), // scale icon size
+    url: markerImage, // url defined in template (static)
+    scaledSize: new google.maps.Size(38, 38), // scale icon size
   };
   icon2 = {
-      url: markerImageLight, // url defined in template (static)
-      scaledSize: new google.maps.Size(38, 38), // scale icon size
+    url: markerImageLight, // url defined in template (static)
+    scaledSize: new google.maps.Size(38, 38), // scale icon size
   };
 
   // see if there exist any memories (by nextLoc)
@@ -94,13 +94,13 @@ function initMap() {
             locate = getLocation( nextLoc );
           } else {
             let coordinates = [
-             [2.33, 48.87],
-             [50.43, 30.52],
-             [52.35, 4.92],
-             [38.88,-77],
-             [45.42, -75.7],
-             [39.91, 116.38],
-             [9.93,-84.08]
+              [2.33, 48.87],
+              [50.43, 30.52],
+              [52.35, 4.92],
+              [38.88,-77],
+              [45.42, -75.7],
+              [39.91, 116.38],
+              [9.93,-84.08]
             ];
             index = Math.floor((Math.random() * coordinates.length));
             locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
@@ -117,13 +117,13 @@ function initMap() {
   } else {
     // choose a random location from coordinates
     let coordinates = [
-     [2.33, 48.87],
-     [50.43, 30.52],
-     [52.35, 4.92],
-     [38.88,-77],
-     [45.42, -75.7],
-     [39.91, 116.38],
-     [9.93,-84.08]
+      [2.33, 48.87],
+      [50.43, 30.52],
+      [52.35, 4.92],
+      [38.88,-77],
+      [45.42, -75.7],
+      [39.91, 116.38],
+      [9.93,-84.08]
     ];
     index = Math.floor((Math.random() * coordinates.length));
     locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
@@ -140,14 +140,14 @@ function initMap() {
     maxZoom: 17,
     mapTypeId: google.maps.MapTypeId.TERRAIN,
     mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              position: google.maps.ControlPosition.TOP_RIGHT
+      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+      position: google.maps.ControlPosition.TOP_RIGHT
     },
     zoomControlOptions: {
-              position: google.maps.ControlPosition.RIGHT_CENTER
+      position: google.maps.ControlPosition.RIGHT_CENTER
     },
     streetViewControlOptions: {
-              position: google.maps.ControlPosition.RIGHT_CENTER
+      position: google.maps.ControlPosition.RIGHT_CENTER
     },
   });
 
@@ -158,7 +158,7 @@ function initMap() {
   });
 
   // pan map's center
-  centerOffset(300);
+  //centerOffset(500);
   updateInfoPanel( mIndex );
   validateMarkers();
 }
@@ -170,6 +170,7 @@ function addMarkers( resultsMap ) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': strArr[i]}, function(results, status) {
       if ( status == 'OK' ) {
+
         // create marker
         let marker = new google.maps.Marker({
           map: resultsMap,
@@ -182,7 +183,7 @@ function addMarkers( resultsMap ) {
         gMarkers[i] = marker;
 
         marker.addListener('click', function() {
-          for (let i = 0; i < gMarkers.length; i++) {
+          for (let i = 0; i < strArr.length; i++) {
             if (gMarkers[i] === marker){
               locate = marker.getPosition();
               map.panTo( locate );
@@ -192,21 +193,74 @@ function addMarkers( resultsMap ) {
 
               currentLoc = null;
             } else if ( gMarkers[i] ) {
-                gMarkers[i].setIcon( icon );
-                //gMarkers[i].setAnimation(null);
+              gMarkers[i].setIcon( icon );
+              //gMarkers[i].setAnimation(null);
             }
           }
         });
 
+      } else if ( status == "INVALID_REQUEST" ) {
+        alert("no memories..");
+      } else if ( status == "OVER_QUERY_LIMIT" ) {
+        //alert("Too many requests. Calm down!");
+        makeMarker( i );
       } else {
         // this location is faulty
         let wCard = $('.card').get( i );
         wCard.className += " wrong-card";
       }
 
-
     });
   }
+}
+
+// try creating marker again after 1s, loops if status stays "OVER_QUERY_LIMIT"
+function makeMarker( i ) {
+  setTimeout(() => {
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': strArr[i]}, function(results, status) {
+      if ( status == 'OK' ) {
+
+        // create marker
+        let marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location,
+          icon: icon,
+          animation: google.maps.Animation.DROP
+        });
+
+        // push marker into the array
+        gMarkers[i] = marker;
+
+        marker.addListener('click', function() {
+          for (let i = 0; i < strArr.length; i++) {
+            if (gMarkers[i] === marker){
+              locate = marker.getPosition();
+              map.panTo( locate );
+              gMarkers[i].setIcon( icon2 );
+              //gMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+              updateInfoPanel(i);
+
+              currentLoc = null;
+            } else if ( gMarkers[i] ) {
+              gMarkers[i].setIcon( icon );
+              //gMarkers[i].setAnimation(null);
+            }
+          }
+        });
+
+      } else if ( status == "INVALID_REQUEST" ) {
+        alert("no memories..");
+      } else if ( status == "OVER_QUERY_LIMIT" ) {
+        // retry
+        makeMarker( i );
+      } else {
+        // this location is faulty
+        let wCard = $('.card').get( i );
+        wCard.className += " wrong-card";
+      }
+    });
+  }, 100);
 }
 
 function getLocation( loc ) {
@@ -220,13 +274,13 @@ function getLocation( loc ) {
         locate = getLocation( nextLoc );
       } else {
         let coordinates = [
-         [2.33, 48.87],
-         [50.43, 30.52],
-         [52.35, 4.92],
-         [38.88,-77],
-         [45.42, -75.7],
-         [39.91, 116.38],
-         [9.93,-84.08]
+          [2.33, 48.87],
+          [50.43, 30.52],
+          [52.35, 4.92],
+          [38.88,-77],
+          [45.42, -75.7],
+          [39.91, 116.38],
+          [9.93,-84.08]
         ];
         index = Math.floor((Math.random() * coordinates.length));
         locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
@@ -256,9 +310,9 @@ function panMap() {
       map.panTo( gMarkers[i].getPosition() );
       gMarkers[i].setIcon( icon2 );
     } else if ( strArr[i] == nextLoc && !gMarkers[i] ) {
-        //alert("Geocode could not find any results for '" + nextLoc + "'");
+      //alert("Geocode could not find any results for '" + nextLoc + "'");
     } else if ( gMarkers[i] ) {
-        gMarkers[i].setIcon( icon );
+      gMarkers[i].setIcon( icon );
     }
   }
   updateInfoPanel(mIndex);

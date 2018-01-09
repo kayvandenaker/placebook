@@ -320,9 +320,7 @@ h2 {
   margin: 0;
   height: 48px;
 
-  width: 25%;
-  min-width: 320px;
-  max-width: 480px;
+  width: 320px;
 
   padding: 8px;
   background-color: #ccc;
@@ -558,10 +556,11 @@ input:hover, textarea:hover {
 /*Bottom Panel*/
 #info-panel {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 296px;
-  max-height: 30%;
+  bottom: 8px;
+  right: 8px;
+  min-width: 304px;
+  width: 25%;
+
   padding-top: 33px;
 
   transition: 0.2s;
@@ -588,7 +587,7 @@ input:hover, textarea:hover {
 #info-main {
   position: relative;
   width: 100%;
-  max-height: calc(30vh - 33px);
+  max-height: calc(40vh - 45px);
   padding: 10px 10px 10px 10px;
   bottom: 33px;
   overflow-y: hidden;
