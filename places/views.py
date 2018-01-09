@@ -25,7 +25,7 @@ from .forms import UserProfileForm
 def intro(request):
     data = {
         'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        'all_memories': Memory.objects.filter(author = request.user).order_by('-date'),
     }
     return render(request, 'places/intro.html', data)
 
@@ -33,7 +33,7 @@ def index(request):
     if request.user.is_authenticated:
         data = {
             'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-            'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+            'all_memories': Memory.objects.filter(author = request.user).order_by('-date'),
         }
         return render(request, 'places/base.html', data)
     else:
@@ -45,7 +45,7 @@ def signup(request):
     if request.user.is_authenticated:
         data = {
             'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-            'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+            'all_memories': Memory.objects.filter(author = request.user).order_by('-date'),
         }
         return render(request, 'places/base.html', data)
     if request.method == 'POST':
@@ -67,7 +67,7 @@ def login(request, user):
 
     data = {
         'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        'all_memories': Memory.objects.filter(author = request.user).order_by('-date'),
     }
     return render(request, 'places/base.html', data)
 
@@ -88,7 +88,7 @@ def avatar(request):
 
     data = {
         'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-        'all_memorys': Memory.objects.filter(author = request.user).order_by('-date'),
+        'all_memories': Memory.objects.filter(author = request.user).order_by('-date'),
         'form': form,
     }
 
@@ -108,7 +108,7 @@ class MemoryCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        context['all_memories'] = Memory.objects.filter(author = self.request.user).order_by('-date')
         context['UserProfile'] = UserProfile.objects.filter(user = self.request.user).last()
         return context
 
@@ -127,7 +127,7 @@ class MemoryUpdate(UpdateView):
     # Getting memos as context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['all_memorys'] = Memory.objects.filter(author = self.request.user).order_by('-date')
+        context['all_memories'] = Memory.objects.filter(author = self.request.user).order_by('-date')
         context['UserProfile'] = UserProfile.objects.filter(user = self.request.user).last()
         return context
 

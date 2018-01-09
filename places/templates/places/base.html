@@ -94,8 +94,8 @@ as styles -->
     <p class="centerize" id="locError">We could not map all locations.<br />
       Please check the <u>red</u> memory values!</p>
 
-    {% if all_memorys %}
-    {% for memory in all_memorys%}
+    {% if all_memories %}
+    {% for memory in all_memories%}
 
       {% if memory.date_due %}
     <div class='card highlighted-card'>
@@ -154,8 +154,8 @@ as styles -->
     let memories = [];
 
     // iterate over the memories
-    {% if all_memorys %}
-    {% for memory in all_memorys%}
+    {% if all_memories %}
+    {% for memory in all_memories%}
     memories[j] = new Memory(
       '{{ memory.id }}',
       '{{ memory.date | date:"DATE_FORMAT" }}',
