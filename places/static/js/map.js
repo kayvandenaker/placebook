@@ -15,11 +15,19 @@ const locError = $('#locError');
 // variable to store memory index
 let locate;
 let mIndex = 0;
-
+const coordinates = [
+  [2.33, 48.87],
+  [50.43, 30.52],
+  [52.35, 4.92],
+  [38.88,-77],
+  [45.42, -75.7],
+  [39.91, 116.38],
+  [9.93,-84.08]
+];
 // Google map elements
 let map;
 let gMarkers = [];
-let icon, icon2;
+let icon, icon2, icon_s, icon2_s;
 
 
 // JQuery
@@ -89,29 +97,16 @@ function initMap() {
       if ( status == "OK" ) {
         locate = {"lat": results[0].geometry.location.lat(), "lng": results[0].geometry.location.lng()};
         map.setCenter( locate );
-
-        // add markers once script has found a valid location.
-        addMarkers(map);
       } else {
         // nested if for errors
         if ( status == "ZERO_RESULTS" ) {
           //alert("Geocode could not find any results for '" + nextLoc + "'");
           mIndex++;
-          if ( memories[i].loc ){
-            nextLoc = memories[i].loc;
+          if ( memories[mIndex] ) {
+            nextLoc = memories[mIndex].loc;
             locate = getLocation( nextLoc );
           } else {
-            let coordinates = [
-              [2.33, 48.87],
-              [50.43, 30.52],
-              [52.35, 4.92],
-              [38.88,-77],
-              [45.42, -75.7],
-              [39.91, 116.38],
-              [9.93,-84.08]
-            ];
-            index = Math.floor((Math.random() * coordinates.length));
-            locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
+            randomLoc();
           }
         } else if ( status == "INVALID_REQUEST" ) {
           // no memories
@@ -124,17 +119,7 @@ function initMap() {
     });
   } else {
     // choose a random location from coordinates
-    let coordinates = [
-      [2.33, 48.87],
-      [50.43, 30.52],
-      [52.35, 4.92],
-      [38.88,-77],
-      [45.42, -75.7],
-      [39.91, 116.38],
-      [9.93,-84.08]
-    ];
-    index = Math.floor((Math.random() * coordinates.length));
-    locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
+    randomLoc();
   }
 
   // create map
@@ -165,8 +150,9 @@ function initMap() {
     map.setCenter( locate );
   });
 
-  // pan map's center
+  // pan map's center, dont use this, gets twitchy with panMap()
   //centerOffset(500);
+  addMarkers(map);
   updateInfoPanel( mIndex );
   validateMarkers();
 }
@@ -205,8 +191,8 @@ function makeMarker( i ) {
         marker.addListener('click', function() {
           for (let i = 0; i < memories.length; i++) {
             if (gMarkers[i] === marker){
-              locate = marker.getPosition();
-              map.panTo( locate );
+              // locate = marker.getPosition();
+              // map.panTo( locate );
               if ( memories[i].due == "True" ){
                 gMarkers[i].setIcon( icon2_s );
               } else {
@@ -238,7 +224,7 @@ function makeMarker( i ) {
         wCard.className += " wrong-card";
       }
     });
-  }, 250);
+  }, 200);
 }
 
 function getLocation( loc ) {
@@ -251,17 +237,7 @@ function getLocation( loc ) {
         nextLoc = memories[mIndex].loc;
         locate = getLocation( nextLoc );
       } else {
-        let coordinates = [
-          [2.33, 48.87],
-          [50.43, 30.52],
-          [52.35, 4.92],
-          [38.88,-77],
-          [45.42, -75.7],
-          [39.91, 116.38],
-          [9.93,-84.08]
-        ];
-        index = Math.floor((Math.random() * coordinates.length));
-        locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
+        randomLoc();
       }
     }
   });
@@ -273,12 +249,20 @@ function getLocation( loc ) {
 function validateMarkers() {
   // markers are being validated after 2s
   setTimeout(() => {
-    if ( gMarkers.includes(undefined)) {
+    if ( gMarkers.includes(undefined) || gMarkers.length < memories.length) {
       // could not create one of the markers
       //alert("Couldn't map all memory locations, check your memory values!");
       locError.show(200);
     }
   }, 2000);
+}
+
+function randomLoc() {
+  index = Math.floor((Math.random() * coordinates.length));
+  locate = { lat : coordinates[index][0], lng : coordinates[index][1] };
+  if ( map ){
+    map.setCenter( locate );
+  }
 }
 
 // pan the map to a new location
