@@ -5,7 +5,6 @@
 font-family: 'Montserrat', sans-serif;
 font-family: 'Roboto', sans-serif;
 as styles -->
-<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
 <!-- own styles (overrides bootstrap) -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
@@ -35,8 +34,7 @@ as styles -->
 
   {% if user.is_authenticated %}
   <div class="logged-in animation-smallslide">
-    <a href="{% url 'avatar' %}" class="nav-text">Profile </span></a>
-    <a href="" class="nav-text">Search <span class="fas fa-search"></span></a>
+    <a href="{% url 'avatar' %}" class="nav-text">Avatar </span></a>
     <a href="{% url 'logout' %}" class="nav-text">Logout </a><br/>
 
   </div>
