@@ -23,10 +23,10 @@ from .forms import UserProfileForm
 # ------------------- HOME -------------------
 
 def intro(request):
-    data = {
-        'UserProfile': UserProfile.objects.filter(user = request.user).last(),
-        'all_memories': Memory.objects.filter(author = request.user).order_by('-date'),
-    }
+    if request.user.is_authenticated:
+        data = {
+            'UserProfile': UserProfile.objects.filter(user = request.user).last(),
+        }
     return render(request, 'places/intro.html', data)
 
 def index(request):
