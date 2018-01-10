@@ -5,8 +5,11 @@ class Memory {
     this.date = date;
     this.info = info;
     this.loc = loc;
-    // boolean in string (ex. "True")
-    // caused by django
-    this.due = due;
+    // boolean
+    if ( due == 'True') {
+      this.due = true;
+    } else {
+      this.due = false;
+    }
   }
 }

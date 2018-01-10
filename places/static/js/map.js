@@ -179,7 +179,7 @@ function makeMarker( i ) {
         });
 
         // change marker if memory is due
-        if ( memories[i].due == "True" ){
+        if ( memories[i].due ){
           marker.setIcon( icon2 );
         }
 
@@ -189,7 +189,7 @@ function makeMarker( i ) {
         marker.addListener('click', function() {
           for (let i = 0; i < memories.length; i++) {
             if (gMarkers[i] === marker){
-              if ( memories[i].due == "True" ){
+              if ( memories[i].due ){
                 gMarkers[i].setIcon( icon2_s );
               } else {
                 gMarkers[i].setIcon( icon_s );
