@@ -6,9 +6,7 @@ let memoSlide;
 // html elements in info panel
 const infoSpan = $('#info');
 const placeSpan = $('#place');
-const placeSpan2 = $('#place-2');
 const dateSpan = $('#date');
-const dateSpan2 = $('#date-2');
 const bottomDiv = $('#info-bottom');
 const locError = $('#locError');
 // variable to store location in lat, lng ( changes with functions )
@@ -191,8 +189,6 @@ function makeMarker( i ) {
         marker.addListener('click', function() {
           for (let i = 0; i < memories.length; i++) {
             if (gMarkers[i] === marker){
-              // locate = marker.getPosition();
-              // map.panTo( locate );
               if ( memories[i].due == "True" ){
                 gMarkers[i].setIcon( icon2_s );
               } else {
@@ -251,7 +247,6 @@ function validateMarkers() {
   setTimeout(() => {
     if ( gMarkers.includes(undefined) || gMarkers.length < memories.length) {
       // could not create one of the markers
-      //alert("Couldn't map all memory locations, check your memory values!");
       locError.show(200);
     }
   }, 2000);
@@ -299,9 +294,7 @@ function centerOffset(wait) {
 function updateInfoPanel(index) {
   infoSpan.html( memories[index].info );
   placeSpan.html( memories[index].loc );
-  placeSpan2.html( memories[index].loc );
   dateSpan.html( memories[index].date );
-  dateSpan2.html( memories[index].date );
 
   clearTimeout(memoSlide);
   if ($('#info-top').is(":hidden")) {
@@ -316,9 +309,7 @@ function updateInfoPanel(index) {
 function clearInfoPanel() {
   infoSpan.html( '-' );
   placeSpan.html( 'none selected' );
-  placeSpan2.html( 'none selected' );
   dateSpan.html( '' );
-  dateSpan2.html( '' );
 }
 // for edit buttons
 function editRedirect() {
