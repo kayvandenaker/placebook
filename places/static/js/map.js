@@ -29,7 +29,7 @@ let icon, icon2, icon_s, icon2_s;
 
 
 // JQuery
-$(document).ready(function () {
+$(document).ready(function() {
 
   $('#info-panel').hover(function() {
     clearTimeout(memoSlide);
@@ -165,7 +165,7 @@ function addMarkers( resultsMap ) {
 
 // try creating marker again after 1s, loops if status stays "OVER_QUERY_LIMIT"
 function makeMarker( i ) {
-  setTimeout(() => {
+  setTimeout(function() {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': memories[i].loc}, function(results, status) {
       if ( status == 'OK' ) {
@@ -244,7 +244,7 @@ function getLocation( loc ) {
 
 function validateMarkers() {
   // markers are being validated after 2s
-  setTimeout(() => {
+  setTimeout(function() {
     if ( gMarkers.includes(undefined) || gMarkers.length < memories.length) {
       // could not create one of the markers
       locError.show(200);
@@ -284,7 +284,7 @@ function panMap() {
 }
 
 function centerOffset(wait) {
-  setTimeout(() => {
+  setTimeout(function() {
     let x = -160;
     map.panBy( x, 0)
   }, wait);
@@ -300,7 +300,7 @@ function updateInfoPanel(index) {
   if ($('#info-top').is(":hidden")) {
     $('#info-top').slideDown(150);
   }
-  memoSlide = setTimeout(() => {
+  memoSlide = setTimeout(function() {
     if ($('#info-top').is(":visible")) {
       $('#info-top').slideUp(300);
     }
