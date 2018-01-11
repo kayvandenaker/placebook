@@ -199,7 +199,7 @@ function makeMarker( i ) {
 
               currentLoc = null;
             } else if ( gMarkers[i] ) {
-              if ( memories[i].due == "True" ){
+              if ( memories[i].due ){
                 gMarkers[i].setIcon( icon2 );
               } else {
                 gMarkers[i].setIcon( icon );
@@ -266,14 +266,14 @@ function panMap() {
     if ( memories[i].loc == nextLoc && gMarkers[i] ) {
       map.panTo( gMarkers[i].getPosition() );
 
-      if ( memories[i].due == "True" ){
+      if ( memories[i].due ){
         gMarkers[i].setIcon( icon2_s );
       } else {
         gMarkers[i].setIcon( icon_s );
       }
 
     } else if ( gMarkers[i] ) {
-      if ( memories[i].due == "True" ){
+      if ( memories[i].due ){
         gMarkers[i].setIcon( icon2 );
       } else {
         gMarkers[i].setIcon( icon );
