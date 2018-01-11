@@ -657,7 +657,7 @@ input:hover, textarea:hover {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
   .infodiv {
