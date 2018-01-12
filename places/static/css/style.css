@@ -397,6 +397,10 @@ h2 {
   color: #ffe3e3 !important;
 }
 
+#click1 {
+  cursor: pointer;
+}
+
 /* simple padding */
 .memory {
   padding: 8px;
@@ -657,7 +661,7 @@ input:hover, textarea:hover {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1224px) {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
   .infodiv {
@@ -685,6 +689,8 @@ the same amount for the map*/
     max-width: 100%;
     border-right: 0;
     background: #ccc;
+
+    -ms-overflow-style: -ms-autohiding-scrollbar !important;
   }
 
   .map-container {
