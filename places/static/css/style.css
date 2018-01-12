@@ -666,8 +666,8 @@ input:hover, textarea:hover {
 /* portrait instead of (max-width: 1224px) */
 @media only screen and (orientation: portrait)  {
   body {
-    zoom: 1.5;
-    -moz-transform: scale(1.5);
+    zoom: 2;
+    -moz-transform: scale(2);
     -moz-transform-origin: 0 0;
   }
 
