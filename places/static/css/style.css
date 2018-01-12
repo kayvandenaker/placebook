@@ -26,6 +26,8 @@
 /* ---------------- default html tags ---------------- */
 html {
   height:100%;
+  /* no scrollbars on Edge/IE */
+  -ms-overflow-style: none !important;
 }
 
 body {
@@ -292,7 +294,7 @@ h2 {
   overflow-y: hidden;
 } .cardholder:hover {
   overflow-y: scroll;
-  padding: 0 3px 0 8px;
+  padding-right: 3px;
 }
 
 .cardholder::-webkit-scrollbar {
@@ -661,7 +663,8 @@ input:hover, textarea:hover {
   }
 }
 
-@media only screen and (max-width: 1224px) {
+/* portrair instead of (max-width: 1224px) */
+@media only screen and (orientation: portrait)  {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
   .infodiv {
