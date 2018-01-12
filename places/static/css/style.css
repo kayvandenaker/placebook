@@ -664,7 +664,7 @@ input:hover, textarea:hover {
 }
 
 /* portrair instead of (max-width: 1224px) */
-@media only screen and (orientation: portrait)  {
+@media (orientation: portrait)  {
 /*max-width:640px because the card holder is 320px, which leaves at least
 the same amount for the map*/
   .infodiv {
