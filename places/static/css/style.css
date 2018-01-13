@@ -477,8 +477,8 @@ input:hover, textarea:hover {
   top: 50px;
   text-align: center;
   position: absolute;
-  width: 100vw;
-  height: calc(100vh - 50px);
+  width: 100%;
+  height: calc(100% - 50px);
 
   background-color: rgba(0,0,0,0.3);
 }
@@ -650,25 +650,24 @@ input:hover, textarea:hover {
 }
 
 /* ---------------- Changes on media properties ---------------- */
-
-@media only screen and (max-width:800px) {
-
-
-  .inputcard {
-    min-width: 200px;
-  }
-
-  .memory > .input-container {
-    display: inline;
-  }
-}
-
 /* portrait instead of (max-width: 1224px) */
 @media only screen and (orientation: portrait)  {
   body {
     zoom: 2;
     -moz-transform: scale(2);
     -moz-transform-origin: 0 0;
+  }
+
+  .inputcard, .logincard {
+    width: 80%;
+
+    zoom: 0.5;
+    -moz-transform: scale(0.5);
+    -moz-transform-origin: 0 0;
+  }
+
+  .memory > .input-container {
+    display: inline;
   }
 
   .infodiv {
