@@ -460,8 +460,8 @@ textarea {
    width: calc(100%);
    padding: 4px 8px;
    min-height: 100px;
-   max-height: 300px;
-   height: 200px;
+   max-height: 400px;
+   height: 300px;
 }
 
 input:hover, textarea:hover {
@@ -489,7 +489,7 @@ input:hover, textarea:hover {
   width: 80%;
   max-width: 800px;
   background-color: #fff;
-  margin: 30px auto;
+  margin: 20px auto;
   border-radius: 5px;
   min-width: 350px;
 }
@@ -657,12 +657,17 @@ input:hover, textarea:hover {
     -moz-transform: scale(2);
     -moz-transform-origin: 0 0;
   }
+  textarea {
+    min-height: 200px;
+    height: 200px;
+  }
 
   .inputcard, .logincard {
-    width: 80%;
+    width: 90%;
+    max-height: 90%;
 
-    zoom: 0.5;
-    -moz-transform: scale(0.5);
+    zoom: 0.65;
+    -moz-transform: scale(0.65);
     -moz-transform-origin: 0 0;
   }
 
