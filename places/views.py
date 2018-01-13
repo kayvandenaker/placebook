@@ -27,8 +27,9 @@ def intro(request):
         data = {
             'UserProfile': UserProfile.objects.filter(user = request.user).last(),
         }
-    return render(request, 'places/intro.html', data)
-
+        return render(request, 'places/intro.html', data)
+    else:
+        return render(request, 'places/intro.html')
 def index(request):
     if request.user.is_authenticated:
         data = {
