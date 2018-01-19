@@ -21,9 +21,9 @@ as styles -->
     <a href="{% url 'intro' %}"><img src="{% static 'img/logo_bg.png' %}" alt="" id="logo"></a>
     {% if user.is_authenticated %}
       {% if UserProfile.avatar and UserProfile.avatar != "media/profile_icon.png" %}
-      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
+      <a href="#" class='right nav-text usernav'id="usermenu">{{ user.get_username }} <img src="{{ UserProfile.avatar.url }}" alt="" id="avatar"></a>
       {% else %}
-      <a href="#" class='right nav-text'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar-d"></a>
+      <a href="#" class='right nav-text usernav'id="usermenu">{{ user.get_username }} <img src="{% static 'img/profile_icon.png' %}" alt="" id="avatar-d"></a>
       {% endif %}
     {% else %}
     <a href="{% url 'login' %}" class='right nav-text'>Sign-in</a>
